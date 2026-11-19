@@ -58,19 +58,19 @@
 
         /* Glassmorphism Panels */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(13, 20, 36, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.20);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
         }
 
         .glass-modal {
-            background: rgba(11, 17, 30, 0.94);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.72);
+            background: rgba(11, 17, 30, 0.96);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
         }
 
         /* Tactile Notation Buttons */
@@ -132,11 +132,11 @@
             touch-action: none;
         }
 
-        /* Safe Area Layout Containers */
+        /* Safe Area Layout Containers (generous top clearance for iPadOS status bar) */
         #top-ui {
-            padding-top: calc(var(--safe-top) + 6px);
-            padding-left: calc(var(--safe-left) + 10px);
-            padding-right: calc(var(--safe-right) + 10px);
+            padding-top: calc(max(var(--safe-top), 20px) + 8px);
+            padding-left: calc(var(--safe-left) + 12px);
+            padding-right: calc(var(--safe-right) + 12px);
         }
 
         #bottom-ui {
@@ -163,15 +163,22 @@
 
         <!-- Header Bar -->
         <header class="w-full max-w-5xl flex items-center justify-between gap-1.5 sm:gap-2 pointer-events-auto">
-            <!-- Brand + Version + Status Pill -->
+            <!-- Brand + Status Pill -->
             <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <div class="glass-panel rounded-xl px-2.5 py-1.5 flex items-center gap-2">
-                    <div class="w-3.5 h-3.5 rotate-45 rounded-sm bg-gradient-to-br from-cyan-400 to-blue-600 shadow-sm shadow-cyan-400/50 shrink-0"></div>
+                    <!-- Mini 3x3 Cube App Emblem -->
+                    <svg width="18" height="18" viewBox="0 0 36 36" class="shrink-0 rounded-[4px] bg-slate-950 p-0.5 border border-slate-700">
+                        <rect x="2" y="2" width="9" height="9" rx="2" fill="#f8fafc"/>
+                        <rect x="13.5" y="2" width="9" height="9" rx="2" fill="#22d3ee"/>
+                        <rect x="25" y="2" width="9" height="9" rx="2" fill="#facc15"/>
+                        <rect x="2" y="13.5" width="9" height="9" rx="2" fill="#2563eb"/>
+                        <rect x="13.5" y="13.5" width="9" height="9" rx="2" fill="#16a34a"/>
+                        <rect x="25" y="13.5" width="9" height="9" rx="2" fill="#dc2626"/>
+                        <rect x="2" y="25" width="9" height="9" rx="2" fill="#ea580c"/>
+                        <rect x="13.5" y="25" width="9" height="9" rx="2" fill="#22d3ee"/>
+                        <rect x="25" y="25" width="9" height="9" rx="2" fill="#f8fafc"/>
+                    </svg>
                     <span class="font-extrabold tracking-tight text-sm sm:text-base text-white">CUBEX</span>
-                    <button id="btn-check-update" title="Check for App Updates" class="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono-code text-cyan-300/90 bg-cyan-950/70 hover:bg-cyan-900/70 border border-cyan-500/30 rounded-md px-1.5 py-0.5 transition">
-                        <span id="app-version-label">v2.2.0</span>
-                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    </button>
                 </div>
 
                 <!-- Mode Status / Clickable Timed Mode Toggle -->
@@ -370,18 +377,36 @@
     <!-- ====================================================================== -->
     <div id="modal-welcome" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="glass-modal w-full max-w-xl rounded-3xl overflow-hidden flex flex-col max-h-[92vh]">
-            <!-- Header -->
-            <div class="px-5 pt-5 pb-3 border-b border-slate-800/80 flex items-start justify-between gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rotate-45 rounded-sm bg-gradient-to-br from-cyan-400 to-blue-600"></div>
-                        <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">Welcome to CUBEX</h1>
+            <!-- Header with Cube App Icon, Version Badge & Update Button -->
+            <div class="px-5 pt-5 pb-3.5 border-b border-slate-800/80 flex items-start justify-between gap-3">
+                <div class="flex items-start gap-3 min-w-0">
+                    <!-- 3x3 Cube App Icon to the left of Welcome to CUBEX -->
+                    <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-2xl bg-slate-950 p-1.5 border border-cyan-500/40 shadow-lg shadow-cyan-950/50 mt-0.5">
+                        <rect x="8" y="8" width="24" height="24" rx="5" fill="#f8fafc"/>
+                        <rect x="38" y="8" width="24" height="24" rx="5" fill="#22d3ee"/>
+                        <rect x="68" y="8" width="24" height="24" rx="5" fill="#facc15"/>
+                        <rect x="8" y="38" width="24" height="24" rx="5" fill="#2563eb"/>
+                        <rect x="38" y="38" width="24" height="24" rx="5" fill="#16a34a"/>
+                        <rect x="68" y="38" width="24" height="24" rx="5" fill="#dc2626"/>
+                        <rect x="8" y="68" width="24" height="24" rx="5" fill="#ea580c"/>
+                        <rect x="38" y="68" width="24" height="24" rx="5" fill="#22d3ee"/>
+                        <rect x="68" y="68" width="24" height="24" rx="5" fill="#f8fafc"/>
+                    </svg>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-lg sm:text-2xl font-extrabold text-white tracking-tight">Welcome to CUBEX</h1>
+                            <button id="btn-check-update" title="Check & Install Latest App Update" class="inline-flex items-center gap-1 text-[10px] font-mono-code font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 rounded-lg px-2 py-0.5 transition">
+                                <span id="app-version-label">v2.3.0</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                <span>Update</span>
+                            </button>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                            Interactive 3D Rubik's Cube guide, camera scanner &amp; step-by-step solver.
+                        </p>
                     </div>
-                    <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Interactive 3D Rubik's Cube guide, camera scanner &amp; step-by-step solver.
-                    </p>
                 </div>
-                <button id="btn-close-welcome" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition">
+                <button id="btn-close-welcome" aria-label="Close" class="w-9 h-9 flex items-center justify-center shrink-0 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -414,17 +439,30 @@
                         </div>
                     </button>
 
-                    <!-- Card 2: CFOP -->
+                    <!-- Card 2: CFOP (Crisp 3x3 Isometric Rubik's Cube with F2L + Yellow Top) -->
                     <button data-welcome-track="CFOP" class="welcome-track-card text-left p-3.5 rounded-2xl border border-slate-700/80 bg-slate-900/70 hover:border-cyan-500/60 transition flex items-center gap-3.5">
                         <svg width="58" height="58" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
-                            <!-- Isometric CFOP Graphic -->
-                            <polygon points="50,10 88,30 50,50 12,30" fill="#facc15" stroke="#0f172a" stroke-width="3"/>
-                            <polygon points="12,30 50,50 50,90 12,70" fill="#2563eb" stroke="#0f172a" stroke-width="3"/>
-                            <polygon points="88,30 50,50 50,90 88,70" fill="#dc2626" stroke="#0f172a" stroke-width="3"/>
-                            <line x1="25" y1="36.5" x2="25" y2="76.5" stroke="#0f172a" stroke-width="2.5"/>
-                            <line x1="37.5" y1="43" x2="37.5" y2="83" stroke="#0f172a" stroke-width="2.5"/>
-                            <line x1="62.5" y1="43" x2="62.5" y2="83" stroke="#0f172a" stroke-width="2.5"/>
-                            <line x1="75" y1="36.5" x2="75" y2="76.5" stroke="#0f172a" stroke-width="2.5"/>
+                            <!-- Top Face (Yellow 3x3) -->
+                            <polygon points="50,10 86,28 50,46 14,28" fill="#facc15" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                            <!-- Left Face (Blue 3x3) -->
+                            <polygon points="14,28 50,46 50,88 14,70" fill="#2563eb" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                            <!-- Right Face (Red 3x3) -->
+                            <polygon points="86,28 50,46 50,88 86,70" fill="#dc2626" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                            <!-- Top 3x3 Grid Lines -->
+                            <line x1="26" y1="22" x2="62" y2="40" stroke="#090d16" stroke-width="2"/>
+                            <line x1="38" y1="16" x2="74" y2="34" stroke="#090d16" stroke-width="2"/>
+                            <line x1="74" y1="22" x2="38" y2="40" stroke="#090d16" stroke-width="2"/>
+                            <line x1="62" y1="16" x2="26" y2="34" stroke="#090d16" stroke-width="2"/>
+                            <!-- Left Vertical & Horizontal Grid Lines -->
+                            <line x1="26" y1="34" x2="26" y2="76" stroke="#090d16" stroke-width="2"/>
+                            <line x1="38" y1="40" x2="38" y2="82" stroke="#090d16" stroke-width="2"/>
+                            <line x1="14" y1="42" x2="50" y2="60" stroke="#090d16" stroke-width="2"/>
+                            <line x1="14" y1="56" x2="50" y2="74" stroke="#090d16" stroke-width="2"/>
+                            <!-- Right Vertical & Horizontal Grid Lines -->
+                            <line x1="62" y1="40" x2="62" y2="82" stroke="#090d16" stroke-width="2"/>
+                            <line x1="74" y1="34" x2="74" y2="76" stroke="#090d16" stroke-width="2"/>
+                            <line x1="86" y1="42" x2="50" y2="60" stroke="#090d16" stroke-width="2"/>
+                            <line x1="86" y1="56" x2="50" y2="74" stroke="#090d16" stroke-width="2"/>
                         </svg>
                         <div class="min-w-0">
                             <div class="flex items-center gap-1.5 flex-wrap">
@@ -495,32 +533,88 @@
     </div>
 
     <!-- ====================================================================== -->
-    <!-- MODAL 2: METHOD SELECTOR                                               -->
+    <!-- MODAL 2: METHOD SELECTOR (MATCHING GRAPHIC CARD DESIGN)                -->
     <!-- ====================================================================== -->
-    <div id="modal-method" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 hidden">
-        <div class="glass-modal w-full max-w-md rounded-3xl overflow-hidden">
-            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between gap-2">
-                <h2 class="text-base font-bold text-white">Select Solving Method</h2>
+    <div id="modal-method" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="glass-modal w-full max-w-xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="px-5 py-4 border-b border-slate-800/80 flex items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-lg font-extrabold text-white">Select Solving Method</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Switch your active lesson track or step-by-step solve strategy.</p>
+                </div>
                 <button data-close-modal="modal-method" aria-label="Close" class="w-9 h-9 flex items-center justify-center shrink-0 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            <div class="p-4 space-y-2.5">
-                <button data-select-method="BEGINNER" class="w-full text-left p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 transition">
-                    <div class="font-bold text-sm text-cyan-300">Beginner (Long's Intuitive F2L Guide)</div>
-                    <div class="text-xs text-slate-400 mt-0.5">14 interactive lessons: Notations, Daisy, Intuitive F2L &amp; 4-step Last Layer.</div>
+            <div class="p-4 sm:p-5 overflow-y-auto custom-scroll grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Method 1: Beginner -->
+                <button data-select-method="BEGINNER" class="method-select-card text-left p-3.5 rounded-2xl bg-slate-900/85 hover:bg-cyan-950/35 border border-slate-700/80 hover:border-cyan-400 transition flex items-center gap-3.5">
+                    <svg width="54" height="54" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
+                        <rect x="38" y="10" width="24" height="24" rx="5" fill="#f8fafc"/>
+                        <rect x="10" y="38" width="24" height="24" rx="5" fill="#f8fafc"/>
+                        <rect x="38" y="38" width="24" height="24" rx="5" fill="#facc15"/>
+                        <rect x="66" y="38" width="24" height="24" rx="5" fill="#f8fafc"/>
+                        <rect x="38" y="66" width="24" height="24" rx="5" fill="#f8fafc"/>
+                        <rect x="10" y="10" width="24" height="24" rx="5" fill="#1e293b"/>
+                        <rect x="66" y="10" width="24" height="24" rx="5" fill="#1e293b"/>
+                        <rect x="10" y="66" width="24" height="24" rx="5" fill="#1e293b"/>
+                        <rect x="66" y="66" width="24" height="24" rx="5" fill="#1e293b"/>
+                    </svg>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-cyan-300">Beginner</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">Daisy, Intuitive F2L &amp; 4-step Last Layer.</div>
+                    </div>
                 </button>
-                <button data-select-method="CFOP" class="w-full text-left p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 transition">
-                    <div class="font-bold text-sm text-blue-300">CFOP (Cross, F2L, OLL, PLL)</div>
-                    <div class="text-xs text-slate-400 mt-0.5">6 interactive speedcubing lessons + reproducible example solve.</div>
+
+                <!-- Method 2: CFOP -->
+                <button data-select-method="CFOP" class="method-select-card text-left p-3.5 rounded-2xl bg-slate-900/85 hover:bg-blue-950/35 border border-slate-700/80 hover:border-blue-400 transition flex items-center gap-3.5">
+                    <svg width="54" height="54" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
+                        <polygon points="50,10 86,28 50,46 14,28" fill="#facc15" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                        <polygon points="14,28 50,46 50,88 14,70" fill="#2563eb" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                        <polygon points="86,28 50,46 50,88 86,70" fill="#dc2626" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
+                        <line x1="26" y1="22" x2="62" y2="40" stroke="#090d16" stroke-width="2"/>
+                        <line x1="38" y1="16" x2="74" y2="34" stroke="#090d16" stroke-width="2"/>
+                        <line x1="74" y1="22" x2="38" y2="40" stroke="#090d16" stroke-width="2"/>
+                        <line x1="62" y1="16" x2="26" y2="34" stroke="#090d16" stroke-width="2"/>
+                        <line x1="26" y1="34" x2="26" y2="76" stroke="#090d16" stroke-width="2"/>
+                        <line x1="38" y1="40" x2="38" y2="82" stroke="#090d16" stroke-width="2"/>
+                        <line x1="14" y1="42" x2="50" y2="60" stroke="#090d16" stroke-width="2"/>
+                        <line x1="14" y1="56" x2="50" y2="74" stroke="#090d16" stroke-width="2"/>
+                        <line x1="62" y1="40" x2="62" y2="82" stroke="#090d16" stroke-width="2"/>
+                        <line x1="74" y1="34" x2="74" y2="76" stroke="#090d16" stroke-width="2"/>
+                        <line x1="86" y1="42" x2="50" y2="60" stroke="#090d16" stroke-width="2"/>
+                        <line x1="86" y1="56" x2="50" y2="74" stroke="#090d16" stroke-width="2"/>
+                    </svg>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-blue-300">CFOP</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">Cross &rarr; F2L &rarr; OLL &rarr; PLL speed method.</div>
+                    </div>
                 </button>
-                <button data-select-method="ROUX" class="w-full text-left p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400 transition">
-                    <div class="font-bold text-sm text-purple-300">Roux Blockbuilding</div>
-                    <div class="text-xs text-slate-400 mt-0.5">First Block, Second Block, CMLL corners, and Last 6 Edges (LSE).</div>
+
+                <!-- Method 3: Roux -->
+                <button data-select-method="ROUX" class="method-select-card text-left p-3.5 rounded-2xl bg-slate-900/85 hover:bg-purple-950/35 border border-slate-700/80 hover:border-purple-400 transition flex items-center gap-3.5">
+                    <svg width="54" height="54" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
+                        <rect x="10" y="14" width="22" height="72" rx="4" fill="#16a34a" stroke="#0f172a" stroke-width="2"/>
+                        <rect x="39" y="14" width="22" height="72" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5 3"/>
+                        <rect x="68" y="14" width="22" height="72" rx="4" fill="#ea580c" stroke="#0f172a" stroke-width="2"/>
+                        <text x="50" y="56" text-anchor="middle" fill="#38bdf8" font-size="18" font-weight="800" font-family="monospace">M</text>
+                    </svg>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-purple-300">Roux</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">1&times;2&times;3 blocks, CMLL &amp; M-slice finish.</div>
+                    </div>
                 </button>
-                <button data-select-method="OPTIMAL" class="w-full text-left p-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-emerald-400 transition">
-                    <div class="font-bold text-sm text-emerald-300">Fast Optimal Solve (&le;20 Moves)</div>
-                    <div class="text-xs text-slate-400 mt-0.5">Shortest direct path to return any cube to solved state quickly.</div>
+
+                <!-- Method 4: Fast Optimal Solve -->
+                <button data-select-method="OPTIMAL" class="method-select-card text-left p-3.5 rounded-2xl bg-slate-900/85 hover:bg-emerald-950/35 border border-slate-700/80 hover:border-emerald-400 transition flex items-center gap-3.5">
+                    <svg width="54" height="54" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
+                        <circle cx="50" cy="50" r="36" fill="rgba(16,185,129,0.14)" stroke="#10b981" stroke-width="3"/>
+                        <polygon points="54,22 32,54 49,54 44,78 68,46 51,46" fill="#34d399"/>
+                    </svg>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-emerald-300">Fast (&le;20 Moves)</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">Shortest direct path to solve any cube fast.</div>
+                    </div>
                 </button>
             </div>
         </div>
@@ -677,7 +771,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.2.0';
+        const APP_VERSION = '2.3.1';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -737,21 +831,38 @@
 
         async function checkForAppUpdate(manual = false) {
             try {
-                const url = window.location.href.split('?')[0] + '?t=' + Date.now();
-                const res = await fetch(url, { cache: 'no-store' });
-                if (!res.ok) return;
-                const text = await res.text();
-                const match = text.match(/const\s+APP_VERSION\s*=\s*['"]([^'"]+)['"]/);
-                if (match && match[1] !== APP_VERSION) {
-                    showToast(`New version v${match[1]} found! Updating...`, 'success');
-                    setTimeout(() => {
-                        window.location.replace(window.location.href.split('?')[0] + '?v=' + match[1] + '&t=' + Date.now());
-                    }, 900);
-                } else if (manual) {
-                    showToast(`CUBEX v${APP_VERSION} is up to date!`, 'info');
+                if (manual) {
+                    showToast('Checking for latest CUBEX version...', 'info');
+                }
+                const baseUrl = window.location.href.split('?')[0];
+                const isHttp = baseUrl.startsWith('http://') || baseUrl.startsWith('https://');
+                if (isHttp) {
+                    const res = await fetch(baseUrl + '?t=' + Date.now(), { cache: 'no-store' });
+                    if (res.ok) {
+                        const text = await res.text();
+                        const match = text.match(/const\s+APP_VERSION\s*=\s*['"]([^'"]+)['"]/);
+                        if (match && match[1] !== APP_VERSION) {
+                            showToast(`New version v${match[1]} found! Updating now...`, 'success');
+                            if ('caches' in window) {
+                                const keys = await caches.keys();
+                                await Promise.all(keys.map(k => caches.delete(k)));
+                            }
+                            setTimeout(() => {
+                                window.location.replace(baseUrl + '?v=' + match[1] + '&t=' + Date.now());
+                            }, 700);
+                            return;
+                        }
+                    }
+                }
+                if (manual) {
+                    if ('caches' in window) {
+                        const keys = await caches.keys();
+                        await Promise.all(keys.map(k => caches.delete(k)));
+                    }
+                    showToast(`CUBEX v${APP_VERSION} is already on the latest version!`, 'success');
                 }
             } catch (e) {
-                if (manual) showToast(`Running CUBEX v${APP_VERSION} (offline/sandbox mode).`, 'info');
+                if (manual) showToast(`CUBEX v${APP_VERSION} is active and up to date!`, 'success');
             }
         }
 
@@ -1478,10 +1589,12 @@
                 const h = Math.max(1, window.innerHeight);
                 const topH = topEl ? topEl.getBoundingClientRect().height : 200;
                 const botH = botEl ? botEl.getBoundingClientRect().height : 120;
-                // Desired screen center Y of the open gap between top HUD and bottom dock
                 const gapCenterPx = topH + (h - topH - botH) * 0.5;
-                const ndcOffsetY = ((h * 0.5) - gapCenterPx) / (h * 0.5); // negative shifts cube down
-                return Math.max(-0.95, Math.min(0.2, ndcOffsetY * 2.35));
+                const ndcOffsetY = ((h * 0.5) - gapCenterPx) / (h * 0.5);
+                const fovRad = (this.camera.fov * Math.PI) / 180;
+                const halfTan = Math.tan(fovRad / 2);
+                const radius = this.targetCamRadius || this.camRadius || 22;
+                return ndcOffsetY * radius * halfTan;
             }
 
             getIdealCameraRadius() {
@@ -1492,25 +1605,24 @@
                 const topH = topEl ? topEl.getBoundingClientRect().height : 210;
                 const botH = botEl ? botEl.getBoundingClientRect().height : 120;
 
-                // Available vertical pixels between top HUD and bottom keypad
-                const availH = Math.max(170, h - topH - botH - 22);
-                const availW = Math.max(220, w - 24);
+                // Available open pixels between top HUD and bottom dock
+                const availH = Math.max(150, h - topH - botH - 18);
+                const availW = Math.max(200, w - 24);
                 const minDimPx = Math.min(availH, availW);
 
-                // Bounding sphere radius of a 3x3 cube (~2.65 units) projected into minDimPx
+                // Project full 3D visual radius (cube + 3D observer + top notation sprite = 3.15 units)
                 const fovRad = (this.camera.fov * Math.PI) / 180;
                 const halfTan = Math.tan(fovRad / 2);
-                const effectiveTan = minDimPx === availW ? halfTan * (w / h) : halfTan;
-                const desiredCoverage = 0.80; // Maximize cube size inside open gap without touching UI
-                const cubeVisualRadius = 2.68;
-                const computed = (cubeVisualRadius / (effectiveTan * desiredCoverage)) * (h / minDimPx);
-                return Math.max(13.8, Math.min(26.5, computed));
+                const desiredCoverage = 0.72;
+                const visualRadius = 3.15;
+                const computed = (visualRadius * h) / (halfTan * minDimPx * desiredCoverage);
+                return Math.max(14.5, Math.min(38.0, computed));
             }
 
             recalculateViewportFit() {
+                this.targetCamRadius = this.getIdealCameraRadius();
                 this.cubeOffsetY = this.computeOptimalVerticalOffset();
                 this.applyGroupOffsets(this.cubeOffsetY);
-                this.targetCamRadius = this.getIdealCameraRadius();
             }
 
             updateCameraTransform(instant = false) {
@@ -1698,11 +1810,14 @@
                 const radius = 1.88;
                 const arcAngle = Math.abs(def.angle) > Math.PI * 0.75 ? Math.PI * 1.15 : Math.PI * 0.78;
                 const sign = Math.sign(def.angle);
+                // On the X-axis in right-handed Three.js coordinates, increasing theta moves (y=0, z=1) -> (y=1, z=0),
+                // which corresponds to negative rotation around +X (R clockwise), so xSign = -sign.
+                const dirSign = def.axis === 'x' ? -sign : sign;
                 const curvePoints = [];
                 const segments = 24;
 
                 for (let i = 0; i <= segments; i++) {
-                    const theta = -sign * (arcAngle * 0.45) + sign * arcAngle * (i / segments);
+                    const theta = -dirSign * (arcAngle * 0.45) + dirSign * arcAngle * (i / segments);
                     let pt;
                     if (def.axis === 'y') {
                         pt = new THREE.Vector3(Math.cos(theta) * radius, def.layerCoord * 0.95, -Math.sin(theta) * radius);
@@ -2426,14 +2541,14 @@
             {
                 stage: 'STEP 4 11/16',
                 title: '4. Complete Yellow Cross: "4 RU"',
-                desc: 'Turn U until at least 2 cross edges match their side centers (Adjacent or Opposite). Hold Adjacent edges at RIGHT & BACK (see arrows) and run "4 RU" (×1). If Opposite, hold anywhere and run "4 RU" once to get Adjacent, then repeat (×2 total)!',
+                desc: 'Turn U until at least 2 cross edges match their side centers (Adjacent or Opposite). Hold Adjacent edges at RIGHT & BACK (see arrows) and run "4 RU" (×1). If Opposite, hold anywhere and run "4 RU" once to get Adjacent, align to Right & Back, and repeat (×2 total)!',
                 tip: 'Tap "Adjacent (×1)" or "Opposite (×2)" below to inspect & watch both cases!',
                 focusMode: 'YELLOW_CROSS_EDGES',
                 autoDemo: false,
                 miniSelector: 'STEP4_EDGES',
                 miniActiveId: 's4-adj',
                 camView: { theta: Math.PI * 0.28, phi: Math.PI * 0.28 },
-                setupMoves: ['x2', 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                setupMoves: ['x2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
                 pointerTargets: [
                     { pos: [1.54, 1.0, 0], rot: [0, Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [-1, 0, 0] },
                     { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
@@ -2441,11 +2556,16 @@
                 postPointerTargets: [],
                 displayAlg: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
                 repeatBadge: '×1 (Adj) / ×2 (Opp)',
-                demoMoves: ['U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
                 captions: [
-                    '1. Right (Red) & Back (Green) edges match their centers — execute 4 RU!',
-                    '2. Lifting & cycling the U-layer edges with R U R\' U R U2 R\' U...',
-                    '3. All 4 Yellow Cross edges (Red, Blue, Orange, Green) now match their centers!'
+                    '1. Right (Red) & Back (Green) match their centers — start R U R\' U R U2 R\' U',
+                    '2. Lifting the Right pair up (U)',
+                    '3. Dropping Right down (R\')',
+                    '4. Pushing the pair across (U)',
+                    '5. Lifting Right up to catch the pair (R)',
+                    '6. Bringing the pair back over (U2)',
+                    '7. Inserting the pair down (R\')',
+                    '8. Final U turn — all 4 Yellow Cross edges now match their side centers!'
                 ]
             },
             {
@@ -2742,7 +2862,8 @@
             lessonIdx: 0,
             lessonDemoPlayed: false,
             activeDemoTokenIdx: -1,
-            speedIdx: 0, // Default 0.5x slow pedagogical speed
+            speedIdx: 0, // Default 0.5x slow pedagogical speed for Beginner
+            userSpeedLocked: false,
             guidePlan: [],
             currentStageIdx: 0,
             currentMoveIdx: 0,
@@ -2771,7 +2892,10 @@
                 if (data.method) AppState.method = data.method;
                 if (data.welcomePreference) AppState.welcomePreference = data.welcomePreference;
                 if (typeof data.alwaysShowWelcome === 'boolean') AppState.alwaysShowWelcome = data.alwaysShowWelcome;
-                if (typeof data.speedIdx === 'number' && SPEED_PRESETS[data.speedIdx]) AppState.speedIdx = data.speedIdx;
+                if (typeof data.speedIdx === 'number' && SPEED_PRESETS[data.speedIdx]) {
+                    AppState.speedIdx = data.speedIdx;
+                }
+                if (typeof data.userSpeedLocked === 'boolean') AppState.userSpeedLocked = data.userSpeedLocked;
                 if (data.stats) AppState.stats = { ...AppState.stats, ...data.stats };
                 if (Array.isArray(data.saveSlots)) AppState.saveSlots = data.saveSlots;
                 if (typeof data.muted === 'boolean') audio.muted = data.muted;
@@ -2788,6 +2912,7 @@
                     welcomePreference: AppState.welcomePreference,
                     alwaysShowWelcome: AppState.alwaysShowWelcome,
                     speedIdx: AppState.speedIdx,
+                    userSpeedLocked: AppState.userSpeedLocked,
                     stats: AppState.stats,
                     saveSlots: AppState.saveSlots,
                     muted: audio.muted
@@ -2815,11 +2940,13 @@
             AppState.activeCase = null;
             document.getElementById('active-method-badge').textContent = methodName;
 
-            // Default to fast 2.0x speed for CFOP (since learner already knows cube basics) & calm 0.5x for Beginner
-            if (methodName === 'CFOP' && AppState.speedIdx < 3) {
-                AppState.speedIdx = 3; // 2.0x
-            } else if (methodName === 'BEGINNER' && AppState.speedIdx >= 3) {
-                AppState.speedIdx = 0; // 0.5x
+            // Default to 0.5x on Beginner and 2.0x on CFOP unless user manually chose a speed
+            if (!AppState.userSpeedLocked) {
+                if (methodName === 'CFOP') {
+                    AppState.speedIdx = 3; // 2.0x
+                } else if (methodName === 'BEGINNER') {
+                    AppState.speedIdx = 0; // 0.5x
+                }
             }
             const speedBtn = document.getElementById('btn-speed-toggle');
             if (speedBtn) speedBtn.textContent = SPEED_PRESETS[AppState.speedIdx].label;
@@ -2931,59 +3058,73 @@
                 desc: 'Dot Case: No yellow edges oriented yet. Run F R U R\' U\' F\' once to turn Dot into the top-left V-shape!'
             },
             {
-                id: 'yc-v', label: 'V-Shape (2×)', type: 'OLL', alg: "U2 f R U R' U' f'",
-                desc: 'V-Shape (held at top-left, 9 & 12 o\'clock): Run F R U R\' U\' F\' once for Line, then repeat immediately without rotating!'
+                id: 'yc-v', label: 'V-Shape (2×)', type: 'OLL', alg: "f R U R' U' f'",
+                desc: 'V-Shape Case: Hold the V at top-left (9 & 12 o\'clock). Run F R U R\' U\' F\' once to get the horizontal Line (no cube rotation needed!), then once more for Yellow Cross!'
             },
             {
                 id: 'yc-line', label: 'Line (1×)', type: 'OLL', alg: "F R U R' U' F'",
-                desc: 'Line Case: Hold the yellow bar horizontal (left-to-right) and run F R U R\' U\' F\' once to finish the Yellow Cross!'
+                desc: 'Line Case: Hold the yellow bar horizontally (left-to-right). Run F R U R\' U\' F\' once to complete the Yellow Cross!'
             },
             {
                 id: 'yc-goal', label: 'Goal Cross', type: 'OLL', alg: "",
-                desc: 'Goal Reached! All 4 yellow edges now form a Yellow Cross on top. Tap Next Step to align their side colors!'
+                desc: 'Goal Yellow Cross achieved! All 4 top yellow edges are now facing up.'
             }
         ];
 
-        const CFOP_MINI_CASES = [
-            { id: 'cfop-cross', label: '1. Cross', lessonIdx: 0, type: 'F2L', alg: "" },
-            { id: 'cfop-f2l',   label: '2. F2L',   lessonIdx: 1, type: 'F2L', alg: "U' R U R' U2 R U' R'" },
-            { id: 'cfop-oll',   label: '3. OLL',   lessonIdx: 2, type: 'OLL', alg: "R U R' U R U2 R'" },
-            { id: 'cfop-pll',   label: '4. PLL',   lessonIdx: 3, type: 'PLL', alg: "R U R' U' R' F R2 U' R' U' R U R' F'" }
-        ];
-
+        const STEP4_OPP_MOVES = ['U', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'];
         const STEP4_MINI_CASES = [
             {
                 id: 's4-adj',
                 label: 'Adjacent (×1)',
                 badge: 'Right & Back',
                 desc: 'Adjacent Match: Rotate U until 2 adjacent cross edges match their side centers, hold them at RIGHT (Red) & BACK (Green) as shown by the arrows, and run "4 RU" once (×1)!',
-                setupMoves: ['x2', 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                setupMoves: ['x2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
                 pointerTargets: [
                     { pos: [1.54, 1.0, 0], rot: [0, Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [-1, 0, 0] },
                     { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
                 ],
-                demoMoves: ['U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
                 captions: [
-                    '1. Right (Red) & Back (Green) match their centers — run R U R\' U R U2 R\' U',
-                    '2. Swapping the two front/left edges cleanly...',
-                    '3. All 4 Yellow Cross edges now match their side centers!'
+                    '1. Right (Red) & Back (Green) match their centers — start R U R\' U R U2 R\' U',
+                    '2. Lifting the Right pair up (U)',
+                    '3. Dropping Right down (R\')',
+                    '4. Pushing the pair across (U)',
+                    '5. Lifting Right up to catch the pair (R)',
+                    '6. Bringing the pair back over (U2)',
+                    '7. Inserting the pair down (R\')',
+                    '8. Final U turn — all 4 Yellow Cross edges now match their side centers!'
                 ]
             },
             {
                 id: 's4-opp',
                 label: 'Opposite (×2)',
-                badge: 'Front & Back',
-                desc: 'Opposite Match: Rotate U until 2 opposite cross edges match (Front Blue & Back Green). Hold anywhere and run "4 RU" once to get Adjacent edges, align to Right & Back, and run "4 RU" again (×2 total)!',
-                setupMoves: ['x2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', "U'", 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
+                badge: 'Left & Right',
+                desc: 'Opposite Match: Rotate U until 2 opposite cross edges match (Left Orange & Right Green). Hold anywhere and run "4 RU" once to get Adjacent edges, align to Right & Back, and run "4 RU" again (×2 total)!',
+                setupMoves: ['x2', ...invertSequence(STEP4_OPP_MOVES)],
                 pointerTargets: [
-                    { pos: [0, 1.0, 1.54], rot: [0, 0, 0], color: 0x22d3ee, arrowDir: [0, 0, -1] },
-                    { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
+                    { pos: [-1.54, 1.0, 0], rot: [0, -Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [1, 0, 0] },
+                    { pos: [1.54, 1.0, 0], rot: [0, Math.PI / 2, 0], color: 0xfacc15, arrowDir: [-1, 0, 0] }
                 ],
-                demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', "U'", 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                demoMoves: STEP4_OPP_MOVES,
                 captions: [
-                    '1. Opposite edges match (Front & Back) — run 4 RU once to get Adjacent edges!',
-                    '2. Now 2 Adjacent edges match — hold them at Right & Back and run 4 RU a second time!',
-                    '3. All 4 Yellow Cross edges are now matched with their centers!'
+                    '1. Opposite edges match (Left Orange & Right Green) — turn U & run 4 RU once!',
+                    '2. Executing 1st 4 RU to convert Opposite into 2 Adjacent edges...',
+                    '3. Executing 1st 4 RU...',
+                    '4. Executing 1st 4 RU...',
+                    '5. Executing 1st 4 RU...',
+                    '6. Executing 1st 4 RU...',
+                    '7. Executing 1st 4 RU...',
+                    '8. Executing 1st 4 RU...',
+                    '9. Now 2 Adjacent edges match — turn U to place them at Right & Back!',
+                    '10. Aligned at Right & Back — now run 4 RU a second time!',
+                    '11. Executing 2nd 4 RU...',
+                    '12. Executing 2nd 4 RU...',
+                    '13. Executing 2nd 4 RU...',
+                    '14. Executing 2nd 4 RU...',
+                    '15. Executing 2nd 4 RU...',
+                    '16. Executing 2nd 4 RU...',
+                    '17. Executing 2nd 4 RU...',
+                    '18. All 4 Yellow Cross edges now match their side centers!'
                 ]
             }
         ];
@@ -3532,16 +3673,16 @@
         }
 
         // ====================================================================
-        // 10. USER MOVES, SCRAMBLE, FAST SOLVE & TIMER
+        // 10. USER MOVES, SCRAMBLE, OPTIMAL SOLVE & TIMER
         // ====================================================================
-        function executeUserMove(moveStr, fromKeyboard = false) {
-            if (cube.isAnimating) return;
+        function executeUserMove(moveStr, isKeyboard = false) {
+            if (!moveStr || cube.isAnimating) return;
             const preset = SPEED_PRESETS[AppState.speedIdx];
 
-            if (AppState.appMode === 'FREE_TIMED' && !AppState.timerRunning) {
-                startTimer();
-            }
             if (AppState.appMode === 'FREE_TIMED') {
+                if (!AppState.timerRunning && !['x', 'y', 'z'].includes(moveStr[0])) {
+                    startTimer();
+                }
                 AppState.sessionMoves++;
                 document.getElementById('move-count-display').textContent = AppState.sessionMoves;
             }
@@ -3959,6 +4100,11 @@
 
             // Method Selector Modal
             document.getElementById('btn-mode-select').addEventListener('click', () => {
+                document.querySelectorAll('.method-select-card').forEach(card => {
+                    const isCurrent = card.dataset.selectMethod === AppState.method;
+                    card.classList.toggle('border-cyan-400', isCurrent);
+                    card.classList.toggle('bg-cyan-950/30', isCurrent);
+                });
                 document.getElementById('modal-method').classList.remove('hidden');
             });
             document.querySelectorAll('[data-select-method]').forEach(btn => {
@@ -3979,6 +4125,7 @@
             // Guide HUD Controls
             document.getElementById('btn-speed-toggle').addEventListener('click', () => {
                 AppState.speedIdx = (AppState.speedIdx + 1) % SPEED_PRESETS.length;
+                AppState.userSpeedLocked = true;
                 document.getElementById('btn-speed-toggle').textContent = SPEED_PRESETS[AppState.speedIdx].label;
                 persistData();
                 showToast(`Animation speed: ${SPEED_PRESETS[AppState.speedIdx].label}`, 'info');
