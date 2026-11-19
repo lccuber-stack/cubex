@@ -179,13 +179,6 @@
                     </svg>
                     <span class="font-extrabold tracking-tight text-sm sm:text-base text-white">CUBEX</span>
                 </div>
-
-                <!-- Pure Guide Mode Status Badge -->
-                <div class="glass-panel rounded-xl px-2.5 py-1.5 flex items-center gap-2 text-[11px]">
-                    <span id="status-dot" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
-                    <span id="guide-mode-indicator" class="hidden sm:inline text-cyan-300 font-bold tracking-wider">GUIDE MODE</span>
-                    <span id="guide-mode-indicator-mob" class="sm:hidden text-cyan-300 font-bold tracking-wider">GUIDE</span>
-                </div>
             </div>
 
             <!-- Primary Action Buttons -->
@@ -705,7 +698,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.5.7';
+        const APP_VERSION = '2.5.8';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -3169,7 +3162,6 @@
                 }
             }
             syncSpeedButtonUI();
-            updateModeStatusHeader();
 
             const curr = getActiveCurriculum();
             AppState.lessonIdx = Math.max(0, Math.min(curr.length - 1, startIndex));
@@ -3302,7 +3294,6 @@
             AppState.activeCase = null;
             AppState.isStageWalkthrough = true;
             document.getElementById('active-method-badge').textContent = track;
-            updateModeStatusHeader();
 
             const scramble = track === 'CFOP'
                 ? CFOP_EXAMPLE_SCRAMBLE
@@ -3328,29 +3319,12 @@
             showToast(`Full cube scrambled! Click "Next Stage »" through all ${stages.length} stages!`, 'info');
         }
 
-        function updateModeStatusHeader() {
-            const guideInd = document.getElementById('guide-mode-indicator');
-            const guideIndMob = document.getElementById('guide-mode-indicator-mob');
-            const statusDot = document.getElementById('status-dot');
-            if (guideInd) {
-                guideInd.textContent = AppState.activeCase ? 'ALG TRAINER' : 'GUIDE MODE';
-                guideInd.className = 'hidden sm:inline text-cyan-300 font-bold tracking-wider';
-            }
-            if (guideIndMob) {
-                guideIndMob.textContent = AppState.activeCase ? 'TRAIN' : 'GUIDE';
-            }
-            if (statusDot) {
-                statusDot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0';
-            }
-        }
-
         function buildPedagogicalPlan() {
             stopAutoPlay();
             AppState.appMode = 'GUIDE_SOLVE';
             AppState.isStageWalkthrough = false;
             cube.setFocusMask('ALL');
             cube.clearPointerTargets();
-            updateModeStatusHeader();
 
             if (cube.isSolved() && !AppState.activeCase) {
                 AppState.guidePlan = [{
@@ -3898,7 +3872,6 @@
 
             AppState.activeCase = item;
             AppState.appMode = 'GUIDE_SOLVE';
-            updateModeStatusHeader();
             buildPedagogicalPlan();
 
             document.getElementById('modal-algs').classList.add('hidden');
