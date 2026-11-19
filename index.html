@@ -291,11 +291,13 @@
                     <stop offset="100%" stop-color="#f59e0b"/>
                 </linearGradient>
             </defs>
-            <!-- Stylized Upper Body (Shoulders + Head looking toward Blue Front Face) -->
-            <path d="M8,74 C8,56 18,48 31,48 C44,48 54,56 54,74 Z" fill="url(#shirtGrad)" stroke="#0f172a" stroke-width="2"/>
-            <circle cx="31" cy="30" r="14" fill="url(#skinGrad)" stroke="#0f172a" stroke-width="2"/>
-            <!-- Sleek Hair Silhouette -->
-            <path d="M17,29 C16,17 26,12 37,15 C44,17 46,24 44,30 C41,23 33,21 25,24 C21,26 19,28 17,29 Z" fill="#0f172a"/>
+            <!-- Stylized Upper Body (Shoulders + Complete Head looking toward Blue Front Face) -->
+            <path d="M8,74 C8,56 18,48 31,48 C44,48 54,56 54,74 Z" fill="url(#shirtGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="31" cy="30" r="14" fill="url(#skinGrad)" stroke="#fbbf24" stroke-width="1.5"/>
+            <!-- Crisp Hair Cap with Distinct Slate Tone so Full Head Silhouette is Visible -->
+            <path d="M17,28 C17,17 24,13 33,14 C40,15 44,20 45,27 C41,22 34,20 26,22 C21,23 19,25 17,28 Z" fill="#334155" stroke="#64748b" stroke-width="1.2"/>
+            <!-- Friendly Eye Looking Toward Cube -->
+            <circle cx="38" cy="30" r="1.8" fill="#0f172a"/>
             <!-- Glowing Gaze Arrow Pointing Toward Blue Front Face -->
             <line x1="50" y1="33" x2="73" y2="33" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
             <polygon points="71,26 83,33 71,40" fill="#22d3ee"/>
@@ -1622,6 +1624,9 @@
                             stickerMesh.getWorldQuaternion(q);
                             n.set(0, 0, 1).applyQuaternion(q).round();
                             showColor = (isCenter || isEdge) && n.y === 1 && origKey === 'D';
+                        } else if (mode === 'YELLOW_CROSS_EDGES' && worldY === 1) {
+                            // Show all Yellow Cross edge stickers (Yellow top + Red/Blue/Green/Orange side stickers) + center, dim only top corners
+                            showColor = isCenter || isEdge;
                         }
                         stickerMesh.material.color.setHex(showColor ? FACE_COLORS_HEX[origKey] : FACE_COLORS_HEX.DIM);
                     });
@@ -2421,24 +2426,26 @@
             {
                 stage: 'STEP 4 11/16',
                 title: '4. Complete Yellow Cross: "4 RU"',
-                desc: 'Look at the two arrows pointing to the matching RIGHT (Red) and BACK (Green) cross edges! Hold matching sides at Right & Back, then tap Next Step to run "4 RU"!',
-                tip: 'If matching edges are opposite instead of adjacent, run 4 RU once first.',
-                focusMode: 'LAST_LAYER_CROSS',
+                desc: 'Turn U until at least 2 cross edges match their side centers (Adjacent or Opposite). Hold Adjacent edges at RIGHT & BACK (see arrows) and run "4 RU" (×1). If Opposite, hold anywhere and run "4 RU" once to get Adjacent, then repeat (×2 total)!',
+                tip: 'Tap "Adjacent (×1)" or "Opposite (×2)" below to inspect & watch both cases!',
+                focusMode: 'YELLOW_CROSS_EDGES',
                 autoDemo: false,
-                camView: { theta: Math.PI * 0.30, phi: Math.PI * 0.30 },
-                setupMoves: ['x2', "U'", 'R', 'U2', "R'", "U'", 'R', "U'", "R'"],
+                miniSelector: 'STEP4_EDGES',
+                miniActiveId: 's4-adj',
+                camView: { theta: Math.PI * 0.28, phi: Math.PI * 0.28 },
+                setupMoves: ['x2', 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
                 pointerTargets: [
                     { pos: [1.54, 1.0, 0], rot: [0, Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [-1, 0, 0] },
                     { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
                 ],
                 postPointerTargets: [],
                 displayAlg: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
-                repeatBadge: '×1',
-                demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
+                repeatBadge: '×1 (Adj) / ×2 (Opp)',
+                demoMoves: ['U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
                 captions: [
-                    '1. Lift Front-Right pair out (R U R\')',
-                    '2. Push across (U) and re-insert from back (R U2 R\')',
-                    '3. Final U aligns all 4 Yellow Cross edges with their centers!'
+                    '1. Right (Red) & Back (Green) edges match their centers — execute 4 RU!',
+                    '2. Lifting & cycling the U-layer edges with R U R\' U R U2 R\' U...',
+                    '3. All 4 Yellow Cross edges (Red, Blue, Orange, Green) now match their centers!'
                 ]
             },
             {
@@ -2465,11 +2472,11 @@
             {
                 stage: 'STEP 6A 13/16',
                 title: '6A. Finish Cube — Corner 1: "RD" (×2)',
-                desc: 'See the ring & arrow on the twisted Front-Right corner! Tap Next Step to run R\' D\' R D (×2) until its yellow sticker points UP!',
-                tip: 'Always complete all 4 moves (R\' D\' R D) — the bottom looks scrambled until all corners are done!',
+                desc: 'Almost done! Hold a twisted yellow corner in Front-Right (yellow ring). Run the 4-move trigger R\' D\' R D twice (×2) until its yellow sticker points UP!',
+                tip: 'Always finish all 4 moves (R\' D\' R D) — the bottom looks mixed up until all corners are twisted yellow-up!',
                 focusMode: 'ALL',
                 autoDemo: false,
-                setupMoves: ['x2', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "U'", "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', 'U'],
+                setupMoves: ['x2', "U'", "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', 'U', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R'],
                 pointerTargets: [
                     { pos: [1.0, 1.53, 1.0], rot: [-Math.PI / 2, 0, 0], color: 0xfacc15, arrowDir: [0, -1, 0] }
                 ],
@@ -2480,49 +2487,49 @@
                 repeatBadge: '×2',
                 demoMoves: ["R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D'],
                 captions: [
-                    "1. First R' D' R D twists the corner halfway",
-                    "2. Second R' D' R D brings Yellow straight UP!"
+                    "1. First R' D' R D twists Corner 1 halfway",
+                    "2. Second R' D' R D brings Corner 1's yellow sticker straight UP!"
                 ]
             },
             {
                 stage: 'STEP 6B 14/16',
-                title: '6B. Turn ONLY U to Bring Corner 2',
-                desc: 'Corner 1 is yellow-up! NEVER rotate the whole cube — tap Next Step to turn ONLY the U layer and bring the next twisted corner to Front-Right!',
-                tip: 'Keep holding Blue Front & Yellow Top — only rotate the U layer!',
+                title: '6B. Turn ONLY U\' to Bring Corner 2',
+                desc: 'Corner 1 is yellow-up! NEVER rotate the whole cube — turn ONLY the top U layer (U\') to slide the next twisted corner from Front-Left into Front-Right!',
+                tip: 'Keep holding Blue Front & Yellow Top — only turn the top U layer!',
                 focusMode: 'ALL',
-                autoDemo: false,
+                autoDemo: true,
                 setupMoves: ['x2', "U'", "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', 'U'],
                 pointerTargets: [
-                    { pos: [1.0, 1.53, -1.0], rot: [-Math.PI / 2, 0, 0], color: 0x22d3ee, arrowDir: [0, 0, -1] }
+                    { pos: [-1.0, 1.53, 1.0], rot: [-Math.PI / 2, 0, 0], color: 0x22d3ee, arrowDir: [0, -1, 0] }
                 ],
                 postPointerTargets: [
                     { pos: [1.0, 1.53, 1.0], rot: [-Math.PI / 2, 0, 0], color: 0xfacc15, arrowDir: [0, -1, 0] }
                 ],
-                displayAlg: ['U'],
-                repeatBadge: 'Turn U',
-                demoMoves: ['U'],
+                displayAlg: ["U'"],
+                repeatBadge: 'Turn Top Only',
+                demoMoves: ["U'"],
                 captions: [
-                    'Turn ONLY U to bring the second twisted corner into Front-Right!'
+                    "Turn ONLY U' to move the twisted corner from Front-Left into Front-Right!"
                 ]
             },
             {
                 stage: 'STEP 6C 15/16',
-                title: '6C. Finish Cube — Corner 2: "RD" (×4) + U\'',
-                desc: 'Corner 2 is now in Front-Right (see ring)! Tap Next Step to run R\' D\' R D (×4) and align U\' to solve the entire cube!',
-                tip: 'When the last corner twists yellow-up, the bottom layer magically restores itself!',
+                title: '6C. Finish Cube — Corner 2: "RD" (×4) + U',
+                desc: 'Corner 2 is now in Front-Right (yellow ring)! Run R\' D\' R D four times (×4) until yellow points UP, then turn U to align the top layer — Cube Solved!',
+                tip: 'When the final corner twists yellow-up, the bottom two layers automatically restore themselves!',
                 focusMode: 'ALL',
                 autoDemo: false,
-                setupMoves: ['x2', "U'", "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', 'U', 'U'],
+                setupMoves: ['x2', "U'", "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R', "D'", "R'", 'D', 'R'],
                 pointerTargets: [
                     { pos: [1.0, 1.53, 1.0], rot: [-Math.PI / 2, 0, 0], color: 0xfacc15, arrowDir: [0, -1, 0] }
                 ],
                 postPointerTargets: [],
                 displayAlg: ["R'", "D'", 'R', 'D'],
-                repeatBadge: '×4 + U\'',
-                demoMoves: ["R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "U'"],
+                repeatBadge: '×4 + U',
+                demoMoves: ["R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', 'U'],
                 captions: [
                     "1. Running R' D' R D ×4 twists the final corner yellow-up",
-                    "2. Final U' aligns the top layer — Cube Solved!"
+                    "2. Final U aligns the yellow layer — Congratulations, Cube Solved!"
                 ]
             },
             {
@@ -2670,53 +2677,59 @@
 
         const BEGINNER_EXAMPLE_STAGES = [
             {
-                stage: 'STEP 1B 1/4',
-                title: '1. Match White Cross Petal & F2',
-                desc: 'Align the last White Cross petal with U and turn F2 (180°) down into the bottom White Cross.',
-                moves: ['U', 'F2']
+                stage: 'STAGE 1/4',
+                title: '1. White Cross (Match & 180° Down)',
+                desc: 'Align the Daisy petals with their side centers and turn 180° down to form the bottom White Cross.',
+                moves: ['U', 'F2', 'R2', 'B2', 'L2']
             },
             {
-                stage: 'STEP 3 2/4',
-                title: '2. Yellow Cross ("Fru Ruff")',
-                desc: 'Execute F R U R\' U\' F\' to form the Yellow Cross on top.',
+                stage: 'STAGE 2/4',
+                title: '2. Intuitive F2L (First Two Layers)',
+                desc: 'Pair the white corners with their middle-layer edges and insert them into the bottom two layers.',
+                moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F']
+            },
+            {
+                stage: 'STAGE 3/4',
+                title: '3. Yellow Cross ("Fru Ruff" & "4 RU")',
+                desc: 'Form the Yellow Cross on top with F R U R\' U\' F\' and align all 4 cross edges.',
                 moves: ['F', 'R', 'U', "R'", "U'", "F'"]
             },
             {
-                stage: 'STEP 5 3/4',
-                title: '3. Position Yellow Corners ("Flipper")',
-                desc: 'Hold the solved Front-Right corner and run U R U\' L\' U R\' U\' L to place all 4 corners.',
-                moves: ['U', 'R', "U'", "L'", 'U', "R'", "U'", 'L']
-            },
-            {
-                stage: 'STEP 6 4/4',
-                title: '4. Orient Corners ("RD" ×2 & ×4)',
-                desc: 'Orient the two remaining corners with R\' D\' R D (×2), turn U, then R\' D\' R D (×4) and U\' to finish!',
-                moves: ["R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', 'U', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "U'"]
+                stage: 'STAGE 4/4',
+                title: '4. Yellow Corners ("Flipper" & "RD")',
+                desc: 'Position corners with Flipper and twist them yellow-up with R\' D\' R D to solve the cube!',
+                moves: ['U', 'R', "U'", "L'", 'U', "R'", "U'", 'L', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', 'U', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "R'", "D'", 'R', 'D', "U'"]
             }
         ];
         const BEGINNER_EXAMPLE_SCRAMBLE = ['x2', ...invertSequence(BEGINNER_EXAMPLE_STAGES.flatMap(s => s.moves))];
 
-        const CFOP_EXAMPLE_SCRAMBLE = ['x2', 'R', 'U', "R'", "U'", "R'", 'F', 'R2', "U'", "R'", "U'", 'R', 'U', "R'", "F'", 'R', 'U2', "R'", "U'", 'R', "U'", "R'", 'U', 'R', "U'", "R'"];
         const CFOP_EXAMPLE_STAGES = [
             {
-                stage: 'CFOP 1/3',
-                title: 'F2L Slot 4 Insert',
-                desc: 'Insert the last Front-Right F2L pair cleanly with R U R\' U\'.',
-                moves: ['R', 'U', "R'", "U'"]
+                stage: 'CFOP 1/4',
+                title: '1. Cross (White Cross on Bottom)',
+                desc: 'Solve all 4 White Cross edges directly onto the bottom layer aligned with their side centers.',
+                moves: ["D'", "R'", 'F', "D'", 'L2', 'D']
             },
             {
-                stage: 'CFOP 2/3',
-                title: 'OLL — Sune (Case 27)',
-                desc: 'Orient all last-layer corners in one look: R U R\' U R U2 R\'.',
+                stage: 'CFOP 2/4',
+                title: '2. F2L (First Two Layers)',
+                desc: 'Pair and insert the corner-edge pairs into the first two layers simultaneously.',
+                moves: ['U', 'R', "U'", "R'", "U'", "L'", 'U', 'L', 'U2', 'R', 'U2', "R'", "U'", "F'", 'U', 'F']
+            },
+            {
+                stage: 'CFOP 3/4',
+                title: '3. OLL (Orient Last Layer — Sune)',
+                desc: 'Orient the entire top layer solid Yellow in one algorithm: R U R\' U R U2 R\'.',
                 moves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'"]
             },
             {
-                stage: 'CFOP 3/3',
-                title: 'PLL — T-Perm',
-                desc: 'Permute the final corners and edges simultaneously with T-Perm!',
+                stage: 'CFOP 4/4',
+                title: '4. PLL (Permute Last Layer — T-Perm)',
+                desc: 'Permute all last-layer corners & edges into their solved spots in one final algorithm!',
                 moves: ['R', 'U', "R'", "U'", "R'", 'F', 'R2', "U'", "R'", "U'", 'R', 'U', "R'", "F'"]
             }
         ];
+        const CFOP_EXAMPLE_SCRAMBLE = ['x2', ...invertSequence(CFOP_EXAMPLE_STAGES.flatMap(s => s.moves))];
 
         // ====================================================================
         // 8. APPLICATION STATE & PERSISTENCE
@@ -2733,6 +2746,7 @@
             guidePlan: [],
             currentStageIdx: 0,
             currentMoveIdx: 0,
+            isStageWalkthrough: false,
             activeCase: null,
             activeAlgCat: 'F2L',
             autoPlayTimer: null,
@@ -2937,6 +2951,56 @@
             { id: 'cfop-pll',   label: '4. PLL',   lessonIdx: 3, type: 'PLL', alg: "R U R' U' R' F R2 U' R' U' R U R' F'" }
         ];
 
+        const STEP4_MINI_CASES = [
+            {
+                id: 's4-adj',
+                label: 'Adjacent (×1)',
+                badge: 'Right & Back',
+                desc: 'Adjacent Match: Rotate U until 2 adjacent cross edges match their side centers, hold them at RIGHT (Red) & BACK (Green) as shown by the arrows, and run "4 RU" once (×1)!',
+                setupMoves: ['x2', 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                pointerTargets: [
+                    { pos: [1.54, 1.0, 0], rot: [0, Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [-1, 0, 0] },
+                    { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
+                ],
+                demoMoves: ['U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                captions: [
+                    '1. Right (Red) & Back (Green) match their centers — run R U R\' U R U2 R\' U',
+                    '2. Swapping the two front/left edges cleanly...',
+                    '3. All 4 Yellow Cross edges now match their side centers!'
+                ]
+            },
+            {
+                id: 's4-opp',
+                label: 'Opposite (×2)',
+                badge: 'Front & Back',
+                desc: 'Opposite Match: Rotate U until 2 opposite cross edges match (Front Blue & Back Green). Hold anywhere and run "4 RU" once to get Adjacent edges, align to Right & Back, and run "4 RU" again (×2 total)!',
+                setupMoves: ['x2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', "U'", 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U'],
+                pointerTargets: [
+                    { pos: [0, 1.0, 1.54], rot: [0, 0, 0], color: 0x22d3ee, arrowDir: [0, 0, -1] },
+                    { pos: [0, 1.0, -1.54], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, 1] }
+                ],
+                demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', "U'", 'U2', 'R', 'U', "R'", 'U', 'R', 'U2', "R'", 'U', 'U2'],
+                captions: [
+                    '1. Opposite edges match (Front & Back) — run 4 RU once to get Adjacent edges!',
+                    '2. Now 2 Adjacent edges match — hold them at Right & Back and run 4 RU a second time!',
+                    '3. All 4 Yellow Cross edges are now matched with their centers!'
+                ]
+            }
+        ];
+
+        function selectStep4Mini(miniId) {
+            const item = STEP4_MINI_CASES.find(c => c.id === miniId);
+            if (!item) return;
+            const lesson = BEGINNER_CURRICULUM[10];
+            lesson.miniActiveId = item.id;
+            lesson.desc = item.desc;
+            lesson.setupMoves = item.setupMoves;
+            lesson.pointerTargets = item.pointerTargets;
+            lesson.demoMoves = item.demoMoves;
+            lesson.captions = item.captions;
+            loadLessonStep(10, true);
+        }
+
         function selectYellowCrossMini(miniId) {
             const item = YCROSS_MINI_CASES.find(c => c.id === miniId);
             if (!item) return;
@@ -2961,8 +3025,18 @@
             AppState.appMode = 'GUIDE_SOLVE';
             AppState.method = track;
             AppState.activeCase = null;
+            AppState.isStageWalkthrough = true;
             document.getElementById('active-method-badge').textContent = track;
             updateModeStatusHeader();
+
+            // Use brisk 1.5x speed for CFOP example solve and 1.0x for Beginner example solve
+            if (track === 'CFOP' && AppState.speedIdx < 2) {
+                AppState.speedIdx = 2;
+            } else if (track === 'BEGINNER' && AppState.speedIdx === 0) {
+                AppState.speedIdx = 1;
+            }
+            const speedBtn = document.getElementById('btn-speed-toggle');
+            if (speedBtn) speedBtn.textContent = SPEED_PRESETS[AppState.speedIdx].label;
 
             const scramble = track === 'CFOP' ? CFOP_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE;
             const stages = track === 'CFOP' ? CFOP_EXAMPLE_STAGES : BEGINNER_EXAMPLE_STAGES;
@@ -2981,7 +3055,7 @@
             AppState.currentStageIdx = 0;
             AppState.currentMoveIdx = 0;
             renderGuideHUD();
-            showToast(`${track} Example Solve ready! Tap "Next" or Auto-Play.`, 'info');
+            showToast(`Full cube scrambled! Click "Next Stage »" (4 times) to watch each stage solve!`, 'info');
         }
 
         function updateModeStatusHeader() {
@@ -3030,6 +3104,7 @@
         function buildPedagogicalPlan() {
             stopAutoPlay();
             AppState.appMode = 'GUIDE_SOLVE';
+            AppState.isStageWalkthrough = false;
             cube.setFocusMask('ALL');
             cube.clearPointerTargets();
             updateModeStatusHeader();
@@ -3184,20 +3259,21 @@
                 btnAuto.classList.add('hidden');
                 if (lesson.demoMoves && lesson.demoMoves.length > 0) {
                     btnDemo.classList.remove('hidden');
+                    if (lesson.autoDemo === false && !AppState.lessonDemoPlayed) {
+                        btnDemo.classList.add('ring-2', 'ring-amber-400/80');
+                    } else {
+                        btnDemo.classList.remove('ring-2', 'ring-amber-400/80');
+                    }
                 } else {
                     btnDemo.classList.add('hidden');
                 }
 
-                if (lesson.autoDemo === false && !AppState.lessonDemoPlayed && lesson.demoMoves && lesson.demoMoves.length > 0) {
-                    btnNext.innerHTML = 'Watch Move &raquo;';
-                    btnNext.classList.remove('ring-2', 'ring-cyan-300');
+                // Always keep Next Step as Next Step (never duplicate Demo button)
+                btnNext.innerHTML = AppState.lessonIdx < curr.length - 1 ? 'Next Step &raquo;' : 'Finish &raquo;';
+                if (AppState.lessonDemoPlayed) {
+                    btnNext.classList.add('ring-2', 'ring-cyan-300');
                 } else {
-                    btnNext.innerHTML = AppState.lessonIdx < curr.length - 1 ? 'Next Step &raquo;' : 'Finish &raquo;';
-                    if (AppState.lessonDemoPlayed) {
-                        btnNext.classList.add('ring-2', 'ring-cyan-300');
-                    } else {
-                        btnNext.classList.remove('ring-2', 'ring-cyan-300');
-                    }
+                    btnNext.classList.remove('ring-2', 'ring-cyan-300');
                 }
 
                 // Render sequence bar (Interactive Miniatures, Launcher CTA, or Move Tokens)
@@ -3225,6 +3301,28 @@
                             <span class="text-[10px] font-bold mt-1 ${active ? 'text-cyan-300' : 'text-slate-300'}">${cm.label}</span>
                         </button>`;
                     }).join('') + `</div>`;
+                } else if (lesson.miniSelector === 'STEP4_EDGES') {
+                    const tokens = lesson.displayAlg || [];
+                    seqBar.innerHTML = `
+                        <div class="w-full space-y-1.5">
+                            <div class="grid grid-cols-2 gap-1.5 w-full">
+                                ${STEP4_MINI_CASES.map(s4 => {
+                                    const active = s4.id === (lesson.miniActiveId || 's4-adj');
+                                    return `<button data-step4-mini="${s4.id}" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl border transition ${active ? 'mini-card-active border-cyan-400' : 'border-slate-800 bg-slate-900/80 hover:border-slate-600'}">
+                                        <span class="text-[11px] font-bold ${active ? 'text-cyan-300' : 'text-slate-200'}">${s4.label}</span>
+                                        <span class="text-[9px] font-mono-code px-1.5 py-0.5 rounded bg-slate-950/80 text-amber-300 border border-slate-700">${s4.badge}</span>
+                                    </button>`;
+                                }).join('')}
+                            </div>
+                            <div class="flex flex-wrap items-center gap-1">
+                                ${tokens.map((m, idx) => {
+                                    const isLit = AppState.activeDemoTokenIdx === idx;
+                                    const cls = isLit ? 'move-token-active border scale-105' : 'bg-slate-900 border-slate-700 text-cyan-300';
+                                    return `<span class="font-mono-code text-xs font-bold px-2 py-0.5 rounded-md border transition-all ${cls}">${m}</span>`;
+                                }).join('')}
+                                <span class="font-mono-code text-[11px] font-extrabold px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-400/50 text-amber-300">${lesson.repeatBadge || ''}</span>
+                            </div>
+                        </div>`;
                 } else if (lesson.isExampleLauncher) {
                     const track = lesson.isExampleLauncher;
                     const scr = (track === 'CFOP' ? CFOP_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE).filter(m => m !== 'x2').join(' ');
@@ -3275,21 +3373,21 @@
             stagePill.textContent = st.stage;
             titleEl.textContent = st.title;
             descEl.textContent = st.desc;
-            btnNext.innerHTML = 'Next &raquo;';
+            btnNext.innerHTML = AppState.isStageWalkthrough
+                ? (AppState.currentStageIdx < AppState.guidePlan.length - 1 ? 'Next Stage &raquo;' : 'Solve Final &raquo;')
+                : 'Next &raquo;';
 
             if (st.moves && st.moves.length > 0) {
                 btnAuto.classList.remove('hidden');
-                seqBar.innerHTML = st.moves.map((m, idx) => {
-                    const done = idx < AppState.currentMoveIdx;
-                    const active = idx === AppState.currentMoveIdx;
-                    const cls = active
-                        ? 'move-token-active border'
-                        : (done ? 'bg-emerald-950/50 border-emerald-500/30 text-emerald-300/70 line-through' : 'bg-slate-900 border-slate-700/80 text-slate-200');
-                    return `<span class="font-mono-code text-xs font-bold px-2 py-0.5 rounded-md border ${cls}">${m}</span>`;
+                const remMoves = st.moves.slice(AppState.currentMoveIdx);
+                seqBar.innerHTML = remMoves.map((m, idx) => {
+                    const isFirst = idx === 0;
+                    const cls = isFirst ? 'move-token-active border scale-105' : 'bg-slate-900 border-slate-700 text-slate-300';
+                    return `<span class="font-mono-code text-xs font-bold px-2 py-0.5 rounded-md border transition-all ${cls}">${m}</span>`;
                 }).join('');
             } else {
                 btnAuto.classList.add('hidden');
-                seqBar.innerHTML = `<span class="text-[11px] text-emerald-300 font-semibold px-1">&#10003; Ready! Scramble or Scan/Paint a cube to practice.</span>`;
+                seqBar.innerHTML = `<span class="text-xs text-emerald-300 font-semibold">&#10003; Stage complete!</span>`;
             }
         }
 
@@ -3298,11 +3396,6 @@
             if (AppState.appMode === 'LESSON') {
                 cube.clearQueue();
                 const curr = getActiveCurriculum();
-                const lesson = curr[AppState.lessonIdx];
-                if (lesson && lesson.autoDemo === false && !AppState.lessonDemoPlayed && lesson.demoMoves && lesson.demoMoves.length > 0) {
-                    playLessonDemo();
-                    return;
-                }
                 if (AppState.lessonIdx < curr.length - 1) {
                     loadLessonStep(AppState.lessonIdx + 1, true);
                 } else {
@@ -3311,15 +3404,55 @@
                 return;
             }
 
-            // GUIDE_SOLVE mode: execute next move in guidePlan
+            // GUIDE_SOLVE mode: if Example Solve stage walkthrough, animate the entire stage in 1 click!
             const st = AppState.guidePlan[AppState.currentStageIdx];
             if (!st || !st.moves || st.moves.length === 0) return;
             if (cube.isAnimating) cube.clearQueue();
 
+            const preset = SPEED_PRESETS[AppState.speedIdx];
+
+            if (AppState.isStageWalkthrough) {
+                const remainingMoves = st.moves.slice(AppState.currentMoveIdx);
+                const startOffset = AppState.currentMoveIdx;
+                const stageTitle = st.title;
+                const totalStageMoves = st.moves.length;
+
+                cube.enqueueMoves(
+                    remainingMoves,
+                    Math.max(preset.radPerFrame, 0.065),
+                    true,
+                    () => {
+                        AppState.currentMoveIdx = totalStageMoves;
+                        if (AppState.currentStageIdx < AppState.guidePlan.length - 1) {
+                            AppState.currentStageIdx++;
+                            AppState.currentMoveIdx = 0;
+                            renderGuideHUD();
+                        } else {
+                            stopAutoPlay();
+                            AppState.isStageWalkthrough = false;
+                            if (cube.isSolved()) {
+                                cube.spawnCelebration();
+                                showToast('Cube Solved! All 4 stages complete!', 'success');
+                            }
+                            AppState.activeCase = null;
+                            buildPedagogicalPlan();
+                        }
+                    },
+                    true,
+                    Math.min(preset.pauseMs, 140),
+                    remainingMoves.map((_, i) => `${stageTitle} (${startOffset + i + 1}/${totalStageMoves})`),
+                    (relIdx) => {
+                        AppState.currentMoveIdx = startOffset + relIdx;
+                        renderGuideHUD();
+                    }
+                );
+                return;
+            }
+
+            // Standard move-by-move guided solve
             const move = st.moves[AppState.currentMoveIdx];
             if (!move) return;
 
-            const preset = SPEED_PRESETS[AppState.speedIdx];
             cube.enqueueMoves([move], preset.radPerFrame, true, () => {
                 AppState.currentMoveIdx++;
                 if (AppState.currentMoveIdx >= st.moves.length) {
@@ -3890,6 +4023,12 @@
                 if (cfopBtn) {
                     audio.playClick();
                     loadLessonStep(parseInt(cfopBtn.dataset.cfopMini, 10), true);
+                    return;
+                }
+                const s4Btn = e.target.closest('[data-step4-mini]');
+                if (s4Btn) {
+                    audio.playClick();
+                    selectStep4Mini(s4Btn.dataset.step4Mini);
                     return;
                 }
                 if (e.target.closest('#btn-launch-example')) {
