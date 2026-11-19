@@ -55,7 +55,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Glassmorphism Panels */
         .glass-panel {
             background: rgba(13, 20, 36, 0.90);
             backdrop-filter: blur(12px);
@@ -72,23 +71,6 @@
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
         }
 
-        /* Tactile Notation Buttons */
-        .cube-btn {
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            box-shadow: 0 3px 0 rgba(2, 6, 23, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
-        }
-        .cube-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 rgba(2, 6, 23, 0.85);
-        }
-        .cube-btn:hover {
-            border-color: rgba(34, 211, 238, 0.55);
-            background: linear-gradient(180deg, rgba(51, 65, 85, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
-        }
-
-        /* Primary CTA Glow */
         .btn-primary-glow {
             background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
             box-shadow: 0 4px 16px rgba(6, 182, 212, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
@@ -97,7 +79,6 @@
             transform: scale(0.97);
         }
 
-        /* Custom Scrollbar for Modals */
         .custom-scroll {
             touch-action: pan-y;
             -webkit-overflow-scrolling: touch;
@@ -115,7 +96,6 @@
             border-radius: 99px;
         }
 
-        /* Active Move Token Highlight */
         .move-token-active {
             background: rgba(34, 211, 238, 0.22);
             border-color: #22d3ee;
@@ -123,7 +103,6 @@
             box-shadow: 0 0 12px rgba(34, 211, 238, 0.45);
         }
 
-        /* Canvas Container */
         #canvas-container {
             position: fixed;
             inset: 0;
@@ -131,7 +110,6 @@
             touch-action: none;
         }
 
-        /* Safe Area Layout Containers (generous top clearance for iPadOS status bar) */
         #top-ui {
             padding-top: calc(max(var(--safe-top), 20px) + 8px);
             padding-left: calc(var(--safe-left) + 12px);
@@ -144,7 +122,6 @@
             padding-right: calc(var(--safe-right) + 10px);
         }
 
-        /* Subtle pulse for active thumbnail */
         .mini-card-active {
             border-color: #22d3ee !important;
             background: rgba(8, 51, 68, 0.65) !important;
@@ -162,10 +139,8 @@
 
         <!-- Header Bar -->
         <header class="w-full max-w-5xl flex items-center justify-between gap-1.5 sm:gap-2 pointer-events-auto">
-            <!-- Brand + Status Pill -->
             <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <div class="glass-panel rounded-xl px-2.5 py-1.5 flex items-center gap-2">
-                    <!-- Mini 3x3 Cube App Emblem -->
                     <svg width="18" height="18" viewBox="0 0 36 36" class="shrink-0 rounded-[4px] bg-slate-950 p-0.5 border border-slate-700">
                         <rect x="2" y="2" width="9" height="9" rx="2" fill="#f8fafc"/>
                         <rect x="13.5" y="2" width="9" height="9" rx="2" fill="#22d3ee"/>
@@ -252,7 +227,6 @@
             <!-- Collapsible Guide Body -->
             <div id="guide-hud-body" class="mt-2 space-y-2">
                 <div class="flex items-start gap-2.5">
-                    <!-- Dynamic Case Recognition Diagram (for OLL/PLL/F2L drills) -->
                     <div id="hud-case-diagram" class="hidden shrink-0"></div>
                     <p id="guide-step-desc" class="text-[11px] sm:text-xs text-slate-300 leading-relaxed flex-1">
                         Loading guide...
@@ -291,17 +265,12 @@
                     <stop offset="100%" stop-color="#f59e0b"/>
                 </linearGradient>
             </defs>
-            <!-- Stylized Upper Body (Shoulders + Complete Head looking toward Blue Front Face) -->
             <path d="M8,74 C8,56 18,48 31,48 C44,48 54,56 54,74 Z" fill="url(#shirtGrad)" stroke="#38bdf8" stroke-width="1.5"/>
             <circle cx="31" cy="30" r="14" fill="url(#skinGrad)" stroke="#fbbf24" stroke-width="1.5"/>
-            <!-- Crisp Hair Cap with Distinct Slate Tone so Full Head Silhouette is Visible -->
             <path d="M17,28 C17,17 24,13 33,14 C40,15 44,20 45,27 C41,22 34,20 26,22 C21,23 19,25 17,28 Z" fill="#334155" stroke="#64748b" stroke-width="1.2"/>
-            <!-- Friendly Eye Looking Toward Cube -->
             <circle cx="38" cy="30" r="1.8" fill="#0f172a"/>
-            <!-- Glowing Gaze Arrow Pointing Toward Blue Front Face -->
             <line x1="50" y1="33" x2="73" y2="33" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
             <polygon points="71,26 83,33 71,40" fill="#22d3ee"/>
-            <!-- Mini Blue Front Cube Badge -->
             <rect x="85" y="21" width="20" height="24" rx="4" fill="#2563eb" stroke="#93c5fd" stroke-width="1.8"/>
             <text x="95" y="37" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800" font-family="monospace">F</text>
         </svg>
@@ -317,14 +286,12 @@
 
     <!-- BOTTOM CONTROLS DOCK (STREAMLINED SINGLE-ROW ACTION BAR + GESTURE HINT) -->
     <div id="bottom-ui" class="fixed bottom-0 left-0 right-0 z-20 pointer-events-none flex flex-col items-center gap-1.5">
-        <!-- Subtle Navigation & Gesture Hint Directly Under 3D Cube -->
-        <div class="pointer-events-none px-3 py-1 rounded-full bg-slate-950/80 border border-slate-800/90 backdrop-blur-md text-[10px] sm:text-[11px] text-slate-300 flex items-center gap-2 shadow-md">
-            <span class="text-cyan-300 font-semibold">Swipe sticker:</span><span>Turn layer</span>
+        <div id="gesture-hint-pill" class="pointer-events-none px-3 py-1 rounded-full bg-slate-950/85 border border-slate-800/90 backdrop-blur-md text-[11px] text-slate-300 flex items-center justify-center gap-2 whitespace-nowrap shadow-md">
+            <span class="text-cyan-300 font-semibold">Swipe:</span><span>Turn</span>
             <span class="text-slate-600">&bull;</span>
-            <span class="text-amber-300 font-semibold">Drag background / 2 fingers:</span><span>Rotate 3D view</span>
+            <span id="gesture-rotate-label" class="text-amber-300 font-semibold">2 fingers:</span><span>Rotate</span>
         </div>
 
-        <!-- Streamlined Utility Dock (Scramble, Fast, Reset, View, Undo) -->
         <div class="w-full max-w-2xl glass-panel rounded-2xl p-1.5 flex items-center justify-between gap-1.5 pointer-events-auto">
             <div class="flex items-center gap-1 sm:gap-1.5 flex-wrap">
                 <button id="btn-scramble" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-amber-300 border border-amber-500/35 flex items-center gap-1 transition">
@@ -352,10 +319,8 @@
     <!-- ====================================================================== -->
     <div id="modal-welcome" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="glass-modal w-full max-w-xl rounded-3xl overflow-hidden flex flex-col max-h-[92vh]">
-            <!-- Header with Cube App Icon, Version Badge & Update Button -->
             <div class="px-5 pt-5 pb-3.5 border-b border-slate-800/80 flex items-start justify-between gap-3">
                 <div class="flex items-start gap-3 min-w-0">
-                    <!-- 3x3 Cube App Icon to the left of Welcome to CUBEX -->
                     <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-2xl bg-slate-950 p-1.5 border border-cyan-500/40 shadow-lg shadow-cyan-950/50 mt-0.5">
                         <rect x="8" y="8" width="24" height="24" rx="5" fill="#f8fafc"/>
                         <rect x="38" y="8" width="24" height="24" rx="5" fill="#22d3ee"/>
@@ -371,7 +336,7 @@
                         <div class="flex items-center gap-2 flex-wrap">
                             <h1 class="text-lg sm:text-2xl font-extrabold text-white tracking-tight">Welcome to CUBEX</h1>
                             <button id="btn-check-update" title="Check &amp; Install Latest App Update" class="inline-flex items-center gap-1 text-[10px] font-mono-code font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 rounded-lg px-2 py-0.5 transition">
-                                <span id="app-version-label">v2.7.0</span>
+                                <span id="app-version-label">v2.8.4</span>
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                                 <span>Update</span>
                             </button>
@@ -386,12 +351,9 @@
                 </button>
             </div>
 
-            <!-- 2x2 Graphic Cards -->
             <div class="p-4 sm:p-5 overflow-y-auto custom-scroll">
                 <div class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3">Choose Your Learning Path</div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-
-                    <!-- Card 1: Beginner -->
                     <button data-welcome-track="BEGINNER" class="welcome-track-card text-left p-3.5 rounded-2xl border-2 border-cyan-400 bg-cyan-950/35 hover:bg-cyan-950/50 transition flex items-center gap-3.5">
                         <svg width="58" height="58" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
                             <rect x="38" y="10" width="24" height="24" rx="5" fill="#f8fafc"/>
@@ -409,11 +371,10 @@
                                 <span class="font-bold text-sm text-white">Beginner</span>
                                 <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Start Here</span>
                             </div>
-                            <p class="text-[11px] text-slate-300 mt-1 leading-snug">Daisy, Intuitive F2L &amp; 4 simple last-layer steps.</p>
+                            <p class="text-[11px] text-slate-300 mt-1 leading-snug">Long's beginner tutorial.</p>
                         </div>
                     </button>
 
-                    <!-- Card 2: CFOP -->
                     <button data-welcome-track="CFOP" class="welcome-track-card text-left p-3.5 rounded-2xl border border-slate-700/80 bg-slate-900/70 hover:border-cyan-500/60 transition flex items-center gap-3.5">
                         <svg width="58" height="58" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
                             <polygon points="50,10 86,28 50,46 14,28" fill="#facc15" stroke="#090d16" stroke-width="2.2" stroke-linejoin="round"/>
@@ -441,7 +402,6 @@
                         </div>
                     </button>
 
-                    <!-- Card 3: Roux -->
                     <button data-welcome-track="ROUX" class="welcome-track-card text-left p-3.5 rounded-2xl border border-slate-700/80 bg-slate-900/70 hover:border-cyan-500/60 transition flex items-center gap-3.5">
                         <svg width="58" height="58" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
                             <rect x="10" y="14" width="22" height="72" rx="4" fill="#16a34a" stroke="#0f172a" stroke-width="2"/>
@@ -458,7 +418,6 @@
                         </div>
                     </button>
 
-                    <!-- Card 4: Alg-Trainer -->
                     <button data-welcome-track="ALGS" class="welcome-track-card text-left p-3.5 rounded-2xl border border-slate-700/80 bg-slate-900/70 hover:border-cyan-500/60 transition flex items-center gap-3.5">
                         <svg width="58" height="58" viewBox="0 0 100 100" class="shrink-0 rounded-xl bg-slate-950 p-1 border border-slate-800">
                             <rect x="16" y="16" width="20" height="20" rx="3" fill="#1e293b"/>
@@ -485,7 +444,6 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="px-5 py-3.5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-950/50">
                 <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
                     <input id="chk-always-show-welcome" type="checkbox" checked class="w-4 h-4 rounded accent-cyan-400">
@@ -499,7 +457,7 @@
     </div>
 
     <!-- ====================================================================== -->
-    <!-- MODAL 2: METHOD SELECTOR (MATCHING GRAPHIC CARD DESIGN)                -->
+    <!-- MODAL 2: METHOD SELECTOR                                               -->
     <!-- ====================================================================== -->
     <div id="modal-method" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="glass-modal w-full max-w-xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
@@ -527,7 +485,7 @@
                     </svg>
                     <div class="min-w-0">
                         <div class="font-bold text-sm text-cyan-300">Beginner</div>
-                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">Daisy, Intuitive F2L &amp; 4-step Last Layer.</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">Long's beginner tutorial.</div>
                     </div>
                 </button>
 
@@ -583,7 +541,7 @@
     </div>
 
     <!-- ====================================================================== -->
-    <!-- MODAL 3: ALGORITHM CASE TRAINER (F2L 41, 2-LOOK, FULL OLL/PLL)         -->
+    <!-- MODAL 3: ALGORITHM CASE TRAINER                                        -->
     <!-- ====================================================================== -->
     <div id="modal-algs" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-4 hidden">
         <div class="glass-modal w-full max-w-3xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
@@ -640,12 +598,19 @@
                             <div class="border border-cyan-400/40"></div><div class="border border-cyan-400/40"></div><div class="border border-cyan-400/40"></div>
                             <div class="border border-cyan-400/40"></div><div class="border border-cyan-400/40"></div><div class="border border-cyan-400/40"></div>
                         </div>
+                        <div id="camera-status-badge" class="absolute bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full bg-slate-950/85 border border-slate-700 text-[10px] font-semibold text-cyan-300 whitespace-nowrap">
+                            Ready to scan active face
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <button id="btn-capture-face" class="btn-primary-glow text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl">Capture Active Face</button>
-                        <button id="btn-stop-camera" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs px-3 py-2.5 rounded-xl border border-slate-700">Stop Camera</button>
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <button id="btn-capture-face" class="btn-primary-glow text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl">Capture Live Frame</button>
+                        <label for="camera-file-input" class="cursor-pointer bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-emerald-500/40 transition">
+                            Take / Pick Photo
+                        </label>
+                        <input id="camera-file-input" type="file" accept="image/*" capture="environment" class="hidden">
+                        <button id="btn-stop-camera" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs px-3 py-2.5 rounded-xl border border-slate-700">Stop</button>
                     </div>
-                    <canvas id="camera-canvas" class="hidden" width="300" height="300"></canvas>
+                    <canvas id="camera-canvas" class="hidden" width="360" height="360"></canvas>
                 </div>
 
                 <div class="space-y-3">
@@ -680,7 +645,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.7.0';
+        const APP_VERSION = '2.8.6';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -1087,8 +1052,8 @@
             }[miniId] || ['1,1'];
 
             const sideYellow = {
-                'yc-dot':  { top: true,  bottom: true,  left: true,  right: true  },
-                'yc-v':    { top: false, bottom: true,  left: false, right: true  },
+                'yc-dot':  { top: true,  bottom: true,  left: true,  right: true },
+                'yc-v':    { top: false, bottom: true,  left: false, right: true },
                 'yc-line': { top: true,  bottom: true,  left: false, right: false },
                 'yc-goal': { top: false, bottom: false, left: false, right: false }
             }[miniId] || { top: true, bottom: true, left: true, right: true };
@@ -1101,10 +1066,10 @@
                     rects.push(`<rect x="${17 + c * 23}" y="${17 + r * 23}" width="20" height="20" rx="3.5" fill="${fill}"/>`);
                 }
             }
-            if (sideYellow.top)    rects.push(`<rect x="40" y="7" width="20" height="6" rx="2" fill="#facc15"/>`);
-            if (sideYellow.bottom) rects.push(`<rect x="40" y="87" width="20" height="6" rx="2" fill="#facc15"/>`);
-            if (sideYellow.left)   rects.push(`<rect x="7" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
-            if (sideYellow.right)  rects.push(`<rect x="87" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
+            if (sideYellow.top)    rects.push(`<rect x="40" y="8" width="20" height="6" rx="2" fill="#facc15"/>`);
+            if (sideYellow.bottom) rects.push(`<rect x="40" y="86" width="20" height="6" rx="2" fill="#facc15"/>`);
+            if (sideYellow.left)   rects.push(`<rect x="8" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
+            if (sideYellow.right)  rects.push(`<rect x="86" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
 
             return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" class="rounded-xl bg-slate-950 border border-slate-800 shrink-0">${rects.join('')}</svg>`;
         }
@@ -1382,7 +1347,7 @@
         };
 
         // ====================================================================
-        // 6. THREE.JS 3D RUBIK'S CUBE ENGINE
+        // 6. THREE.JS 3D RUBIK'S CUBE ENGINE (VIEWPORT-CENTERED + 2-FINGER/RIGHT-DRAG)
         // ====================================================================
         class RubiksCube3D {
             constructor(container) {
@@ -1480,17 +1445,19 @@
                 this.gazeGroup.add(personHead);
             }
 
+            // Places the 3D cube centered in the open viewport area between #top-ui and #bottom-ui
             computeOptimalVerticalOffset() {
                 const topEl = document.getElementById('top-ui');
                 const botEl = document.getElementById('bottom-ui');
                 const h = Math.max(1, window.innerHeight);
                 const topH = topEl ? topEl.getBoundingClientRect().height : 200;
                 const botH = botEl ? botEl.getBoundingClientRect().height : 84;
-                const gapCenterPx = topH + (h - topH - botH) * 0.50;
+                const reservedBottom = Math.max(botH + 14, 118);
+                const gapCenterPx = topH + Math.max(60, h - topH - reservedBottom) * 0.50;
                 const ndcOffsetY = ((h * 0.5) - gapCenterPx) / (h * 0.5);
                 const fovRad = (this.camera.fov * Math.PI) / 180;
                 const halfTan = Math.tan(fovRad / 2);
-                const radius = this.targetCamRadius || this.camRadius || 19;
+                const radius = this.targetCamRadius || this.camRadius || 18;
                 return ndcOffsetY * radius * halfTan;
             }
 
@@ -1501,17 +1468,18 @@
                 const h = Math.max(1, window.innerHeight);
                 const topH = topEl ? topEl.getBoundingClientRect().height : 200;
                 const botH = botEl ? botEl.getBoundingClientRect().height : 84;
+                const reservedBottom = Math.max(botH + 14, 118);
 
-                const availH = Math.max(160, h - topH - botH - 16);
-                const availW = Math.max(200, w - 20);
+                const availH = Math.max(150, h - topH - reservedBottom - 16);
+                const availW = Math.max(200, w - 24);
                 const minDimPx = Math.min(availH, availW);
 
                 const fovRad = (this.camera.fov * Math.PI) / 180;
                 const halfTan = Math.tan(fovRad / 2);
-                const desiredCoverage = 0.76;
+                const desiredCoverage = w < 640 ? 0.80 : 0.78;
                 const visualRadius = 2.95;
                 const computed = (visualRadius * h) / (halfTan * minDimPx * desiredCoverage);
-                return Math.max(12.2, Math.min(32.0, computed));
+                return Math.max(12.2, Math.min(34.0, computed));
             }
 
             recalculateViewportFit() {
@@ -1534,7 +1502,8 @@
                 const y = this.camRadius * Math.cos(this.camPhi);
                 const z = this.camRadius * Math.sin(this.camPhi) * Math.cos(this.camTheta);
                 this.camera.position.set(x, y, z);
-                this.camera.lookAt(0, this.cubeOffsetY, 0);
+                // Look at world origin so cubeOffsetY shifts the cube downward into the open viewport below the HUD
+                this.camera.lookAt(0, 0, 0);
             }
 
             resetCamera() {
@@ -2072,14 +2041,11 @@
                 const pointer = new THREE.Vector2();
 
                 let isDragging = false;
-                let dragMode = null;
+                let dragMode = null; // 'STICKER' | 'ORBIT'
                 let startX = 0, startY = 0;
                 let hitCubie = null;
                 let hitNormal = null;
-
-                let isTwoFingerOrbit = false;
-                let lastMidX = 0, lastMidY = 0;
-                let lastPinchDist = 0;
+                const activePointers = new Map();
 
                 const getHit = (clientX, clientY) => {
                     const rect = dom.getBoundingClientRect();
@@ -2096,90 +2062,37 @@
 
                 dom.addEventListener('contextmenu', (e) => e.preventDefault());
 
-                dom.addEventListener('touchstart', (e) => {
-                    if (e.touches.length >= 2) {
-                        isDragging = false;
-                        dragMode = null;
-                        isTwoFingerOrbit = true;
-                        const t0 = e.touches[0], t1 = e.touches[1];
-                        lastMidX = (t0.clientX + t1.clientX) * 0.5;
-                        lastMidY = (t0.clientY + t1.clientY) * 0.5;
-                        lastPinchDist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
-                    }
-                }, { passive: true });
-
-                dom.addEventListener('touchmove', (e) => {
-                    if (isTwoFingerOrbit && e.touches.length >= 2) {
-                        const t0 = e.touches[0], t1 = e.touches[1];
-                        const midX = (t0.clientX + t1.clientX) * 0.5;
-                        const midY = (t0.clientY + t1.clientY) * 0.5;
-                        const dx = midX - lastMidX;
-                        const dy = midY - lastMidY;
-
-                        this.targetCamTheta -= dx * 0.009;
-                        this.targetCamPhi = Math.max(0.18, Math.min(Math.PI - 0.18, this.targetCamPhi - dy * 0.009));
-                        lastMidX = midX;
-                        lastMidY = midY;
-
-                        const dist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
-                        if (lastPinchDist > 0 && dist > 0) {
-                            const minR = this.getIdealCameraRadius() * 0.72;
-                            const maxR = this.getIdealCameraRadius() * 1.45;
-                            this.targetCamRadius = Math.max(minR, Math.min(maxR, this.targetCamRadius + (lastPinchDist - dist) * 0.035));
-                        }
-                        lastPinchDist = dist;
-                    }
-                }, { passive: true });
-
-                dom.addEventListener('touchend', (e) => {
-                    if (e.touches.length < 2) {
-                        isTwoFingerOrbit = false;
-                        lastPinchDist = 0;
-                    }
-                }, { passive: true });
-
                 dom.addEventListener('pointerdown', (e) => {
-                    if (isTwoFingerOrbit) return;
-                    const isTouch = e.pointerType === 'touch';
+                    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-                    if (isTouch) {
-                        isDragging = true;
-                        startX = e.clientX;
-                        startY = e.clientY;
-                        const hit = getHit(e.clientX, e.clientY);
-                        if (hit && !this.isAnimating) {
-                            dragMode = 'STICKER';
-                            hitCubie = hit.cubie;
-                            hitNormal = hit.normal;
-                        } else {
-                            dragMode = 'ORBIT';
-                        }
-                        return;
-                    }
-
-                    // Desktop Mouse: Drag on sticker turns layer; Right-click or empty-space drag orbits 3D camera
-                    if (e.button === 2) {
+                    // Two-finger touch drag or right-mouse drag always orbits the 3D view
+                    if (activePointers.size >= 2 || e.button === 2) {
                         isDragging = true;
                         dragMode = 'ORBIT';
                         startX = e.clientX;
                         startY = e.clientY;
-                    } else if (e.button === 0) {
-                        isDragging = true;
-                        startX = e.clientX;
-                        startY = e.clientY;
-                        const hit = getHit(e.clientX, e.clientY);
-                        if (hit && !this.isAnimating) {
-                            dragMode = 'STICKER';
-                            hitCubie = hit.cubie;
-                            hitNormal = hit.normal;
-                        } else {
-                            dragMode = 'ORBIT';
-                        }
+                        return;
+                    }
+
+                    if (e.button !== undefined && e.button !== 0) return;
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    const hit = getHit(e.clientX, e.clientY);
+                    if (hit && !this.isAnimating) {
+                        dragMode = 'STICKER';
+                        hitCubie = hit.cubie;
+                        hitNormal = hit.normal;
+                    } else {
+                        dragMode = 'ORBIT';
                     }
                 });
 
                 window.addEventListener('pointermove', (e) => {
-                    if (!isDragging || isTwoFingerOrbit) return;
+                    if (activePointers.has(e.pointerId)) {
+                        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    }
+                    if (!isDragging) return;
                     const dx = e.clientX - startX;
                     const dy = e.clientY - startY;
 
@@ -2195,10 +2108,15 @@
                     }
                 });
 
-                window.addEventListener('pointerup', () => {
-                    isDragging = false;
-                    dragMode = null;
-                });
+                const endPointer = (e) => {
+                    activePointers.delete(e.pointerId);
+                    if (activePointers.size === 0) {
+                        isDragging = false;
+                        dragMode = null;
+                    }
+                };
+                window.addEventListener('pointerup', endPointer);
+                window.addEventListener('pointercancel', endPointer);
 
                 dom.addEventListener('wheel', (e) => {
                     e.preventDefault();
@@ -2316,6 +2234,7 @@
         const YCROSS_LINE_SOLVE = ['F', 'R', 'U', "R'", "U'", "F'"];
         const YCROSS_V_TO_LINE = ['F', 'R', 'U', "R'", "U'", "F'"];
         const YCROSS_DOT_TO_V = ['F', 'R', 'U', "R'", "U'", "F'"];
+
         const YCROSS_LINE_SETUP_YELLOW_TOP = ['x2', ...invertSequence(YCROSS_LINE_SOLVE)];
         const YCROSS_V_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
         const YCROSS_DOT_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_DOT_TO_V, ...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
@@ -2331,10 +2250,10 @@
                 setupMoves: ['x2'],
                 demoMoves: ['y', 'y', 'y', 'y'],
                 captions: [
-                    '1. F (Front) is the face closest to you — we use BLUE facing you!',
+                    '1. F (Front) is the side facing you — we use BLUE in front!',
                     '2. White is on bottom opposite Yellow on top',
                     '3. Red & Orange are opposites; Blue & Green are opposites',
-                    '4. Keep Blue facing you (F) & use light finger tricks!'
+                    '4. Keep Blue in front (F) & use light finger turns!'
                 ]
             },
             {
@@ -2496,7 +2415,7 @@
             {
                 stage: 'STEP 3 10/16',
                 title: '3. Yellow Cross: "Fru Ruff" (F R U R\' U\' F\')',
-                desc: 'Top & side yellow edge stickers match a real cube: Dot (all 4 yellow edge stickers on sides) → V-Shape (top-left yellow + right/bottom side yellow) → horizontal Line (left/right yellow + top/bottom side yellow) → Goal Cross!',
+                desc: 'Dot Case: Only the Yellow center faces UP while all 4 yellow edge stickers sit on the sides. Run F R U R\' U\' F\' once during Demo to form the top-left V-shape (9 & 12 o\'clock)!',
                 tip: 'Tap Dot, V-Shape, Line, or Goal Cross below to inspect & watch each case slowly!',
                 focusMode: 'LAST_LAYER_CROSS',
                 autoDemo: false,
@@ -2510,7 +2429,7 @@
                     '3. U — Up clockwise',
                     "4. R' — Right anti-clockwise",
                     "5. U' — Up anti-clockwise",
-                    "6. F' — Front anti-clockwise (Dot becomes top-left V-Shape!)"
+                    "6. F' — Front anti-clockwise (Dot becomes the top-left V-shape!)"
                 ]
             },
             {
@@ -2954,21 +2873,21 @@
                 label: 'Dot (3×)',
                 setupMoves: YCROSS_DOT_SETUP_YELLOW_TOP,
                 demoMoves: YCROSS_DOT_TO_V,
-                desc: 'Dot Case: All 4 yellow edge stickers sit on the outer sides (only center yellow on top). Run F R U R\' U\' F\' once to turn Dot into the top-left V-Shape!'
+                desc: 'Dot Case: Only the Yellow center faces UP while all 4 yellow edge stickers sit on the sides. Run F R U R\' U\' F\' once during Demo to form the top-left V-shape (9 & 12 o\'clock)!'
             },
             {
                 id: 'yc-v',
                 label: 'V-Shape (2×)',
                 setupMoves: YCROSS_V_SETUP_YELLOW_TOP,
                 demoMoves: YCROSS_V_TO_LINE,
-                desc: 'V-Shape Case: Back & Left yellow edges face UP (9 & 12 o\'clock), while Right & Front yellow stickers sit on the sides. Run F R U R\' U\' F\' once to form the horizontal Line!'
+                desc: 'V-Shape Case: Back & Left yellow edges face UP (9 & 12 o\'clock) while Front & Right yellow edge stickers sit on the sides. Run F R U R\' U\' F\' once to get the horizontal Line!'
             },
             {
                 id: 'yc-line',
                 label: 'Line (1×)',
                 setupMoves: YCROSS_LINE_SETUP_YELLOW_TOP,
                 demoMoves: YCROSS_LINE_SOLVE,
-                desc: 'Line Case: Left & Right yellow edges form a horizontal bar on top, while Back & Front yellow stickers sit on the sides. Run F R U R\' U\' F\' once to complete the Goal Cross!'
+                desc: 'Line Case: Left, Center & Right form a horizontal yellow line while Front & Back yellow edge stickers sit on the sides. Run F R U R\' U\' F\' once to complete the Yellow Cross!'
             },
             {
                 id: 'yc-goal',
@@ -3276,7 +3195,7 @@
             lesson.setupMoves = item.setupMoves;
             lesson.demoMoves = item.demoMoves;
             lesson.desc = item.desc;
-            loadLessonStep(9, item.id !== 'yc-goal');
+            loadLessonStep(9, false);
         }
 
         function launchExampleSolveWalkthrough(track = 'BEGINNER') {
@@ -3353,7 +3272,7 @@
                 AppState.guidePlan = [{
                     stage: 'READY',
                     title: 'Custom Cube Loaded',
-                    desc: 'Your custom cube state is ready. Use the keypad or swipe stickers to solve!',
+                    desc: 'Your custom cube state is ready. Swipe stickers on the 3D cube to turn layers!',
                     moves: []
                 }];
                 AppState.currentStageIdx = 0;
@@ -3570,6 +3489,7 @@
                     }
                     seqBar.innerHTML = html || `<span class="text-[11px] text-slate-400 px-1">Tap Next Step when ready!</span>`;
                 }
+                requestAnimationFrame(() => cube.recalculateViewportFit());
                 return;
             }
 
@@ -3596,6 +3516,7 @@
                 btnAuto.classList.add('hidden');
                 seqBar.innerHTML = `<span class="text-xs text-emerald-300 font-semibold">&#10003; Stage complete!</span>`;
             }
+            requestAnimationFrame(() => cube.recalculateViewportFit());
         }
 
         function advanceStep() {
@@ -3872,7 +3793,7 @@
         }
 
         // ====================================================================
-        // 12. CAMERA SCANNER & MANUAL STICKER PAINTER
+        // 12. CAMERA SCANNER & MANUAL STICKER PAINTER (LIVE + PHOTO FALLBACK)
         // ====================================================================
         const PaintState = {
             activeFace: 'U',
@@ -3951,86 +3872,150 @@
                     ? 'All 6 colors have 9 stickers — ready to load!'
                     : `Counts: ${faces.map(f => `${f}:${counts[f]}`).join(' ')}`;
             }
+            const statusBadge = document.getElementById('camera-status-badge');
+            if (statusBadge) {
+                statusBadge.textContent = `Scanning Face ${PaintState.activeFace} (${FACE_NAMES[PaintState.activeFace]} Center)`;
+            }
         }
 
         async function startCameraScanner() {
             const panel = document.getElementById('camera-panel');
             const video = document.getElementById('camera-video');
+            const badge = document.getElementById('camera-status-badge');
             panel.classList.remove('hidden');
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                showToast('Camera API unavailable — use Manual Sticker Painter below!', 'warn');
+                if (badge) badge.textContent = 'Live stream blocked — tap "Take / Pick Photo" below!';
+                showToast('Tap "Take / Pick Photo" to snap your cube with iPhone/iPad camera!', 'info');
                 return;
             }
             try {
-                stopCameraScanner();
+                stopCameraScanner(false);
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 640 } },
+                    video: { facingMode: { ideal: 'environment' }, width: { ideal: 720 }, height: { ideal: 720 } },
                     audio: false
                 });
                 PaintState.stream = stream;
                 video.srcObject = stream;
                 await video.play().catch(() => {});
+                if (badge) badge.textContent = `Live Camera Active • Face ${PaintState.activeFace} (${FACE_NAMES[PaintState.activeFace]} Center)`;
                 showToast(`Align ${PaintState.activeFace} face in the 3×3 grid & tap Capture!`, 'info');
             } catch (err) {
-                showToast('Could not access camera — tap stickers below to paint manually.', 'warn');
+                if (badge) badge.textContent = 'Use "Take / Pick Photo" or paint stickers below';
+                showToast('Live camera unavailable in preview — use "Take / Pick Photo"!', 'warn');
             }
         }
 
-        function stopCameraScanner() {
+        function stopCameraScanner(hidePanel = true) {
             if (PaintState.stream) {
                 PaintState.stream.getTracks().forEach(t => t.stop());
                 PaintState.stream = null;
             }
             const video = document.getElementById('camera-video');
             if (video) video.srcObject = null;
-            const panel = document.getElementById('camera-panel');
-            if (panel) panel.classList.add('hidden');
+            if (hidePanel) {
+                const panel = document.getElementById('camera-panel');
+                if (panel) panel.classList.add('hidden');
+            }
         }
 
         function classifyRGBToFace(r, g, b) {
-            const max = Math.max(r, g, b);
-            const min = Math.min(r, g, b);
-            const sat = max === 0 ? 0 : (max - min) / max;
-            if (max > 185 && sat < 0.24) return 'U';
-            if (r > 170 && g > 155 && b < 90) return 'D';
-            if (b > r + 45 && b > g + 25) return 'B';
-            if (g > r + 25 && g >= b) return 'F';
-            if (r > 165 && g < 115 && b < 95) return 'R';
-            if (r > 165 && g >= 90 && g <= 165 && b < 85) return 'L';
-            return PaintState.brushColor || 'U';
+            const rn = r / 255, gn = g / 255, bn = b / 255;
+            const max = Math.max(rn, gn, bn);
+            const min = Math.min(rn, gn, bn);
+            const d = max - min;
+            const sat = max === 0 ? 0 : d / max;
+
+            if (max > 0.62 && sat < 0.28) return 'U'; // White
+
+            let hue = 0;
+            if (d > 0) {
+                if (max === rn) hue = ((gn - bn) / d + (gn < bn ? 6 : 0)) * 60;
+                else if (max === gn) hue = ((bn - rn) / d + 2) * 60;
+                else hue = ((rn - gn) / d + 4) * 60;
+            }
+
+            if (hue >= 42 && hue <= 76) return 'D';   // Yellow
+            if (hue >= 77 && hue <= 165) return 'F';  // Green
+            if (hue >= 175 && hue <= 265) return 'B'; // Blue
+            if (hue >= 12 && hue < 42) return 'L';    // Orange
+            return 'R';                               // Red
+        }
+
+        function sampleSquareSourceToFace(sourceEl, srcW, srcH) {
+            const canvas = document.getElementById('camera-canvas');
+            const ctx = canvas.getContext('2d');
+            const size = Math.min(srcW, srcH);
+            const sx0 = Math.floor((srcW - size) * 0.5);
+            const sy0 = Math.floor((srcH - size) * 0.5);
+            ctx.drawImage(sourceEl, sx0, sy0, size, size, 0, 0, canvas.width, canvas.height);
+
+            // Sample inside the 3x3 reticle inset (approx 11%..89% of square)
+            const inset = Math.floor(canvas.width * 0.11);
+            const gridSpan = canvas.width - inset * 2;
+            const nextFaceArr = [...PaintState.map[PaintState.activeFace]];
+
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    const idx = row * 3 + col;
+                    if (idx === 4) {
+                        nextFaceArr[4] = PaintState.activeFace;
+                        continue;
+                    }
+                    const cx = Math.floor(inset + ((col + 0.5) / 3) * gridSpan);
+                    const cy = Math.floor(inset + ((row + 0.5) / 3) * gridSpan);
+                    const patch = ctx.getImageData(cx - 4, cy - 4, 9, 9).data;
+                    let rSum = 0, gSum = 0, bSum = 0;
+                    const pixels = patch.length / 4;
+                    for (let p = 0; p < patch.length; p += 4) {
+                        rSum += patch[p];
+                        gSum += patch[p + 1];
+                        bSum += patch[p + 2];
+                    }
+                    nextFaceArr[idx] = classifyRGBToFace(rSum / pixels, gSum / pixels, bSum / pixels);
+                }
+            }
+            PaintState.map[PaintState.activeFace] = nextFaceArr;
+
+            const order = ['U', 'R', 'F', 'D', 'L', 'B'];
+            const nextIdx = order.indexOf(PaintState.activeFace);
+            const capturedFace = PaintState.activeFace;
+            if (nextIdx >= 0 && nextIdx < order.length - 1) {
+                PaintState.activeFace = order[nextIdx + 1];
+                PaintState.brushColor = PaintState.activeFace;
+            }
+            renderPaintUI();
+            showToast(`Captured ${capturedFace} face! Now showing ${PaintState.activeFace}.`, 'success');
         }
 
         function captureFaceFromCamera() {
             try {
                 const video = document.getElementById('camera-video');
-                const canvas = document.getElementById('camera-canvas');
-                if (!video || !video.videoWidth) {
-                    showToast('Camera not streaming yet — tap stickers to paint manually.', 'warn');
+                if (!video || !video.videoWidth || !video.videoHeight) {
+                    showToast('No live stream — tap "Take / Pick Photo" to capture from your camera!', 'warn');
                     return;
                 }
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                const nextFaceArr = [...PaintState.map[PaintState.activeFace]];
-                for (let row = 0; row < 3; row++) {
-                    for (let col = 0; col < 3; col++) {
-                        const idx = row * 3 + col;
-                        if (idx === 4) {
-                            nextFaceArr[4] = PaintState.activeFace;
-                            continue;
-                        }
-                        const sx = Math.floor(((col + 0.5) / 3) * canvas.width);
-                        const sy = Math.floor(((row + 0.5) / 3) * canvas.height);
-                        const pixel = ctx.getImageData(sx, sy, 1, 1).data;
-                        nextFaceArr[idx] = classifyRGBToFace(pixel[0], pixel[1], pixel[2]);
-                    }
-                }
-                PaintState.map[PaintState.activeFace] = nextFaceArr;
-                renderPaintUI();
-                showToast(`Captured ${PaintState.activeFace} face! Switch to next face or load cube.`, 'success');
+                sampleSquareSourceToFace(video, video.videoWidth, video.videoHeight);
             } catch (e) {
-                showToast('Could not sample frame — tap stickers to paint manually.', 'warn');
+                showToast('Could not capture frame — try "Take / Pick Photo" or manual paint.', 'warn');
             }
+        }
+
+        function handlePhotoFileSelected(file) {
+            if (!file) return;
+            const img = new Image();
+            const url = URL.createObjectURL(file);
+            img.onload = () => {
+                try {
+                    sampleSquareSourceToFace(img, img.naturalWidth || img.width, img.naturalHeight || img.height);
+                } finally {
+                    URL.revokeObjectURL(url);
+                }
+            };
+            img.onerror = () => {
+                URL.revokeObjectURL(url);
+                showToast('Could not read photo — try another image.', 'error');
+            };
+            img.src = url;
         }
 
         // ====================================================================
@@ -4265,7 +4250,7 @@
 
             document.getElementById('btn-scan-paint').addEventListener('click', openScanPaintModal);
             document.getElementById('tab-manual-paint').addEventListener('click', () => {
-                stopCameraScanner();
+                stopCameraScanner(true);
                 document.getElementById('tab-manual-paint').className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition';
                 document.getElementById('tab-camera-scan').className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-slate-900 text-slate-400 border border-slate-700 transition';
             });
@@ -4275,7 +4260,12 @@
                 document.getElementById('tab-manual-paint').className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-slate-900 text-slate-400 border border-slate-700 transition';
             });
             document.getElementById('btn-capture-face').addEventListener('click', captureFaceFromCamera);
-            document.getElementById('btn-stop-camera').addEventListener('click', stopCameraScanner);
+            document.getElementById('camera-file-input').addEventListener('change', (e) => {
+                const f = e.target.files && e.target.files[0];
+                if (f) handlePhotoFileSelected(f);
+                e.target.value = '';
+            });
+            document.getElementById('btn-stop-camera').addEventListener('click', () => stopCameraScanner(true));
 
             document.getElementById('paint-face-tabs').addEventListener('click', (e) => {
                 const btn = e.target.closest('[data-paint-face]');
@@ -4311,7 +4301,7 @@
                 renderPaintUI();
             });
             document.getElementById('btn-apply-scanned').addEventListener('click', () => {
-                stopCameraScanner();
+                stopCameraScanner(true);
                 cube.applyStateMap(PaintState.map);
                 AppState.activeCase = null;
                 document.getElementById('modal-scan').classList.add('hidden');
@@ -4329,7 +4319,7 @@
             document.querySelectorAll('[data-close-modal]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const id = btn.dataset.closeModal;
-                    if (id === 'modal-scan') stopCameraScanner();
+                    if (id === 'modal-scan') stopCameraScanner(true);
                     document.getElementById(id).classList.add('hidden');
                 });
             });
@@ -4346,6 +4336,11 @@
         injectPWAIcons();
         loadSavedData();
         document.getElementById('app-version-label').textContent = `v${APP_VERSION}`;
+        const rotateLabelEl = document.getElementById('gesture-rotate-label');
+        if (rotateLabelEl) {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            rotateLabelEl.textContent = isTouchDevice ? '2 fingers:' : 'Right-drag:';
+        }
         syncSpeedButtonUI();
         document.getElementById('icon-sound-on').classList.toggle('hidden', audio.muted);
         document.getElementById('icon-sound-off').classList.toggle('hidden', !audio.muted);
