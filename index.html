@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-title" content="CUBEX">
     <meta name="theme-color" content="#090d16">
     <meta name="color-scheme" content="dark">
-    <title>CUBEX — Interactive 3D Rubik's Cube Guide & Solver</title>
+    <title>CUBEX — Interactive 3D Rubik's Cube Guide &amp; Solver</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -190,7 +190,7 @@
 
             <!-- Primary Action Buttons -->
             <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <button id="btn-welcome-hub" title="Welcome & Learning Paths" class="glass-panel hover:bg-slate-800/90 text-xs font-semibold px-2 py-1.5 sm:px-2.5 sm:py-2 rounded-xl flex items-center gap-1.5 text-amber-300 border-amber-500/30 whitespace-nowrap transition">
+                <button id="btn-welcome-hub" title="Welcome &amp; Learning Paths" class="glass-panel hover:bg-slate-800/90 text-xs font-semibold px-2 py-1.5 sm:px-2.5 sm:py-2 rounded-xl flex items-center gap-1.5 text-amber-300 border-amber-500/30 whitespace-nowrap transition">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     <span class="hidden lg:inline">Start</span>
                 </button>
@@ -253,7 +253,7 @@
                 </div>
 
                 <!-- Full Unclipped Step Title -->
-                <h2 id="guide-step-title" class="w-full text-xs sm:text-sm font-bold text-white leading-snug">Cube Knowledge & How to Hold (F = Front)</h2>
+                <h2 id="guide-step-title" class="w-full text-xs sm:text-sm font-bold text-white leading-snug">Cube Knowledge &amp; How to Hold (F = Front)</h2>
             </div>
 
             <!-- Collapsible Guide Body -->
@@ -279,7 +279,7 @@
         <div class="glass-panel rounded-2xl px-3.5 py-2 border border-cyan-400/40 flex items-center gap-3 shadow-lg shadow-cyan-950/50">
             <span id="overlay-move-symbol" class="font-mono-code text-lg sm:text-xl font-extrabold text-cyan-300 bg-cyan-950/90 border border-cyan-500/40 rounded-lg px-2.5 py-0.5 shrink-0">R</span>
             <div class="min-w-0">
-                <div id="overlay-move-title" class="text-xs sm:text-sm font-bold text-white leading-tight truncate">Right (R) • Clockwise 90°</div>
+                <div id="overlay-move-title" class="text-xs sm:text-sm font-bold text-white leading-tight truncate">Right (R) &bull; Clockwise 90&deg;</div>
                 <div id="overlay-move-caption" class="text-[11px] text-amber-300 leading-snug mt-0.5 hidden"></div>
             </div>
         </div>
@@ -395,8 +395,8 @@
                     <div class="min-w-0">
                         <div class="flex items-center gap-2 flex-wrap">
                             <h1 class="text-lg sm:text-2xl font-extrabold text-white tracking-tight">Welcome to CUBEX</h1>
-                            <button id="btn-check-update" title="Check & Install Latest App Update" class="inline-flex items-center gap-1 text-[10px] font-mono-code font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 rounded-lg px-2 py-0.5 transition">
-                                <span id="app-version-label">v2.4.3</span>
+                            <button id="btn-check-update" title="Check &amp; Install Latest App Update" class="inline-flex items-center gap-1 text-[10px] font-mono-code font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 rounded-lg px-2 py-0.5 transition">
+                                <span id="app-version-label">v2.5.4</span>
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                                 <span>Update</span>
                             </button>
@@ -705,7 +705,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.4.3';
+        const APP_VERSION = '2.5.5';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -1111,14 +1111,27 @@
                 'yc-goal': ['1,1', '0,1', '2,1', '1,0', '1,2']
             }[miniId] || ['1,1'];
 
+            const sideYellow = {
+                'yc-dot':  { top: true,  bottom: true,  left: true,  right: true  },
+                'yc-v':    { top: false, bottom: true,  left: false, right: true  },
+                'yc-line': { top: true,  bottom: true,  left: false, right: false },
+                'yc-goal': { top: false, bottom: false, left: false, right: false }
+            }[miniId] || { top: true, bottom: true, left: true, right: true };
+
             const rects = [];
             for (let r = 0; r < 3; r++) {
                 for (let c = 0; c < 3; c++) {
                     const isYellow = activeCells.includes(`${r},${c}`);
                     const fill = isYellow ? '#facc15' : '#1e293b';
-                    rects.push(`<rect x="${14 + c * 25}" y="${14 + r * 25}" width="22" height="22" rx="4" fill="${fill}"/>`);
+                    rects.push(`<rect x="${17 + c * 23}" y="${17 + r * 23}" width="20" height="20" rx="3" fill="${fill}"/>`);
                 }
             }
+
+            if (sideYellow.top)    rects.push(`<rect x="40" y="8"  width="20" height="6"  rx="2" fill="#facc15"/>`);
+            if (sideYellow.bottom) rects.push(`<rect x="40" y="86" width="20" height="6"  rx="2" fill="#facc15"/>`);
+            if (sideYellow.left)   rects.push(`<rect x="8"  y="40" width="6"  height="20" rx="2" fill="#facc15"/>`);
+            if (sideYellow.right)  rects.push(`<rect x="86" y="40" width="6"  height="20" rx="2" fill="#facc15"/>`);
+
             return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" class="rounded-xl bg-slate-950 border border-slate-800 shrink-0">${rects.join('')}</svg>`;
         }
 
@@ -1643,7 +1656,15 @@
                         if (mode === 'LAST_LAYER_CROSS' && worldY === 1) {
                             stickerMesh.getWorldQuaternion(q);
                             n.set(0, 0, 1).applyQuaternion(q).round();
-                            showColor = (isCenter || isEdge) && n.y === 1 && origKey === 'D';
+                            const isTopFaceSticker = n.y === 1;
+                            const isSideFaceSticker = Math.abs(n.x) === 1 || Math.abs(n.z) === 1;
+                            if (isCenter) {
+                                showColor = isTopFaceSticker && origKey === 'D';
+                            } else if (isEdge) {
+                                showColor = (isTopFaceSticker || isSideFaceSticker) && origKey === 'D';
+                            } else {
+                                showColor = false;
+                            }
                         } else if (mode === 'YELLOW_CROSS_EDGES' && worldY === 1) {
                             showColor = isCenter || isEdge;
                         }
@@ -2421,13 +2442,13 @@
             {
                 stage: 'STEP 3 10/16',
                 title: '3. Yellow Cross: "Fru Ruff" (F R U R\' U\' F\')',
-                desc: 'Only top yellow stickers are shown so you can read the pattern like the miniatures: Dot → top-left V (9 & 12 o’clock) → horizontal Line → Yellow Cross!',
+                desc: 'Top & side yellow edge stickers match a real cube: Dot (all 4 yellow edge stickers on sides) → V-Shape (top-left yellow + right/bottom side yellow) → horizontal Line (left/right yellow + top/bottom side yellow) → Goal Cross!',
                 tip: 'Tap Dot, V-Shape, Line, or Goal Cross below to inspect & watch each case slowly!',
                 focusMode: 'LAST_LAYER_CROSS',
                 autoDemo: false,
                 miniSelector: 'YCROSS',
                 miniActiveId: 'yc-dot',
-                setupMoves: ['x2', ...invertSequence(tokenizeAlg("F R U R' U' F' f R U R' U' f'"))],
+                setupMoves: ['x2', 'F', 'R', 'U', "R'", "U'", "F'", 'f', 'R', 'U', "R'", "U'", "f'"],
                 demoMoves: ['F', 'R', 'U', "R'", "U'", "F'"],
                 captions: [
                     '1. F — Front clockwise',
@@ -2876,19 +2897,19 @@
         const YCROSS_MINI_CASES = [
             {
                 id: 'yc-dot', label: 'Dot (3×)', type: 'OLL', alg: "F R U R' U' F' f R U R' U' f'",
-                desc: 'Dot Case: No yellow edges oriented yet. Run F R U R\' U\' F\' once to turn Dot into the top-left V-shape!'
+                desc: 'Dot Case: All 4 yellow edge stickers are on the sides (top, bottom, left, right) and none face UP yet. Run F R U R\' U\' F\' once to turn Dot into the top-left V-shape!'
             },
             {
                 id: 'yc-v', label: 'V-Shape (2×)', type: 'OLL', alg: "f R U R' U' f'",
-                desc: 'V-Shape Case: Hold the V at top-left (9 & 12 o\'clock). Run F R U R\' U\' F\' once to get the horizontal Line (no cube rotation needed!), then once more for Yellow Cross!'
+                desc: 'V-Shape Case: Top & left yellow edges face UP, while the right & bottom edges show their yellow stickers on the sides. Run F R U R\' U\' F\' once to form the horizontal Line!'
             },
             {
                 id: 'yc-line', label: 'Line (1×)', type: 'OLL', alg: "F R U R' U' F'",
-                desc: 'Line Case: Hold the yellow bar horizontally (left-to-right). Run F R U R\' U\' F\' once to complete the Yellow Cross!'
+                desc: 'Line Case: Left, center & right yellow stickers form a horizontal line on top, while the front & back edges show their yellow stickers on top/bottom sides. Run F R U R\' U\' F\' once for Goal Cross!'
             },
             {
                 id: 'yc-goal', label: 'Goal Cross', type: 'OLL', alg: "",
-                desc: 'Goal Yellow Cross achieved! All 4 top yellow edges are now facing up.'
+                desc: 'Goal Yellow Cross achieved! All 4 yellow edge stickers face UP on the top cross with no side yellow edge stickers left.'
             }
         ];
 
@@ -3187,14 +3208,16 @@
             if (!item) return;
             const lesson = BEGINNER_CURRICULUM[9];
             lesson.miniActiveId = item.id;
-            lesson.setupMoves = item.alg
-                ? ['x2', ...invertSequence(tokenizeAlg(item.alg))]
-                : ['x2'];
+            const baseSetup = {
+                'yc-dot':  ['x2', 'F', 'R', 'U', "R'", "U'", "F'", 'f', 'R', 'U', "R'", "U'", "f'"],
+                'yc-v':    ['x2', 'f', 'R', 'U', "R'", "U'", "f'"],
+                'yc-line': ['x2', 'F', 'R', 'U', "R'", "U'", "F'"],
+                'yc-goal': ['x2']
+            }[miniId] || ['x2'];
+            lesson.setupMoves = baseSetup;
             lesson.demoMoves = item.id === 'yc-goal'
                 ? []
-                : (item.id === 'yc-v'
-                    ? ['F', 'R', 'U', "R'", "U'", "F'", 'F', 'R', 'U', "R'", "U'", "F'"]
-                    : ['F', 'R', 'U', "R'", "U'", "F'"]);
+                : ['F', 'R', 'U', "R'", "U'", "F'"];
             lesson.desc = item.desc;
             loadLessonStep(9, item.id !== 'yc-goal');
         }
