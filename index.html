@@ -1499,11 +1499,11 @@
                     this.camRadius += (this.targetCamRadius - this.camRadius) * 0.16;
                 }
                 const x = this.camRadius * Math.sin(this.camPhi) * Math.sin(this.camTheta);
-                const y = this.camRadius * Math.cos(this.camPhi);
+                const y = this.cubeOffsetY + this.camRadius * Math.cos(this.camPhi);
                 const z = this.camRadius * Math.sin(this.camPhi) * Math.cos(this.camTheta);
                 this.camera.position.set(x, y, z);
-                // Look at world origin so cubeOffsetY shifts the cube downward into the open viewport below the HUD
-                this.camera.lookAt(0, 0, 0);
+                // Orbit directly around the cube's true 3D center (0, cubeOffsetY, 0)
+                this.camera.lookAt(0, this.cubeOffsetY, 0);
             }
 
             resetCamera() {
@@ -2043,9 +2043,20 @@
                 let isDragging = false;
                 let dragMode = null; // 'STICKER' | 'ORBIT'
                 let startX = 0, startY = 0;
+                let lastCentroid = null;
                 let hitCubie = null;
                 let hitNormal = null;
                 const activePointers = new Map();
+
+                const getTouchCentroid = () => {
+                    let sx = 0, sy = 0, count = 0;
+                    for (const pt of activePointers.values()) {
+                        sx += pt.x;
+                        sy += pt.y;
+                        count++;
+                    }
+                    return count > 0 ? { x: sx / count, y: sy / count } : null;
+                };
 
                 const getHit = (clientX, clientY) => {
                     const rect = dom.getBoundingClientRect();
@@ -2065,26 +2076,32 @@
                 dom.addEventListener('pointerdown', (e) => {
                     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-                    // Two-finger touch drag or right-mouse drag always orbits the 3D view
+                    // Two-finger touch drag (or right-mouse drag on desktop) orbits the 3D view
                     if (activePointers.size >= 2 || e.button === 2) {
                         isDragging = true;
                         dragMode = 'ORBIT';
-                        startX = e.clientX;
-                        startY = e.clientY;
+                        hitCubie = null;
+                        hitNormal = null;
+                        lastCentroid = activePointers.size >= 2 ? getTouchCentroid() : { x: e.clientX, y: e.clientY };
+                        startX = lastCentroid.x;
+                        startY = lastCentroid.y;
                         return;
                     }
 
                     if (e.button !== undefined && e.button !== 0) return;
-                    isDragging = true;
-                    startX = e.clientX;
-                    startY = e.clientY;
+
+                    // Single finger on touch devices ONLY turns stickers (never rotates 3D view)
                     const hit = getHit(e.clientX, e.clientY);
                     if (hit && !this.isAnimating) {
+                        isDragging = true;
                         dragMode = 'STICKER';
+                        startX = e.clientX;
+                        startY = e.clientY;
                         hitCubie = hit.cubie;
                         hitNormal = hit.normal;
                     } else {
-                        dragMode = 'ORBIT';
+                        isDragging = false;
+                        dragMode = null;
                     }
                 });
 
@@ -2093,26 +2110,46 @@
                         activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
                     }
                     if (!isDragging) return;
-                    const dx = e.clientX - startX;
-                    const dy = e.clientY - startY;
 
                     if (dragMode === 'ORBIT') {
-                        this.targetCamTheta -= dx * 0.008;
-                        this.targetCamPhi = Math.max(0.18, Math.min(Math.PI - 0.18, this.targetCamPhi - dy * 0.008));
-                        startX = e.clientX;
-                        startY = e.clientY;
-                    } else if (dragMode === 'STICKER' && Math.hypot(dx, dy) > 22) {
-                        this.handleSwipeTurn(hitCubie, hitNormal, dx, dy);
-                        isDragging = false;
-                        dragMode = null;
+                        if (activePointers.size >= 2) {
+                            const c = getTouchCentroid();
+                            if (!c || !lastCentroid) return;
+                            const dx = c.x - lastCentroid.x;
+                            const dy = c.y - lastCentroid.y;
+                            this.targetCamTheta -= dx * 0.0085;
+                            this.targetCamPhi = Math.max(0.18, Math.min(Math.PI - 0.18, this.targetCamPhi - dy * 0.0085));
+                            lastCentroid = c;
+                        } else if (e.pointerType !== 'touch') {
+                            const dx = e.clientX - startX;
+                            const dy = e.clientY - startY;
+                            this.targetCamTheta -= dx * 0.008;
+                            this.targetCamPhi = Math.max(0.18, Math.min(Math.PI - 0.18, this.targetCamPhi - dy * 0.008));
+                            startX = e.clientX;
+                            startY = e.clientY;
+                        }
+                    } else if (dragMode === 'STICKER' && activePointers.size === 1) {
+                        const dx = e.clientX - startX;
+                        const dy = e.clientY - startY;
+                        if (Math.hypot(dx, dy) > 22) {
+                            this.handleSwipeTurn(hitCubie, hitNormal, dx, dy);
+                            isDragging = false;
+                            dragMode = null;
+                        }
                     }
                 });
 
                 const endPointer = (e) => {
                     activePointers.delete(e.pointerId);
-                    if (activePointers.size === 0) {
+                    if (activePointers.size < 2 && dragMode === 'ORBIT' && e.pointerType === 'touch') {
+                        // Stop touch orbit immediately once fewer than 2 fingers remain so lifting 1 finger never jumps
                         isDragging = false;
                         dragMode = null;
+                        lastCentroid = null;
+                    } else if (activePointers.size === 0) {
+                        isDragging = false;
+                        dragMode = null;
+                        lastCentroid = null;
                     }
                 };
                 window.addEventListener('pointerup', endPointer);
@@ -2221,25 +2258,25 @@
                     if (p.life <= 0) {
                         this.scene.remove(p.mesh);
                         this.particles.splice(i, 1);
-                    }
                 }
-
-                this.renderer.render(this.scene, this.camera);
             }
+
+            this.renderer.render(this.scene, this.camera);
         }
+    }
 
-        // ====================================================================
-        // 7. PEDAGOGICAL CURRICULA (BEGINNER, CFOP, ROUX) & EXAMPLE SOLVES
-        // ====================================================================
-        const YCROSS_LINE_SOLVE = ['F', 'R', 'U', "R'", "U'", "F'"];
-        const YCROSS_V_TO_LINE = ['F', 'R', 'U', "R'", "U'", "F'"];
-        const YCROSS_DOT_TO_V = ['F', 'R', 'U', "R'", "U'", "F'"];
+    // ====================================================================
+    // 7. PEDAGOGICAL CURRICULA (BEGINNER, CFOP, ROUX) & EXAMPLE SOLVES
+    // ====================================================================
+    const YCROSS_LINE_SOLVE = ['F', 'R', 'U', "R'", "U'", "F'"];
+    const YCROSS_V_TO_LINE = ['F', 'R', 'U', "R'", "U'", "F'"];
+    const YCROSS_DOT_TO_V = ['F', 'R', 'U', "R'", "U'", "F'"];
 
-        const YCROSS_LINE_SETUP_YELLOW_TOP = ['x2', ...invertSequence(YCROSS_LINE_SOLVE)];
-        const YCROSS_V_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
-        const YCROSS_DOT_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_DOT_TO_V, ...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
+    const YCROSS_LINE_SETUP_YELLOW_TOP = ['x2', ...invertSequence(YCROSS_LINE_SOLVE)];
+    const YCROSS_V_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
+    const YCROSS_DOT_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_DOT_TO_V, ...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
 
-        const BEGINNER_CURRICULUM = [
+    const BEGINNER_CURRICULUM = [
             {
                 stage: 'INTRO 1/16',
                 title: 'Cube Knowledge & How to Hold (F = Front)',
