@@ -771,7 +771,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.3.1';
+        const APP_VERSION = '2.3.2';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -2349,35 +2349,36 @@
         const BEGINNER_CURRICULUM = [
             {
                 stage: 'INTRO 1/16',
-                title: 'Cube Knowledge & Facts',
-                desc: 'Centers (1 color) never move and decide each side’s color: White is opposite Yellow, Green opposite Blue, Red opposite Orange.',
-                tip: 'Never twist a single corner physically — if one corner is twisted, the cube is unsolvable until twisted back!',
+                title: 'Cube Knowledge & How to Hold (F = Front)',
+                desc: 'F (Front) is always whichever side faces closest to your chest — for simplicity in this guide, we keep the BLUE side facing you! Centers (1 color) never move: White is opposite Yellow, Blue opposite Green, Red opposite Orange.',
+                tip: 'Hold BLUE facing you (F) & YELLOW on Top (U) to follow along easily — and never twist a single corner physically!',
                 focusMode: 'CENTERS',
                 autoDemo: true,
                 setupMoves: ['x2'],
                 demoMoves: ['y', 'y', 'y', 'y'],
                 captions: [
-                    '1. Watch the 6 fixed center pieces — they never swap places',
+                    '1. F (Front) is always the face closest to you — we use BLUE facing you for simplicity!',
                     '2. White is always on bottom opposite Yellow on top',
                     '3. Red & Orange are opposites; Blue & Green are opposites',
-                    '4. Use light finger tricks instead of heavy wrist turns!'
+                    '4. Keep Blue facing you (F) & use light finger tricks!'
                 ]
             },
             {
                 stage: 'INTRO 2/16',
-                title: 'Cube Notations & WCA Scramble Hold',
-                desc: 'Each letter turns that face 90° clockwise (’ = anti-clockwise, 2 = 180°). Standard WCA Scramble Hold: WHITE on Top (U) & GREEN facing You (F)!',
-                tip: 'Hold White Top + Green Front when scrambling; flip x2 (Yellow Top) when solving!',
+                title: 'Cube Notations (F = Side Closest to You)',
+                desc: 'F (Front) is always the side closest to your chest (Blue in our guide). Each letter turns that face 90° clockwise (’ = anti-clockwise, 2 = 180°). For WCA scrambling, hold White on Top & Green in Front.',
+                tip: 'Imagine looking straight at the face you are turning: clockwise = normal letter, anti-clockwise = prime (\').',
                 focusMode: 'ALL',
                 autoDemo: true,
                 setupMoves: ['x2'],
-                demoMoves: ['R', "R'", 'U', "U'", 'F2'],
+                demoMoves: ['F', "F'", 'R', "R'", 'U', "U'"],
                 captions: [
-                    '1. R = Right face 90° clockwise',
-                    "2. R' = Right face 90° anti-clockwise",
-                    '3. U = Top (Up) face 90° clockwise',
-                    "4. U' = Top face 90° anti-clockwise",
-                    '5. F2 = Front face 180° half-turn'
+                    '1. F = Front face (closest to you, Blue) 90° clockwise',
+                    "2. F' = Front face 90° anti-clockwise",
+                    '3. R = Right face (Red) 90° clockwise',
+                    "4. R' = Right face 90° anti-clockwise",
+                    '5. U = Top / Up face (Yellow) 90° clockwise',
+                    "6. U' = Top / Up face 90° anti-clockwise"
                 ]
             },
             {
