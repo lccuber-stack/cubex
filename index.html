@@ -181,17 +181,12 @@
                     <span class="font-extrabold tracking-tight text-sm sm:text-base text-white">CUBEX</span>
                 </div>
 
-                <!-- Mode Status / Clickable Timed Mode Toggle -->
-                <button id="btn-toggle-timed" title="Click to toggle Timed Speedrun Mode" class="glass-panel hover:bg-slate-800/90 rounded-xl px-2.5 py-1.5 flex items-center gap-2 text-[11px] transition">
+                <!-- Pure Guide Mode Status Badge -->
+                <div class="glass-panel rounded-xl px-2.5 py-1.5 flex items-center gap-2 text-[11px]">
                     <span id="status-dot" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
                     <span id="guide-mode-indicator" class="hidden sm:inline text-cyan-300 font-bold tracking-wider">GUIDE MODE</span>
                     <span id="guide-mode-indicator-mob" class="sm:hidden text-cyan-300 font-bold tracking-wider">GUIDE</span>
-                    <div id="free-timer-box" class="hidden items-center gap-2 border-l border-slate-700 pl-2 font-mono-code">
-                        <span id="timer-display" class="text-white font-bold">00:00.00</span>
-                        <span class="text-slate-400 text-[10px]"><span id="move-count-display" class="text-cyan-300 font-bold">0</span>m</span>
-                    </div>
-                    <span id="free-timer-mob" class="hidden sm:hidden font-mono-code text-amber-300 font-bold">00:00</span>
-                </button>
+                </div>
             </div>
 
             <!-- Primary Action Buttons -->
@@ -215,10 +210,6 @@
                     <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span class="hidden lg:inline">Scan / Paint</span>
                     <span class="hidden md:inline lg:hidden">Scan</span>
-                </button>
-
-                <button id="btn-saves" title="Save Slots & Stats" class="glass-panel hover:bg-slate-800/90 p-1.5 sm:p-2 rounded-xl text-slate-200 shrink-0 transition">
-                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                 </button>
 
                 <button id="btn-audio-toggle" title="Toggle Sound Effects" class="glass-panel hover:bg-slate-800/90 p-1.5 sm:p-2 rounded-xl text-slate-200 shrink-0 transition">
@@ -484,10 +475,10 @@
                         </svg>
                         <div class="min-w-0">
                             <div class="flex items-center gap-1.5 flex-wrap">
-                                <span class="font-bold text-sm text-white">Roux</span>
+                                <span class="font-bold text-sm text-white">Beginner Roux</span>
                                 <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">M-Slice</span>
                             </div>
-                            <p class="text-[11px] text-slate-400 mt-1 leading-snug">1&times;2&times;3 blocks, CMLL &amp; intuitive M/U finish.</p>
+                            <p class="text-[11px] text-slate-400 mt-1 leading-snug">Step-by-step 1&times;2&times;3 blocks, 2-Look CMLL &amp; M/U finish.</p>
                         </div>
                     </button>
 
@@ -600,8 +591,8 @@
                         <text x="50" y="56" text-anchor="middle" fill="#38bdf8" font-size="18" font-weight="800" font-family="monospace">M</text>
                     </svg>
                     <div class="min-w-0">
-                        <div class="font-bold text-sm text-purple-300">Roux</div>
-                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">1&times;2&times;3 blocks, CMLL &amp; M-slice finish.</div>
+                        <div class="font-bold text-sm text-purple-300">Beginner Roux</div>
+                        <div class="text-[11px] text-slate-400 mt-1 leading-snug">1&times;2&times;3 blocks, 2-Look CMLL &amp; M-slice finish.</div>
                     </div>
                 </button>
 
@@ -718,50 +709,6 @@
     </div>
 
     <!-- ====================================================================== -->
-    <!-- MODAL 5: SAVE SLOTS & STATS                                            -->
-    <!-- ====================================================================== -->
-    <div id="modal-saves" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 hidden">
-        <div class="glass-modal w-full max-w-md rounded-3xl overflow-hidden flex flex-col max-h-[88vh]">
-            <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between gap-2">
-                <h2 class="text-base font-extrabold text-white">Save Slots &amp; Stats</h2>
-                <button data-close-modal="modal-saves" aria-label="Close" class="w-9 h-9 flex items-center justify-center shrink-0 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="p-4 overflow-y-auto custom-scroll space-y-4">
-                <!-- Stats Row -->
-                <div class="grid grid-cols-3 gap-2 text-center">
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                        <div class="text-[10px] uppercase text-slate-400 font-bold">Solves</div>
-                        <div id="stat-solves" class="text-lg font-extrabold text-cyan-300 font-mono-code">0</div>
-                    </div>
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                        <div class="text-[10px] uppercase text-slate-400 font-bold">Best Time</div>
-                        <div id="stat-best-time" class="text-lg font-extrabold text-emerald-300 font-mono-code">--</div>
-                    </div>
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                        <div class="text-[10px] uppercase text-slate-400 font-bold">Best Moves</div>
-                        <div id="stat-best-moves" class="text-lg font-extrabold text-amber-300 font-mono-code">--</div>
-                    </div>
-                </div>
-
-                <!-- Save Current State -->
-                <div class="flex gap-2">
-                    <input id="input-slot-name" type="text" maxlength="28" placeholder="Slot name (e.g. My F2L Practice)" class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
-                    <button id="btn-save-new-slot" class="btn-primary-glow text-slate-950 font-bold text-xs px-4 py-2 rounded-xl shrink-0">Save</button>
-                </div>
-
-                <!-- Saved Slots List -->
-                <div id="save-slots-list" class="space-y-2"></div>
-            </div>
-            <div class="px-4 py-3 border-t border-slate-800 flex items-center justify-between bg-slate-950/50">
-                <button id="btn-new-session" class="text-xs font-semibold text-rose-300 hover:text-rose-200 px-3 py-1.5 rounded-lg bg-rose-950/50 border border-rose-500/30">New Session</button>
-                <button data-close-modal="modal-saves" class="text-xs font-bold text-slate-300 px-4 py-1.5 rounded-lg bg-slate-800">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ====================================================================== -->
     <!-- APPLICATION SCRIPT (100% SELF-CONTAINED)                               -->
     <!-- ====================================================================== -->
     <script>
@@ -771,7 +718,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.3.2';
+        const APP_VERSION = '2.4.1';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -1727,6 +1674,12 @@
                         const isWhiteCrossEdge = isEdge && hy === 1;
                         const isFRPair = (hx === 1 && hz === -1 && hy >= 0);
                         highlight = isCenter || isWhiteCrossEdge || isFRPair;
+                    } else if (mode === 'ROUX_FB') {
+                        // Left 1x2x3 block (Orange Left = hx === 1 after x2, bottom & middle layers hy >= 0) + centers
+                        highlight = isCenter || (hx === 1 && hy >= 0);
+                    } else if (mode === 'ROUX_SB') {
+                        // Left block (hx === 1, hy >= 0) + Right 1x2x3 block (Red Right = hx === -1, hy >= 0) + centers
+                        highlight = isCenter || (hx === 1 && hy >= 0) || (hx === -1 && hy >= 0);
                     }
 
                     Object.entries(cubie.userData.stickers).forEach(([origKey, stickerMesh]) => {
@@ -2745,54 +2698,141 @@
 
         const ROUX_CURRICULUM = [
             {
-                stage: 'ROUX 1/5',
-                title: 'Overview of Roux Blockbuilding',
-                desc: 'Roux builds two 1×2×3 blocks on Left & Right, solves the top 4 corners (CMLL), and finishes the last 6 edges with fast M and U turns!',
-                tip: 'No rotations needed after the blocks — great ergonomics for both hands.',
+                stage: 'ROUX 1/8',
+                title: 'Beginner Roux Overview & M-Slice Notation',
+                desc: 'Roux does NOT start with a cross! Instead, you build two 1×2×3 blocks on the Left & Right sides, leaving the middle M-slice and top U-layer completely free to turn without rotations!',
+                tip: 'M moves the middle slice downward (same direction as L). Watch M and M\' below!',
                 focusMode: 'ALL',
+                autoDemo: true,
                 setupMoves: ['x2'],
-                demoMoves: ['M', 'U', "M'", "U'"],
-                captions: ['Roux uses intuitive blockbuilding + M-slice edge control!']
+                demoMoves: ['M', "M'", 'U', "U'"],
+                captions: [
+                    '1. M = Middle slice downward (follows Left face L)',
+                    "2. M' = Middle slice upward (follows Right face R)",
+                    '3. U = Top layer clockwise — Left & Right blocks stay untouched!',
+                    "4. U' = Top layer anti-clockwise — super ergonomic two-hand flow!"
+                ]
             },
             {
-                stage: 'ROUX 2/5',
-                title: '1. First Block (Left 1×2×3)',
-                desc: 'Build a complete 1×2×3 block on the Left face (DL edge + two F2L pairs on the left) using wide r, R, U, and M moves freely.',
-                tip: 'Since the Right and M slices are unsolved, you have huge freedom to pair pieces.',
-                focusMode: 'ALL',
+                stage: 'ROUX 2/8',
+                title: '1A. First Block — Bottom Left Edge (DL)',
+                desc: 'Start on the LEFT side (Orange center, cyan ring). First place the White-Orange bottom-left edge (DL) directly under the Orange center! Because the middle M-slice and Right side are empty, you can move freely!',
+                tip: 'Look at the highlighted Left 1×2×3 block — first anchor the bottom-left White-Orange edge.',
+                focusMode: 'ROUX_FB',
+                autoDemo: false,
+                setupMoves: ['x2', "L'", 'U', 'L'],
+                pointerTargets: [
+                    { pos: [-1.53, 0, 0], rot: [0, -Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [1, 0, 0] },
+                    { pos: [-1.53, -1.0, 0], rot: [0, -Math.PI / 2, 0], color: 0xfacc15, arrowDir: [1, 0, 0] }
+                ],
+                postPointerTargets: [
+                    { pos: [-1.53, -1.0, 0], rot: [0, -Math.PI / 2, 0], color: 0x10b981 }
+                ],
+                connectLine: true,
+                demoMoves: ["L'", "U'", 'L'],
+                captions: [
+                    "1. Bring the White-Orange edge over the Left face (L' U')",
+                    '2. Drop it down onto the bottom-left DL spot (L)!'
+                ]
+            },
+            {
+                stage: 'ROUX 3/8',
+                title: '1B. Finish First Block (Left 1×2×3)',
+                desc: 'Now add the front-left and back-left corner-edge pairs onto the Left side to complete a solid 1×2×3 Left Block! You can use L, U, M, and wide r moves freely.',
+                tip: 'Once the Left 1×2×3 block is solved, keep it intact for the rest of the solve!',
+                focusMode: 'ROUX_FB',
+                autoDemo: false,
                 setupMoves: ['x2', 'L', 'U', "L'"],
+                pointerTargets: [
+                    { pos: [-1.0, 1.0, 1.0], rot: [-Math.PI / 2, 0, 0], color: 0x22d3ee, arrowDir: [0, -1, 0] },
+                    { pos: [-1.0, -1.0, 1.0], rot: [0, 0, 0], color: 0xfacc15, arrowDir: [0, 0, -1] }
+                ],
+                postPointerTargets: [],
+                connectLine: true,
                 demoMoves: ['L', "U'", "L'"],
-                captions: ['Completing the Left 1×2×3 block anchors your entire solve!']
+                captions: [
+                    '1. Lift the front-left slot up to meet the pair (L)',
+                    "2. Slide the corner-edge pair into place (U') and drop L' — Left 1×2×3 Block complete!"
+                ]
             },
             {
-                stage: 'ROUX 3/5',
+                stage: 'ROUX 4/8',
                 title: '2. Second Block (Right 1×2×3)',
-                desc: 'Build the opposite 1×2×3 block on the Right face using only R, r, U, and M turns so your Left block stays completely intact.',
-                tip: 'Pair DR edge with its two corner-edge pairs using R and U turns.',
-                focusMode: 'ALL',
+                desc: 'Keep your Left 1×2×3 block on the Left and build the matching 1×2×3 block on the RIGHT (Red center)! Solve the bottom-right White-Red edge (DR) first, then insert the two right-side pairs using only R, r, U, and M!',
+                tip: 'Never turn L or F now — stick to R, r, U, and M so your Left block stays 100% solved!',
+                focusMode: 'ROUX_SB',
+                autoDemo: false,
                 setupMoves: ['x2', 'R', 'U', "R'"],
+                pointerTargets: [
+                    { pos: [1.53, 0, 0], rot: [0, Math.PI / 2, 0], color: 0x22d3ee, arrowDir: [-1, 0, 0] },
+                    { pos: [1.53, -1.0, 0], rot: [0, Math.PI / 2, 0], color: 0xfacc15, arrowDir: [-1, 0, 0] }
+                ],
+                postPointerTargets: [],
+                connectLine: true,
                 demoMoves: ['R', "U'", "R'"],
-                captions: ['Both 1×2×3 side blocks are now solved, leaving only U and M!']
+                captions: [
+                    '1. Lift the right slot up (R) without disturbing the Left block',
+                    "2. Pair and drop down (U' R') — BOTH 1×2×3 blocks are now solved!"
+                ]
             },
             {
-                stage: 'ROUX 4/5',
-                title: '3. CMLL (Corners of Last Layer)',
-                desc: 'Solve all 4 top-layer corners in one algorithm without worrying about the M-slice edges yet.',
-                tip: 'You can use 2-Look OLL + T/Y-Perm from the Algs trainer as a beginner CMLL!',
+                stage: 'ROUX 5/8',
+                title: '3. Beginner CMLL (2-Look Corners)',
+                desc: 'Both 1×2×3 side blocks are done! Next, solve the 4 top corners in 2 easy beginner steps (2-Look CMLL) — ignore the middle M-slice edges for now:\n• Step A (Orient): Use Sune (R U R\' U R U2 R\') until all 4 corners are yellow on top.\n• Step B (Permute): Use T-Perm (or Beginner Flipper) to swap corners into their right spots.',
+                tip: 'You can drill Sune & T-Perm anytime in the Algs trainer!',
                 focusMode: 'ALL',
+                autoDemo: false,
+                openAlgsCat: '2LOOK_OLL',
                 setupMoves: ['x2', 'R', 'U2', "R'", "U'", 'R', "U'", "R'"],
+                displayAlg: ['R', 'U', "R'", 'U', 'R', 'U2', "R'"],
+                repeatBadge: 'Sune (Orient)',
                 demoMoves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'"],
-                captions: ['Corners are oriented and permuted; only the 6 M/U edges remain!']
+                captions: [
+                    '1. Sune (R U R\' U R U2 R\') twists the top corners yellow-up while preserving both 1×2×3 blocks!'
+                ]
             },
             {
-                stage: 'ROUX 5/5',
-                title: '4. LSE (Last Six Edges)',
-                desc: 'Orient all 6 remaining edges with M and U moves, solve UL/UR edges, and finish the middle M-slice!',
-                tip: 'Click Scramble (20) anytime to practice Roux solves with guided assistance.',
+                stage: 'ROUX 6/8',
+                title: '4A. LSE — Orient All 6 Edges (EO)',
+                desc: 'Only 6 edges remain (4 on top + 2 in the bottom M-slice)! Turn U & M\' to place "bad" (non-yellow/white) edges on top and flip them using the easy 3-move trigger M\' U M\' until ALL 6 edges show Yellow or White on top/bottom!',
+                tip: 'Think "M\' U M\'" — each trigger flips 2 top edges and 2 M-slice edges cleanly!',
                 focusMode: 'ALL',
+                autoDemo: false,
+                setupMoves: ['x2', 'M', "U'", 'M'],
+                displayAlg: ["M'", 'U', "M'"],
+                repeatBadge: '3-Move Flip',
+                demoMoves: ["M'", 'U', "M'"],
+                captions: [
+                    '1. M\' lifts the bottom M-slice edge up into the top layer',
+                    '2. U repositions the bad edges on top',
+                    '3. M\' flips all 4 active edges into good orientation!'
+                ]
+            },
+            {
+                stage: 'ROUX 7/8',
+                title: '4B. LSE — Solve UL/UR & Finish M-Slice',
+                desc: 'All 6 edges are oriented! First put the Left & Right top edges (UL & UR) into the bottom M-slice and lift them onto Left & Right (U2 M2 U2). Finally, cycle the last 4 M-slice edges with M2 U M2 U2 M2 U M2 — Cube Solved!',
+                tip: 'Watch how M2 and U turns slide the final edges home without touching your blocks!',
+                focusMode: 'ALL',
+                autoDemo: false,
                 setupMoves: ['x2', 'M2', 'U', 'M2', 'U2', 'M2', 'U', 'M2'],
+                displayAlg: ['M2', 'U', 'M2', 'U2', 'M2', 'U', 'M2'],
+                repeatBadge: 'Finish LSE',
                 demoMoves: ['M2', 'U', 'M2', 'U2', 'M2', 'U', 'M2'],
-                captions: ['M2 U M2 U2 M2 U M2 permutes the final edges into a solved cube!']
+                captions: [
+                    '1. M2 U M2 swaps the front/back M-slice edges',
+                    '2. U2 M2 U M2 cycles the final edges straight into a solved cube!'
+                ]
+            },
+            {
+                stage: 'ROUX 8/8',
+                title: 'Beginner Roux Example Solve Walkthrough',
+                desc: 'Ready to see Beginner Roux from a full scramble? Tap "Launch ROUX Example Solve" below to step through First Block → Second Block → 2-Look CMLL → LSE in 4 clear stages!',
+                tip: 'Remember: White Top & Green Front for WCA scrambling, then x2 (Yellow Top, Blue Front) to solve!',
+                focusMode: 'ALL',
+                isExampleLauncher: 'ROUX',
+                setupMoves: ['x2'],
+                demoMoves: []
             }
         ];
 
@@ -2852,11 +2892,39 @@
         ];
         const CFOP_EXAMPLE_SCRAMBLE = ['x2', ...invertSequence(CFOP_EXAMPLE_STAGES.flatMap(s => s.moves))];
 
+        const ROUX_EXAMPLE_STAGES = [
+            {
+                stage: 'ROUX 1/4',
+                title: '1. First Block (Left 1×2×3 Block)',
+                desc: 'Build the complete 1×2×3 block on the Left side (DL edge + two left pairs) using L, U, and M moves.',
+                moves: ['U', "L'", "U'", 'L', 'U', 'L', "U'", "L'"]
+            },
+            {
+                stage: 'ROUX 2/4',
+                title: '2. Second Block (Right 1×2×3 Block)',
+                desc: 'Build the opposite 1×2×3 block on the Right side using only R, U, and M moves.',
+                moves: ['U', 'R', "U'", "R'", 'U2', 'R', 'U', "R'"]
+            },
+            {
+                stage: 'ROUX 3/4',
+                title: '3. 2-Look CMLL (Solve Top 4 Corners)',
+                desc: 'Orient & permute the 4 top corners with Sune (R U R\' U R U2 R\') while preserving both side blocks.',
+                moves: ['R', 'U', "R'", 'U', 'R', 'U2', "R'"]
+            },
+            {
+                stage: 'ROUX 4/4',
+                title: '4. LSE (Last Six Edges with M & U)',
+                desc: 'Orient & permute the final 6 edges using M2 and U turns to finish the cube!',
+                moves: ['M2', 'U', 'M2', 'U2', 'M2', 'U', 'M2']
+            }
+        ];
+        const ROUX_EXAMPLE_SCRAMBLE = ['x2', ...invertSequence(ROUX_EXAMPLE_STAGES.flatMap(s => s.moves))];
+
         // ====================================================================
         // 8. APPLICATION STATE & PERSISTENCE
         // ====================================================================
         const AppState = {
-            appMode: 'LESSON', // 'LESSON' | 'GUIDE_SOLVE' | 'FREE_TIMED'
+            appMode: 'LESSON', // 'LESSON' | 'GUIDE_SOLVE'
             method: 'BEGINNER',
             welcomePreference: 'BEGINNER',
             alwaysShowWelcome: true,
@@ -2873,14 +2941,7 @@
             activeAlgCat: 'F2L',
             autoPlayTimer: null,
             isAutoPlaying: false,
-            hudCollapsed: false,
-            timerRunning: false,
-            timerStart: 0,
-            timerElapsed: 0,
-            timerRaf: null,
-            sessionMoves: 0,
-            stats: { solves: 0, bestTimeMs: null, bestMoves: null },
-            saveSlots: []
+            hudCollapsed: false
         };
 
         const cube = new RubiksCube3D(document.getElementById('canvas-container'));
@@ -2897,8 +2958,6 @@
                     AppState.speedIdx = data.speedIdx;
                 }
                 if (typeof data.userSpeedLocked === 'boolean') AppState.userSpeedLocked = data.userSpeedLocked;
-                if (data.stats) AppState.stats = { ...AppState.stats, ...data.stats };
-                if (Array.isArray(data.saveSlots)) AppState.saveSlots = data.saveSlots;
                 if (typeof data.muted === 'boolean') audio.muted = data.muted;
             } catch (e) {
                 console.warn('Could not load saved data:', e);
@@ -2914,8 +2973,6 @@
                     alwaysShowWelcome: AppState.alwaysShowWelcome,
                     speedIdx: AppState.speedIdx,
                     userSpeedLocked: AppState.userSpeedLocked,
-                    stats: AppState.stats,
-                    saveSlots: AppState.saveSlots,
                     muted: audio.muted
                 }));
             } catch (e) {
@@ -2934,18 +2991,17 @@
 
         function startCurriculum(methodName, startIndex = 0) {
             stopAutoPlay();
-            stopTimer();
             cube.clearQueue();
             AppState.appMode = 'LESSON';
             AppState.method = methodName;
             AppState.activeCase = null;
             document.getElementById('active-method-badge').textContent = methodName;
 
-            // Default to 0.5x on Beginner and 2.0x on CFOP unless user manually chose a speed
+            // Default to 0.5x on Beginner/Roux and 2.0x on CFOP unless user manually chose a speed
             if (!AppState.userSpeedLocked) {
                 if (methodName === 'CFOP') {
                     AppState.speedIdx = 3; // 2.0x
-                } else if (methodName === 'BEGINNER') {
+                } else {
                     AppState.speedIdx = 0; // 0.5x
                 }
             }
@@ -3162,7 +3218,6 @@
 
         function launchExampleSolveWalkthrough(track = 'BEGINNER') {
             stopAutoPlay();
-            stopTimer();
             cube.clearQueue();
             AppState.appMode = 'GUIDE_SOLVE';
             AppState.method = track;
@@ -3171,17 +3226,21 @@
             document.getElementById('active-method-badge').textContent = track;
             updateModeStatusHeader();
 
-            // Use brisk 1.5x speed for CFOP example solve and 1.0x for Beginner example solve
+            // Use brisk 1.5x speed for CFOP example solve and 1.0x for Beginner/Roux example solve
             if (track === 'CFOP' && AppState.speedIdx < 2) {
                 AppState.speedIdx = 2;
-            } else if (track === 'BEGINNER' && AppState.speedIdx === 0) {
+            } else if (track !== 'CFOP' && AppState.speedIdx === 0) {
                 AppState.speedIdx = 1;
             }
             const speedBtn = document.getElementById('btn-speed-toggle');
             if (speedBtn) speedBtn.textContent = SPEED_PRESETS[AppState.speedIdx].label;
 
-            const scramble = track === 'CFOP' ? CFOP_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE;
-            const stages = track === 'CFOP' ? CFOP_EXAMPLE_STAGES : BEGINNER_EXAMPLE_STAGES;
+            const scramble = track === 'CFOP'
+                ? CFOP_EXAMPLE_SCRAMBLE
+                : (track === 'ROUX' ? ROUX_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE);
+            const stages = track === 'CFOP'
+                ? CFOP_EXAMPLE_STAGES
+                : (track === 'ROUX' ? ROUX_EXAMPLE_STAGES : BEGINNER_EXAMPLE_STAGES);
 
             cube.resetSolved();
             cube.setFocusMask('ALL');
@@ -3197,48 +3256,22 @@
             AppState.currentStageIdx = 0;
             AppState.currentMoveIdx = 0;
             renderGuideHUD();
-            showToast(`Full cube scrambled! Click "Next Stage »" (4 times) to watch each stage solve!`, 'info');
+            showToast(`Full cube scrambled! Click "Next Stage »" (4 times) to watch each ${track} stage solve!`, 'info');
         }
 
         function updateModeStatusHeader() {
             const guideInd = document.getElementById('guide-mode-indicator');
-            const statusDot = document.getElementById('status-dot');
-            const timerBox = document.getElementById('free-timer-box');
             const guideIndMob = document.getElementById('guide-mode-indicator-mob');
-            const timerMob = document.getElementById('free-timer-mob');
-
-            if (AppState.appMode === 'FREE_TIMED') {
-                guideInd.textContent = 'TIMED';
-                guideInd.className = 'hidden sm:inline text-amber-300 font-bold tracking-wider';
-                if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-amber-400 shrink-0';
-                timerBox.classList.remove('hidden');
-                timerBox.classList.add('flex');
-                guideIndMob.classList.add('hidden');
-                timerMob.classList.remove('hidden');
-            } else {
-                guideInd.textContent = 'GUIDE MODE';
+            const statusDot = document.getElementById('status-dot');
+            if (guideInd) {
+                guideInd.textContent = AppState.activeCase ? 'ALG TRAINER' : 'GUIDE MODE';
                 guideInd.className = 'hidden sm:inline text-cyan-300 font-bold tracking-wider';
-                if (statusDot) statusDot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0';
-                timerBox.classList.add('hidden');
-                timerBox.classList.remove('flex');
-                guideIndMob.classList.remove('hidden');
-                timerMob.classList.add('hidden');
             }
-        }
-
-        function toggleTimedPracticeMode() {
-            if (AppState.appMode === 'FREE_TIMED') {
-                stopTimer();
-                buildPedagogicalPlan();
-                showToast('Calm Guide Mode enabled.', 'info');
-            } else {
-                stopAutoPlay();
-                AppState.appMode = 'FREE_TIMED';
-                cube.setFocusMask('ALL');
-                cube.clearPointerTargets();
-                resetTimer();
-                updateModeStatusHeader();
-                showToast('Timed Speedrun Mode! Timer starts on your first twist.', 'info');
+            if (guideIndMob) {
+                guideIndMob.textContent = AppState.activeCase ? 'TRAIN' : 'GUIDE';
+            }
+            if (statusDot) {
+                statusDot.className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0';
             }
         }
 
@@ -3467,7 +3500,10 @@
                         </div>`;
                 } else if (lesson.isExampleLauncher) {
                     const track = lesson.isExampleLauncher;
-                    const scr = (track === 'CFOP' ? CFOP_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE).filter(m => m !== 'x2').join(' ');
+                    const scrObj = track === 'CFOP'
+                        ? CFOP_EXAMPLE_SCRAMBLE
+                        : (track === 'ROUX' ? ROUX_EXAMPLE_SCRAMBLE : BEGINNER_EXAMPLE_SCRAMBLE);
+                    const scr = scrObj.filter(m => m !== 'x2').join(' ');
                     const algBtn = lesson.openAlgsCat
                         ? `<button data-open-algs-cat="${lesson.openAlgsCat}" class="text-xs font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 px-3 py-1.5 rounded-xl shrink-0 transition">Open Alg-Trainer &rarr;</button>`
                         : '';
@@ -3541,7 +3577,8 @@
                 if (AppState.lessonIdx < curr.length - 1) {
                     loadLessonStep(AppState.lessonIdx + 1, true);
                 } else {
-                    launchExampleSolveWalkthrough(AppState.method === 'CFOP' ? 'CFOP' : 'BEGINNER');
+                    const track = AppState.method === 'CFOP' ? 'CFOP' : (AppState.method === 'ROUX' ? 'ROUX' : 'BEGINNER');
+                    launchExampleSolveWalkthrough(track);
                 }
                 return;
             }
@@ -3674,29 +3711,14 @@
         }
 
         // ====================================================================
-        // 10. USER MOVES, SCRAMBLE, OPTIMAL SOLVE & TIMER
+        // 10. USER MOVES, SCRAMBLE & OPTIMAL SOLVE
         // ====================================================================
         function executeUserMove(moveStr, isKeyboard = false) {
             if (!moveStr || cube.isAnimating) return;
             const preset = SPEED_PRESETS[AppState.speedIdx];
 
-            if (AppState.appMode === 'FREE_TIMED') {
-                if (!AppState.timerRunning && !['x', 'y', 'z'].includes(moveStr[0])) {
-                    startTimer();
-                }
-                AppState.sessionMoves++;
-                document.getElementById('move-count-display').textContent = AppState.sessionMoves;
-            }
-
             cube.enqueueMoves([moveStr], Math.max(preset.radPerFrame, 0.085), true, () => {
-                if (AppState.appMode === 'FREE_TIMED') {
-                    if (cube.isSolved()) {
-                        stopTimer();
-                        cube.spawnCelebration();
-                        recordSolveStats(AppState.timerElapsed, AppState.sessionMoves);
-                        showToast(`Solved in ${formatTime(AppState.timerElapsed)} (${AppState.sessionMoves} moves)!`, 'success');
-                    }
-                } else if (AppState.appMode === 'GUIDE_SOLVE') {
+                if (AppState.appMode === 'GUIDE_SOLVE') {
                     // Check if user followed the current guided move
                     const st = AppState.guidePlan[AppState.currentStageIdx];
                     if (st && st.moves && st.moves[AppState.currentMoveIdx] === moveStr) {
@@ -3722,11 +3744,8 @@
 
         function scrambleCube(length = 20) {
             stopAutoPlay();
-            stopTimer();
             cube.clearQueue();
             AppState.activeCase = null;
-            AppState.sessionMoves = 0;
-            document.getElementById('move-count-display').textContent = '0';
 
             const faces = ['U', 'D', 'L', 'R', 'F', 'B'];
             const mods = ['', "'", '2'];
@@ -3748,71 +3767,18 @@
             cube.resetCamera();
             audio.playTwist();
 
-            if (AppState.appMode === 'FREE_TIMED') {
-                resetTimer();
-                showToast('WCA Scramble (White Top, Green Front) — Timer starts on your first move!', 'info');
-            } else {
-                buildPedagogicalPlan();
-                showToast(`Scrambled (${length} moves • WCA White Top, Green Front) — Follow the guide!`, 'info');
-            }
+            buildPedagogicalPlan();
+            showToast(`Scrambled (${length} moves • WCA White Top, Green Front) — Follow the guide!`, 'info');
         }
 
         function triggerFastOptimalSolve() {
             stopAutoPlay();
-            stopTimer();
             cube.clearQueue();
             AppState.activeCase = null;
             AppState.method = 'OPTIMAL';
             document.getElementById('active-method-badge').textContent = 'OPTIMAL';
             buildPedagogicalPlan();
             showToast('Optimal Fast Solve (≤20 moves) calculated!', 'success');
-        }
-
-        function formatTime(ms) {
-            const totalSec = Math.floor(ms / 1000);
-            const mins = Math.floor(totalSec / 60);
-            const secs = totalSec % 60;
-            const centis = Math.floor((ms % 1000) / 10);
-            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${String(centis).padStart(2, '0')}`;
-        }
-
-        function startTimer() {
-            AppState.timerRunning = true;
-            AppState.timerStart = performance.now() - AppState.timerElapsed;
-            const loop = () => {
-                if (!AppState.timerRunning) return;
-                AppState.timerElapsed = performance.now() - AppState.timerStart;
-                const formatted = formatTime(AppState.timerElapsed);
-                document.getElementById('timer-display').textContent = formatted;
-                document.getElementById('free-timer-mob').textContent = formatted.slice(0, 5);
-                AppState.timerRaf = requestAnimationFrame(loop);
-            };
-            loop();
-        }
-
-        function stopTimer() {
-            AppState.timerRunning = false;
-            cancelAnimationFrame(AppState.timerRaf);
-        }
-
-        function resetTimer() {
-            stopTimer();
-            AppState.timerElapsed = 0;
-            AppState.sessionMoves = 0;
-            document.getElementById('timer-display').textContent = '00:00.00';
-            document.getElementById('free-timer-mob').textContent = '00:00';
-            document.getElementById('move-count-display').textContent = '0';
-        }
-
-        function recordSolveStats(timeMs, moves) {
-            AppState.stats.solves++;
-            if (timeMs > 0 && (!AppState.stats.bestTimeMs || timeMs < AppState.stats.bestTimeMs)) {
-                AppState.stats.bestTimeMs = timeMs;
-            }
-            if (moves > 0 && (!AppState.stats.bestMoves || moves < AppState.stats.bestMoves)) {
-                AppState.stats.bestMoves = moves;
-            }
-            persistData();
         }
 
         // ====================================================================
@@ -3852,7 +3818,6 @@
             if (!item) return;
 
             stopAutoPlay();
-            stopTimer();
             cube.clearQueue();
 
             const tokens = tokenizeAlg(item.alg);
@@ -3884,7 +3849,6 @@
         const PaintState = {
             activeFace: 'U',
             brushColor: 'U',
-            cameraStream: null,
             map: {
                 U: Array(9).fill('U'),
                 D: Array(9).fill('D'),
@@ -3892,157 +3856,159 @@
                 B: Array(9).fill('B'),
                 R: Array(9).fill('R'),
                 L: Array(9).fill('L')
-            }
+            },
+            stream: null
         };
 
         function openScanPaintModal() {
-            PaintState.map = cube.exportStateMap();
+            stopAutoPlay();
+            cube.clearQueue();
+            try {
+                PaintState.map = cube.exportStateMap();
+            } catch (e) {
+                PaintState.map = {
+                    U: Array(9).fill('U'), D: Array(9).fill('D'), F: Array(9).fill('F'),
+                    B: Array(9).fill('B'), R: Array(9).fill('R'), L: Array(9).fill('L')
+                };
+            }
+            // Ensure center stickers stay matched to each face
+            ['U', 'D', 'F', 'B', 'R', 'L'].forEach(f => {
+                if (Array.isArray(PaintState.map[f])) PaintState.map[f][4] = f;
+            });
+            document.getElementById('camera-panel').classList.add('hidden');
+            document.getElementById('tab-manual-paint').className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition';
+            document.getElementById('tab-camera-scan').className = 'flex-1 py-2 text-xs font-bold rounded-xl bg-slate-900 text-slate-400 border border-slate-700 transition';
             renderPaintUI();
             document.getElementById('modal-scan').classList.remove('hidden');
         }
 
         function renderPaintUI() {
-            const faceOrder = ['U', 'F', 'R', 'B', 'L', 'D'];
-            const tabsEl = document.getElementById('paint-face-tabs');
-            tabsEl.innerHTML = faceOrder.map(f => {
-                const active = PaintState.activeFace === f;
-                return `<button data-paint-face="${f}" class="py-1.5 px-1 rounded-xl border text-[11px] font-bold flex flex-col items-center gap-1 transition ${active ? 'border-cyan-400 bg-cyan-950/50 text-white' : 'border-slate-800 bg-slate-900/80 text-slate-400'}">
-                    <span class="w-3 h-3 rounded-sm border border-black/40" style="background:${FACE_COLORS_CSS[f]}"></span>
-                    <span>${f} (${FACE_NAMES[f].slice(0, 3)})</span>
-                </button>`;
+            const faces = ['U', 'D', 'F', 'B', 'R', 'L'];
+            const faceTabs = document.getElementById('paint-face-tabs');
+            faceTabs.innerHTML = faces.map(f => {
+                const active = f === PaintState.activeFace;
+                return `<button data-paint-face="${f}" class="py-1.5 rounded-xl text-xs font-mono-code font-extrabold border transition flex items-center justify-center gap-1 ${
+                    active ? 'border-cyan-400 bg-cyan-950/70 text-cyan-300' : 'border-slate-800 bg-slate-900 text-slate-300 hover:border-slate-600'
+                }"><span class="w-2.5 h-2.5 rounded-sm inline-block" style="background:${FACE_COLORS_CSS[f]}"></span>${f}</button>`;
             }).join('');
 
-            const gridEl = document.getElementById('paint-grid');
-            const faceStickers = PaintState.map[PaintState.activeFace];
-            gridEl.innerHTML = faceStickers.map((colKey, idx) => {
+            const faceArr = PaintState.map[PaintState.activeFace] || Array(9).fill(PaintState.activeFace);
+            const grid = document.getElementById('paint-grid');
+            grid.innerHTML = faceArr.map((colKey, idx) => {
                 const isCenter = idx === 4;
-                return `<button data-sticker-idx="${idx}" class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl border-2 ${isCenter ? 'border-white/60 cursor-not-allowed' : 'border-slate-700 hover:scale-105'} transition shadow-inner flex items-center justify-center" style="background:${FACE_COLORS_CSS[colKey]}">
-                    ${isCenter ? '<span class="text-[9px] sm:text-[10px] font-extrabold text-slate-950/75 bg-white/60 px-1 py-0.5 rounded">CTR</span>' : ''}
-                </button>`;
+                return `<button data-sticker-idx="${idx}" ${isCenter ? 'disabled' : ''} class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl border-2 flex items-center justify-center font-mono-code text-xs font-extrabold transition ${
+                    isCenter ? 'border-white/50 cursor-not-allowed opacity-90' : 'border-slate-900 hover:scale-105 active:scale-95'
+                }" style="background:${FACE_COLORS_CSS[colKey] || '#1e293b'}; color:${colKey === 'U' || colKey === 'D' ? '#0f172a' : '#ffffff'}">${isCenter ? PaintState.activeFace : ''}</button>`;
             }).join('');
 
-            const palEl = document.getElementById('paint-palette');
-            palEl.innerHTML = faceOrder.map(c => {
-                const active = PaintState.brushColor === c;
-                return `<button data-brush-color="${c}" class="w-10 h-10 rounded-xl border-2 transition ${active ? 'border-cyan-400 scale-110 shadow-lg' : 'border-slate-700 opacity-85 hover:opacity-100'}" style="background:${FACE_COLORS_CSS[c]}" title="${FACE_NAMES[c]}"></button>`;
+            const palette = document.getElementById('paint-palette');
+            palette.innerHTML = faces.map(colKey => {
+                const active = colKey === PaintState.brushColor;
+                return `<button data-brush-color="${colKey}" title="${FACE_NAMES[colKey]}" class="w-11 h-11 rounded-xl border-2 transition flex items-center justify-center ${
+                    active ? 'border-cyan-300 scale-105 ring-2 ring-cyan-400/50' : 'border-slate-950 opacity-85 hover:opacity-100'
+                }" style="background:${FACE_COLORS_CSS[colKey]}"></button>`;
             }).join('');
 
-            // Validate sticker counts (each of 6 colors must appear 9 times)
+            // Count stickers per color to help verify 9 of each
             const counts = { U: 0, D: 0, F: 0, B: 0, R: 0, L: 0 };
-            Object.values(PaintState.map).forEach(arr => arr.forEach(c => { if (counts[c] !== undefined) counts[c]++; }));
-            const invalid = Object.entries(counts).filter(([, n]) => n !== 9);
-            const valEl = document.getElementById('paint-validation-msg');
-            if (invalid.length === 0) {
-                valEl.innerHTML = `<span class="text-emerald-400 font-semibold">&#10003; All 6 colors have 9 stickers!</span>`;
-            } else {
-                valEl.innerHTML = `<span class="text-amber-300">${invalid.map(([k, n]) => `${FACE_NAMES[k]}: ${n}/9`).join(', ')}</span>`;
+            faces.forEach(f => {
+                (PaintState.map[f] || []).forEach(k => {
+                    if (counts[k] !== undefined) counts[k]++;
+                });
+            });
+            const msgEl = document.getElementById('paint-validation-msg');
+            if (msgEl) {
+                const allNine = faces.every(f => counts[f] === 9);
+                msgEl.className = `text-[11px] text-center sm:text-left pt-1 ${allNine ? 'text-emerald-300' : 'text-amber-300'}`;
+                msgEl.textContent = allNine
+                    ? 'All 6 colors have 9 stickers — ready to load!'
+                    : `Counts: ${faces.map(f => `${f}:${counts[f]}`).join(' ')}`;
             }
         }
 
         async function startCameraScanner() {
             const panel = document.getElementById('camera-panel');
+            const video = document.getElementById('camera-video');
             panel.classList.remove('hidden');
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showToast('Camera API unavailable — use Manual Sticker Painter below!', 'warn');
+                return;
+            }
             try {
+                stopCameraScanner();
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 640 } },
+                    video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 640 } },
                     audio: false
                 });
-                PaintState.cameraStream = stream;
-                document.getElementById('camera-video').srcObject = stream;
+                PaintState.stream = stream;
+                video.srcObject = stream;
+                await video.play().catch(() => {});
+                showToast(`Align ${PaintState.activeFace} face in the 3×3 grid & tap Capture!`, 'info');
             } catch (err) {
-                showToast('Camera unavailable or permission denied — use Manual Painter!', 'warn');
+                showToast('Could not access camera — tap stickers below to paint manually.', 'warn');
             }
         }
 
         function stopCameraScanner() {
-            if (PaintState.cameraStream) {
-                PaintState.cameraStream.getTracks().forEach(t => t.stop());
-                PaintState.cameraStream = null;
+            if (PaintState.stream) {
+                PaintState.stream.getTracks().forEach(t => t.stop());
+                PaintState.stream = null;
             }
-            document.getElementById('camera-panel').classList.add('hidden');
+            const video = document.getElementById('camera-video');
+            if (video) video.srcObject = null;
+            const panel = document.getElementById('camera-panel');
+            if (panel) panel.classList.add('hidden');
         }
 
-        function classifyRGBToCubeFace(r, g, b) {
-            const ref = {
-                U: [248, 250, 252],
-                D: [250, 204, 21],
-                F: [22, 163, 74],
-                B: [37, 99, 235],
-                R: [220, 38, 38],
-                L: [234, 88, 12]
-            };
-            let bestKey = 'U';
-            let bestDist = Infinity;
-            for (const [k, [rr, rg, rb]] of Object.entries(ref)) {
-                const dist = (r - rr) ** 2 + (g - rg) ** 2 + (b - rb) ** 2;
-                if (dist < bestDist) {
-                    bestDist = dist;
-                    bestKey = k;
-                }
-            }
-            return bestKey;
+        function classifyRGBToFace(r, g, b) {
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const sat = max === 0 ? 0 : (max - min) / max;
+            if (max > 185 && sat < 0.24) return 'U'; // White
+            if (r > 170 && g > 155 && b < 90) return 'D'; // Yellow
+            if (b > r + 45 && b > g + 25) return 'B'; // Blue
+            if (g > r + 25 && g >= b) return 'F'; // Green
+            if (r > 165 && g < 115 && b < 95) return 'R'; // Red
+            if (r > 165 && g >= 90 && g <= 165 && b < 85) return 'L'; // Orange
+            return PaintState.brushColor || 'U';
         }
 
         function captureFaceFromCamera() {
-            const video = document.getElementById('camera-video');
-            if (!video || !video.videoWidth) {
-                showToast('Camera stream not ready yet.', 'warn');
-                return;
-            }
-            const canvas = document.getElementById('camera-canvas');
-            const ctx = canvas.getContext('2d');
-            const size = Math.min(video.videoWidth, video.videoHeight);
-            const sx = (video.videoWidth - size) / 2;
-            const sy = (video.videoHeight - size) / 2;
-            ctx.drawImage(video, sx, sy, size, size, 0, 0, 300, 300);
-
-            const cell = 300 / 3;
-            for (let r = 0; r < 3; r++) {
-                for (let c = 0; c < 3; c++) {
-                    const idx = r * 3 + c;
-                    if (idx === 4) continue; // Keep fixed center
-                    const px = Math.floor(c * cell + cell / 2);
-                    const py = Math.floor(r * cell + cell / 2);
-                    const data = ctx.getImageData(px - 4, py - 4, 9, 9).data;
-                    let sr = 0, sg = 0, sb = 0, cnt = 0;
-                    for (let i = 0; i < data.length; i += 4) {
-                        sr += data[i]; sg += data[i + 1]; sb += data[i + 2]; cnt++;
-                    }
-                    PaintState.map[PaintState.activeFace][idx] = classifyRGBToCubeFace(sr / cnt, sg / cnt, sb / cnt);
+            try {
+                const video = document.getElementById('camera-video');
+                const canvas = document.getElementById('camera-canvas');
+                if (!video || !video.videoWidth) {
+                    showToast('Camera not streaming yet — tap stickers to paint manually.', 'warn');
+                    return;
                 }
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const nextFaceArr = [...PaintState.map[PaintState.activeFace]];
+                for (let row = 0; row < 3; row++) {
+                    for (let col = 0; col < 3; col++) {
+                        const idx = row * 3 + col;
+                        if (idx === 4) {
+                            nextFaceArr[4] = PaintState.activeFace;
+                            continue;
+                        }
+                        const sx = Math.floor(((col + 0.5) / 3) * canvas.width);
+                        const sy = Math.floor(((row + 0.5) / 3) * canvas.height);
+                        const pixel = ctx.getImageData(sx, sy, 1, 1).data;
+                        nextFaceArr[idx] = classifyRGBToFace(pixel[0], pixel[1], pixel[2]);
+                    }
+                }
+                PaintState.map[PaintState.activeFace] = nextFaceArr;
+                renderPaintUI();
+                showToast(`Captured ${PaintState.activeFace} face! Switch to next face or load cube.`, 'success');
+            } catch (e) {
+                showToast('Could not sample frame — tap stickers to paint manually.', 'warn');
             }
-            audio.playClick();
-            renderPaintUI();
-            showToast(`Captured ${FACE_NAMES[PaintState.activeFace]} face! Verify stickers & select next face.`, 'success');
         }
 
         // ====================================================================
-        // 13. SAVE SLOTS & WELCOME HUB UI
+        // 13. WELCOME HUB UI
         // ====================================================================
-        function renderSaveSlotsModal() {
-            document.getElementById('stat-solves').textContent = AppState.stats.solves;
-            document.getElementById('stat-best-time').textContent = AppState.stats.bestTimeMs ? formatTime(AppState.stats.bestTimeMs) : '--';
-            document.getElementById('stat-best-moves').textContent = AppState.stats.bestMoves ? AppState.stats.bestMoves : '--';
-
-            const listEl = document.getElementById('save-slots-list');
-            if (AppState.saveSlots.length === 0) {
-                listEl.innerHTML = `<div class="text-xs text-slate-400 text-center py-4 bg-slate-900/50 rounded-2xl border border-slate-800">No saved cube states yet. Save your current practice state above!</div>`;
-                return;
-            }
-            listEl.innerHTML = AppState.saveSlots.map((slot, idx) => `
-                <div class="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between gap-2">
-                    <div class="min-w-0">
-                        <div class="font-bold text-xs text-white truncate">${slot.name}</div>
-                        <div class="text-[10px] text-slate-400">${slot.method} • ${new Date(slot.savedAt).toLocaleDateString()}</div>
-                    </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <button data-load-slot="${idx}" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">Load</button>
-                        <button data-delete-slot="${idx}" class="text-[11px] font-bold px-2 py-1 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-500/30">&times;</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
         function updateWelcomeTrackCards() {
             document.querySelectorAll('.welcome-track-card').forEach(card => {
                 const selected = card.dataset.welcomeTrack === AppState.welcomePreference;
@@ -4075,9 +4041,6 @@
         function bindAllEvents() {
             // Version Update Check
             document.getElementById('btn-check-update').addEventListener('click', () => checkForAppUpdate(true));
-
-            // Toggle Timed Mode vs Guide Mode
-            document.getElementById('btn-toggle-timed').addEventListener('click', toggleTimedPracticeMode);
 
             // Welcome Hub
             document.getElementById('btn-welcome-hub').addEventListener('click', () => {
@@ -4181,7 +4144,8 @@
                 }
                 if (e.target.closest('#btn-launch-example')) {
                     audio.playClick();
-                    launchExampleSolveWalkthrough(AppState.method === 'CFOP' ? 'CFOP' : 'BEGINNER');
+                    const track = AppState.method === 'CFOP' ? 'CFOP' : (AppState.method === 'ROUX' ? 'ROUX' : 'BEGINNER');
+                    launchExampleSolveWalkthrough(track);
                     return;
                 }
                 const openAlgsBtn = e.target.closest('[data-open-algs-cat]');
@@ -4196,11 +4160,9 @@
             document.getElementById('btn-fast-solve').addEventListener('click', triggerFastOptimalSolve);
             document.getElementById('btn-instant-reset').addEventListener('click', () => {
                 stopAutoPlay();
-                stopTimer();
                 cube.resetSolved();
                 cube.setFocusMask('ALL');
                 AppState.activeCase = null;
-                resetTimer();
                 buildPedagogicalPlan();
                 showToast('Cube reset to solved state.', 'info');
             });
@@ -4314,56 +4276,6 @@
                 document.getElementById('modal-scan').classList.add('hidden');
                 buildPedagogicalPlan();
                 showToast('Physical cube state loaded!', 'success');
-            });
-
-            // Save Slots Modal
-            document.getElementById('btn-saves').addEventListener('click', () => {
-                renderSaveSlotsModal();
-                document.getElementById('modal-saves').classList.remove('hidden');
-            });
-            document.getElementById('btn-save-new-slot').addEventListener('click', () => {
-                const input = document.getElementById('input-slot-name');
-                const name = (input.value || '').trim() || `Save #${AppState.saveSlots.length + 1}`;
-                AppState.saveSlots.unshift({
-                    name,
-                    method: AppState.method,
-                    savedAt: Date.now(),
-                    map: cube.exportStateMap(),
-                    history: [...cube.moveHistory]
-                });
-                input.value = '';
-                persistData();
-                renderSaveSlotsModal();
-                showToast(`Saved "${name}"!`, 'success');
-            });
-            document.getElementById('save-slots-list').addEventListener('click', (e) => {
-                const loadBtn = e.target.closest('[data-load-slot]');
-                if (loadBtn) {
-                    const slot = AppState.saveSlots[parseInt(loadBtn.dataset.loadSlot, 10)];
-                    if (slot) {
-                        cube.applyStateMap(slot.map);
-                        cube.moveHistory = [...(slot.history || [])];
-                        AppState.method = slot.method || 'BEGINNER';
-                        document.getElementById('active-method-badge').textContent = AppState.method;
-                        document.getElementById('modal-saves').classList.add('hidden');
-                        buildPedagogicalPlan();
-                        showToast(`Loaded "${slot.name}"!`, 'success');
-                    }
-                    return;
-                }
-                const delBtn = e.target.closest('[data-delete-slot]');
-                if (delBtn) {
-                    AppState.saveSlots.splice(parseInt(delBtn.dataset.deleteSlot, 10), 1);
-                    persistData();
-                    renderSaveSlotsModal();
-                }
-            });
-            document.getElementById('btn-new-session').addEventListener('click', () => {
-                cube.resetSolved();
-                resetTimer();
-                document.getElementById('modal-saves').classList.add('hidden');
-                startCurriculum(AppState.welcomePreference || 'BEGINNER', 0);
-                showToast('Started fresh session!', 'info');
             });
 
             // Audio Toggle
