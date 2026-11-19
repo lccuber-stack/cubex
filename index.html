@@ -268,19 +268,19 @@
     </div>
 
     <!-- FLOATING LIVE MOVE NOTATION & ACTION CAPTION OVERLAY -->
-    <div id="move-notation-overlay" class="fixed left-1/2 -translate-x-1/2 bottom-[118px] sm:bottom-[132px] z-20 pointer-events-none opacity-0 transition-opacity duration-200 max-w-[92vw]">
-        <div class="glass-panel rounded-2xl px-3.5 py-2 border border-cyan-400/40 flex items-center gap-3 shadow-lg shadow-cyan-950/50">
-            <span id="overlay-move-symbol" class="font-mono-code text-lg sm:text-xl font-extrabold text-cyan-300 bg-cyan-950/90 border border-cyan-500/40 rounded-lg px-2.5 py-0.5 shrink-0">R</span>
-            <div class="min-w-0">
+    <div id="move-notation-overlay" class="fixed left-1/2 -translate-x-1/2 bottom-[88px] sm:bottom-[96px] z-30 pointer-events-none opacity-0 transition-opacity duration-200 w-[92vw] max-w-lg">
+        <div class="glass-panel rounded-2xl px-3.5 py-2 border border-cyan-400/50 flex items-center gap-3 shadow-2xl shadow-cyan-950/70">
+            <span id="overlay-move-symbol" class="font-mono-code text-base sm:text-lg font-extrabold text-cyan-300 bg-cyan-950/95 border border-cyan-500/50 rounded-xl px-2.5 py-1 shrink-0">R</span>
+            <div class="min-w-0 flex-1">
                 <div id="overlay-move-title" class="text-xs sm:text-sm font-bold text-white leading-tight truncate">Right (R) &bull; Clockwise 90&deg;</div>
-                <div id="overlay-move-caption" class="text-[11px] text-amber-300 leading-snug mt-0.5 hidden"></div>
+                <div id="overlay-move-caption" class="text-[11px] text-amber-300 leading-snug mt-0.5 line-clamp-2 hidden"></div>
             </div>
         </div>
     </div>
 
     <!-- SOLVER ORIENTATION FIGURE (STYLIZED UPPER-BODY FACING BLUE FRONT FACE) -->
-    <div id="solver-orientation-card" class="fixed left-2.5 sm:left-4 bottom-[122px] sm:bottom-[136px] z-10 pointer-events-none hidden md:flex items-center gap-2 glass-panel rounded-2xl px-2.5 py-2 border border-blue-500/35 shadow-lg">
-        <svg width="74" height="54" viewBox="0 0 110 80" class="shrink-0">
+    <div id="solver-orientation-card" class="fixed left-3 sm:left-4 bottom-[86px] sm:bottom-[94px] z-10 pointer-events-none hidden lg:flex items-center gap-2 glass-panel rounded-2xl px-2.5 py-2 border border-blue-500/35 shadow-lg">
+        <svg width="68" height="50" viewBox="0 0 110 80" class="shrink-0">
             <defs>
                 <linearGradient id="shirtGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#38bdf8"/>
@@ -313,54 +313,36 @@
     </div>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast-container" class="fixed left-1/2 -translate-x-1/2 top-[72px] z-50 pointer-events-none flex flex-col items-center gap-2"></div>
+    <div id="toast-container" class="fixed left-1/2 -translate-x-1/2 top-[68px] z-50 pointer-events-none flex flex-col items-center gap-2"></div>
 
-    <!-- BOTTOM CONTROLS DOCK -->
-    <div id="bottom-ui" class="fixed bottom-0 left-0 right-0 z-20 pointer-events-none flex flex-col items-center gap-1">
-        <!-- Quick Utility Row -->
-        <div class="w-full max-w-2xl flex items-center justify-between gap-1.5 pointer-events-auto">
+    <!-- BOTTOM CONTROLS DOCK (STREAMLINED SINGLE-ROW ACTION BAR + GESTURE HINT) -->
+    <div id="bottom-ui" class="fixed bottom-0 left-0 right-0 z-20 pointer-events-none flex flex-col items-center gap-1.5">
+        <!-- Subtle Navigation & Gesture Hint Directly Under 3D Cube -->
+        <div class="pointer-events-none px-3 py-1 rounded-full bg-slate-950/80 border border-slate-800/90 backdrop-blur-md text-[10px] sm:text-[11px] text-slate-300 flex items-center gap-2 shadow-md">
+            <span class="text-cyan-300 font-semibold">Swipe sticker:</span><span>Turn layer</span>
+            <span class="text-slate-600">&bull;</span>
+            <span class="text-amber-300 font-semibold">Drag background / 2 fingers:</span><span>Rotate 3D view</span>
+        </div>
+
+        <!-- Streamlined Utility Dock (Scramble, Fast, Reset, View, Undo) -->
+        <div class="w-full max-w-2xl glass-panel rounded-2xl p-1.5 flex items-center justify-between gap-1.5 pointer-events-auto">
             <div class="flex items-center gap-1 sm:gap-1.5 flex-wrap">
-                <button id="btn-scramble" class="glass-panel hover:bg-slate-800/90 text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl text-amber-300 border-amber-500/30 flex items-center gap-1 transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                <button id="btn-scramble" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-amber-300 border border-amber-500/35 flex items-center gap-1 transition">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     <span>Scramble</span>
                 </button>
-                <button id="btn-fast-solve" class="glass-panel hover:bg-slate-800/90 text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl text-emerald-300 border-emerald-500/30 flex items-center gap-1 transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <button id="btn-fast-solve" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-emerald-300 border border-emerald-500/35 flex items-center gap-1 transition">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     <span>Fast (&le;20)</span>
                 </button>
-                <button id="btn-instant-reset" class="glass-panel hover:bg-slate-800/90 text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl text-slate-300 border-slate-700/60 transition">
+                <button id="btn-instant-reset" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-slate-200 border border-slate-700/80 transition">
                     Reset
                 </button>
             </div>
 
             <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <button id="btn-cam-reset" class="glass-panel hover:bg-slate-800/90 text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl text-slate-300 transition">View</button>
-                <button id="btn-undo" class="glass-panel hover:bg-slate-800/90 text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-xl text-slate-300 transition">Undo</button>
-            </div>
-        </div>
-
-        <!-- Tactile Move Keypad -->
-        <div class="w-full max-w-2xl glass-panel rounded-2xl p-1 sm:p-1.5 pointer-events-auto">
-            <div class="grid grid-cols-9 gap-1">
-                <button data-move="U" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">U</button>
-                <button data-move="D" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">D</button>
-                <button data-move="L" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">L</button>
-                <button data-move="R" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">R</button>
-                <button data-move="F" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">F</button>
-                <button data-move="B" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-white">B</button>
-                <button data-move="M" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-cyan-300">M</button>
-                <button data-move="y" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-amber-300">y</button>
-                <button data-move="x" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-amber-300">x</button>
-
-                <button data-move="U'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">U'</button>
-                <button data-move="D'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">D'</button>
-                <button data-move="L'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">L'</button>
-                <button data-move="R'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">R'</button>
-                <button data-move="F'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">F'</button>
-                <button data-move="B'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-slate-300">B'</button>
-                <button data-move="M'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-cyan-300/80">M'</button>
-                <button data-move="y'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-amber-300/80">y'</button>
-                <button data-move="x'" class="cube-btn rounded-lg py-1 sm:py-1.5 text-xs font-mono-code font-bold text-amber-300/80">x'</button>
+                <button id="btn-cam-reset" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-cyan-200 border border-slate-700/80 transition">View</button>
+                <button id="btn-undo" class="hover:bg-slate-800/90 bg-slate-900/80 text-[11px] sm:text-xs font-semibold px-2.5 py-1.5 rounded-xl text-slate-200 border border-slate-700/80 transition">Undo</button>
             </div>
         </div>
     </div>
@@ -389,13 +371,13 @@
                         <div class="flex items-center gap-2 flex-wrap">
                             <h1 class="text-lg sm:text-2xl font-extrabold text-white tracking-tight">Welcome to CUBEX</h1>
                             <button id="btn-check-update" title="Check &amp; Install Latest App Update" class="inline-flex items-center gap-1 text-[10px] font-mono-code font-bold text-cyan-300 bg-cyan-950/80 hover:bg-cyan-900/80 border border-cyan-500/40 rounded-lg px-2 py-0.5 transition">
-                                <span id="app-version-label">v2.5.7</span>
+                                <span id="app-version-label">v2.7.0</span>
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                                 <span>Update</span>
                             </button>
                         </div>
                         <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                            3D Rubik's Cube guide, scanner &amp; trainer. View: 2 fingers (touch) / right-drag (mouse).
+                            Interactive 3D Rubik's Cube guide, camera scanner &amp; step-by-step solver.
                         </p>
                     </div>
                 </div>
@@ -698,7 +680,7 @@
         // ====================================================================
         // 1. VERSIONING, PWA ICON INJECTION & AUTO-UPDATE
         // ====================================================================
-        const APP_VERSION = '2.5.8';
+        const APP_VERSION = '2.7.0';
         const STORAGE_KEY = 'cubex_state_v2';
 
         function injectPWAIcons() {
@@ -1116,14 +1098,13 @@
                 for (let c = 0; c < 3; c++) {
                     const isYellow = activeCells.includes(`${r},${c}`);
                     const fill = isYellow ? '#facc15' : '#1e293b';
-                    rects.push(`<rect x="${17 + c * 23}" y="${17 + r * 23}" width="20" height="20" rx="3" fill="${fill}"/>`);
+                    rects.push(`<rect x="${17 + c * 23}" y="${17 + r * 23}" width="20" height="20" rx="3.5" fill="${fill}"/>`);
                 }
             }
-
-            if (sideYellow.top)    rects.push(`<rect x="40" y="8"  width="20" height="6"  rx="2" fill="#facc15"/>`);
-            if (sideYellow.bottom) rects.push(`<rect x="40" y="86" width="20" height="6"  rx="2" fill="#facc15"/>`);
-            if (sideYellow.left)   rects.push(`<rect x="8"  y="40" width="6"  height="20" rx="2" fill="#facc15"/>`);
-            if (sideYellow.right)  rects.push(`<rect x="86" y="40" width="6"  height="20" rx="2" fill="#facc15"/>`);
+            if (sideYellow.top)    rects.push(`<rect x="40" y="7" width="20" height="6" rx="2" fill="#facc15"/>`);
+            if (sideYellow.bottom) rects.push(`<rect x="40" y="87" width="20" height="6" rx="2" fill="#facc15"/>`);
+            if (sideYellow.left)   rects.push(`<rect x="7" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
+            if (sideYellow.right)  rects.push(`<rect x="87" y="40" width="6" height="20" rx="2" fill="#facc15"/>`);
 
             return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" class="rounded-xl bg-slate-950 border border-slate-800 shrink-0">${rects.join('')}</svg>`;
         }
@@ -1504,15 +1485,12 @@
                 const botEl = document.getElementById('bottom-ui');
                 const h = Math.max(1, window.innerHeight);
                 const topH = topEl ? topEl.getBoundingClientRect().height : 200;
-                const botH = botEl ? botEl.getBoundingClientRect().height : 120;
-                const availH = Math.max(140, h - topH - botH);
-                // Place lower in the open space toward the bottom dock without touching it
-                const lowerFactor = window.innerWidth < 640 ? 0.66 : 0.60;
-                const gapCenterPx = topH + availH * lowerFactor;
+                const botH = botEl ? botEl.getBoundingClientRect().height : 84;
+                const gapCenterPx = topH + (h - topH - botH) * 0.50;
                 const ndcOffsetY = ((h * 0.5) - gapCenterPx) / (h * 0.5);
                 const fovRad = (this.camera.fov * Math.PI) / 180;
                 const halfTan = Math.tan(fovRad / 2);
-                const radius = this.targetCamRadius || this.camRadius || 22;
+                const radius = this.targetCamRadius || this.camRadius || 19;
                 return ndcOffsetY * radius * halfTan;
             }
 
@@ -1521,19 +1499,19 @@
                 const botEl = document.getElementById('bottom-ui');
                 const w = Math.max(1, window.innerWidth);
                 const h = Math.max(1, window.innerHeight);
-                const topH = topEl ? topEl.getBoundingClientRect().height : 210;
-                const botH = botEl ? botEl.getBoundingClientRect().height : 120;
+                const topH = topEl ? topEl.getBoundingClientRect().height : 200;
+                const botH = botEl ? botEl.getBoundingClientRect().height : 84;
 
-                const availH = Math.max(150, h - topH - botH - 8);
-                const availW = Math.max(200, w - 12);
+                const availH = Math.max(160, h - topH - botH - 16);
+                const availW = Math.max(200, w - 20);
                 const minDimPx = Math.min(availH, availW);
 
                 const fovRad = (this.camera.fov * Math.PI) / 180;
                 const halfTan = Math.tan(fovRad / 2);
-                const desiredCoverage = w < 640 ? 0.90 : 0.80;
-                const visualRadius = 2.85;
+                const desiredCoverage = 0.76;
+                const visualRadius = 2.95;
                 const computed = (visualRadius * h) / (halfTan * minDimPx * desiredCoverage);
-                return Math.max(12.8, Math.min(36.0, computed));
+                return Math.max(12.2, Math.min(32.0, computed));
             }
 
             recalculateViewportFit() {
@@ -2094,16 +2072,14 @@
                 const pointer = new THREE.Vector2();
 
                 let isDragging = false;
-                let dragMode = null; // 'ORBIT' | 'STICKER' | 'TWO_FINGER_ORBIT'
+                let dragMode = null;
                 let startX = 0, startY = 0;
-                let prevMidX = 0, prevMidY = 0;
                 let hitCubie = null;
                 let hitNormal = null;
 
-                // Prevent browser context menu on right-click drag so desktop right-click orbit works smoothly
-                dom.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                });
+                let isTwoFingerOrbit = false;
+                let lastMidX = 0, lastMidY = 0;
+                let lastPinchDist = 0;
 
                 const getHit = (clientX, clientY) => {
                     const rect = dom.getBoundingClientRect();
@@ -2118,44 +2094,55 @@
                     return null;
                 };
 
-                // Two-finger touch drag on iPhone/iPad to rotate camera; single-finger touch/click interacts with stickers
+                dom.addEventListener('contextmenu', (e) => e.preventDefault());
+
                 dom.addEventListener('touchstart', (e) => {
                     if (e.touches.length >= 2) {
-                        e.preventDefault();
-                        dragMode = 'TWO_FINGER_ORBIT';
-                        isDragging = true;
+                        isDragging = false;
+                        dragMode = null;
+                        isTwoFingerOrbit = true;
                         const t0 = e.touches[0], t1 = e.touches[1];
-                        prevMidX = (t0.clientX + t1.clientX) * 0.5;
-                        prevMidY = (t0.clientY + t1.clientY) * 0.5;
+                        lastMidX = (t0.clientX + t1.clientX) * 0.5;
+                        lastMidY = (t0.clientY + t1.clientY) * 0.5;
+                        lastPinchDist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
                     }
-                }, { passive: false });
+                }, { passive: true });
 
                 dom.addEventListener('touchmove', (e) => {
-                    if (dragMode === 'TWO_FINGER_ORBIT' && e.touches.length >= 2) {
-                        e.preventDefault();
+                    if (isTwoFingerOrbit && e.touches.length >= 2) {
                         const t0 = e.touches[0], t1 = e.touches[1];
                         const midX = (t0.clientX + t1.clientX) * 0.5;
                         const midY = (t0.clientY + t1.clientY) * 0.5;
-                        const dx = midX - prevMidX;
-                        const dy = midY - prevMidY;
+                        const dx = midX - lastMidX;
+                        const dy = midY - lastMidY;
+
                         this.targetCamTheta -= dx * 0.009;
                         this.targetCamPhi = Math.max(0.18, Math.min(Math.PI - 0.18, this.targetCamPhi - dy * 0.009));
-                        prevMidX = midX;
-                        prevMidY = midY;
+                        lastMidX = midX;
+                        lastMidY = midY;
+
+                        const dist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
+                        if (lastPinchDist > 0 && dist > 0) {
+                            const minR = this.getIdealCameraRadius() * 0.72;
+                            const maxR = this.getIdealCameraRadius() * 1.45;
+                            this.targetCamRadius = Math.max(minR, Math.min(maxR, this.targetCamRadius + (lastPinchDist - dist) * 0.035));
+                        }
+                        lastPinchDist = dist;
                     }
-                }, { passive: false });
+                }, { passive: true });
 
                 dom.addEventListener('touchend', (e) => {
-                    if (dragMode === 'TWO_FINGER_ORBIT' && e.touches.length < 2) {
-                        isDragging = false;
-                        dragMode = null;
+                    if (e.touches.length < 2) {
+                        isTwoFingerOrbit = false;
+                        lastPinchDist = 0;
                     }
-                });
+                }, { passive: true });
 
                 dom.addEventListener('pointerdown', (e) => {
-                    if (e.pointerType === 'touch') {
-                        // Touch orbit requires two fingers; single touch is reserved for sticker swipe/tap
-                        if (dragMode === 'TWO_FINGER_ORBIT') return;
+                    if (isTwoFingerOrbit) return;
+                    const isTouch = e.pointerType === 'touch';
+
+                    if (isTouch) {
                         isDragging = true;
                         startX = e.clientX;
                         startY = e.clientY;
@@ -2165,21 +2152,18 @@
                             hitCubie = hit.cubie;
                             hitNormal = hit.normal;
                         } else {
-                            dragMode = null;
+                            dragMode = 'ORBIT';
                         }
                         return;
                     }
 
-                    // Desktop / mouse / pen: button === 2 is right-click orbit; button === 0 is sticker swipe
+                    // Desktop Mouse: Drag on sticker turns layer; Right-click or empty-space drag orbits 3D camera
                     if (e.button === 2) {
                         isDragging = true;
                         dragMode = 'ORBIT';
                         startX = e.clientX;
                         startY = e.clientY;
-                        return;
-                    }
-
-                    if (e.button === 0) {
+                    } else if (e.button === 0) {
                         isDragging = true;
                         startX = e.clientX;
                         startY = e.clientY;
@@ -2189,14 +2173,13 @@
                             hitCubie = hit.cubie;
                             hitNormal = hit.normal;
                         } else {
-                            dragMode = null;
+                            dragMode = 'ORBIT';
                         }
                     }
                 });
 
                 window.addEventListener('pointermove', (e) => {
-                    if (!isDragging) return;
-                    if (e.pointerType === 'touch' && dragMode === 'TWO_FINGER_ORBIT') return;
+                    if (!isDragging || isTwoFingerOrbit) return;
                     const dx = e.clientX - startX;
                     const dy = e.clientY - startY;
 
@@ -2212,8 +2195,7 @@
                     }
                 });
 
-                window.addEventListener('pointerup', (e) => {
-                    if (e.pointerType === 'touch' && dragMode === 'TWO_FINGER_ORBIT') return;
+                window.addEventListener('pointerup', () => {
                     isDragging = false;
                     dragMode = null;
                 });
@@ -2331,21 +2313,28 @@
         // ====================================================================
         // 7. PEDAGOGICAL CURRICULA (BEGINNER, CFOP, ROUX) & EXAMPLE SOLVES
         // ====================================================================
+        const YCROSS_LINE_SOLVE = ['F', 'R', 'U', "R'", "U'", "F'"];
+        const YCROSS_V_TO_LINE = ['F', 'R', 'U', "R'", "U'", "F'"];
+        const YCROSS_DOT_TO_V = ['F', 'R', 'U', "R'", "U'", "F'"];
+        const YCROSS_LINE_SETUP_YELLOW_TOP = ['x2', ...invertSequence(YCROSS_LINE_SOLVE)];
+        const YCROSS_V_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
+        const YCROSS_DOT_SETUP_YELLOW_TOP = ['x2', ...invertSequence([...YCROSS_DOT_TO_V, ...YCROSS_V_TO_LINE, ...YCROSS_LINE_SOLVE])];
+
         const BEGINNER_CURRICULUM = [
             {
                 stage: 'INTRO 1/16',
                 title: 'Cube Knowledge & How to Hold (F = Front)',
-                desc: 'F (Front) is the face closest to you — we keep BLUE in front. Centers never move: White = Yellow, Blue = Green, Red = Orange.',
-                tip: 'Keep BLUE in front (F) & YELLOW on top (U).',
+                desc: 'F (Front) is the side facing you — we keep BLUE in front and YELLOW on top. Centers never move: White is opposite Yellow, Blue opposite Green, Red opposite Orange.',
+                tip: 'Hold BLUE facing you (F) & YELLOW on Top (U) — and never twist a single corner physically!',
                 focusMode: 'CENTERS',
                 autoDemo: true,
                 setupMoves: ['x2'],
                 demoMoves: ['y', 'y', 'y', 'y'],
                 captions: [
-                    '1. F (Front) = side closest to you (Blue here)',
-                    '2. White is opposite Yellow',
-                    '3. Red/Orange & Blue/Green are opposites',
-                    '4. Keep Blue in front (F) & Yellow on top (U)'
+                    '1. F (Front) is the face closest to you — we use BLUE facing you!',
+                    '2. White is on bottom opposite Yellow on top',
+                    '3. Red & Orange are opposites; Blue & Green are opposites',
+                    '4. Keep Blue facing you (F) & use light finger tricks!'
                 ]
             },
             {
@@ -2513,15 +2502,15 @@
                 autoDemo: false,
                 miniSelector: 'YCROSS',
                 miniActiveId: 'yc-dot',
-                setupMoves: ['x2', 'F', 'R', 'U', "R'", "U'", "F'", 'f', 'R', 'U', "R'", "U'", "f'"],
-                demoMoves: ['F', 'R', 'U', "R'", "U'", "F'"],
+                setupMoves: YCROSS_DOT_SETUP_YELLOW_TOP,
+                demoMoves: YCROSS_DOT_TO_V,
                 captions: [
                     '1. F — Front clockwise',
                     '2. R — Right clockwise',
                     '3. U — Up clockwise',
                     "4. R' — Right anti-clockwise",
                     "5. U' — Up anti-clockwise",
-                    "6. F' — Front anti-clockwise (Dot advances to top-left V-shape!)"
+                    "6. F' — Front anti-clockwise (Dot becomes top-left V-Shape!)"
                 ]
             },
             {
@@ -2961,20 +2950,32 @@
 
         const YCROSS_MINI_CASES = [
             {
-                id: 'yc-dot', label: 'Dot (3×)', type: 'OLL', alg: "F R U R' U' F' f R U R' U' f'",
-                desc: 'Dot Case: All 4 yellow edge stickers are on the sides (top, bottom, left, right) and none face UP yet. Run F R U R\' U\' F\' once to turn Dot into the top-left V-shape!'
+                id: 'yc-dot',
+                label: 'Dot (3×)',
+                setupMoves: YCROSS_DOT_SETUP_YELLOW_TOP,
+                demoMoves: YCROSS_DOT_TO_V,
+                desc: 'Dot Case: All 4 yellow edge stickers sit on the outer sides (only center yellow on top). Run F R U R\' U\' F\' once to turn Dot into the top-left V-Shape!'
             },
             {
-                id: 'yc-v', label: 'V-Shape (2×)', type: 'OLL', alg: "f R U R' U' f'",
-                desc: 'V-Shape Case: Top & left yellow edges face UP, while the right & bottom edges show their yellow stickers on the sides. Run F R U R\' U\' F\' once to form the horizontal Line!'
+                id: 'yc-v',
+                label: 'V-Shape (2×)',
+                setupMoves: YCROSS_V_SETUP_YELLOW_TOP,
+                demoMoves: YCROSS_V_TO_LINE,
+                desc: 'V-Shape Case: Back & Left yellow edges face UP (9 & 12 o\'clock), while Right & Front yellow stickers sit on the sides. Run F R U R\' U\' F\' once to form the horizontal Line!'
             },
             {
-                id: 'yc-line', label: 'Line (1×)', type: 'OLL', alg: "F R U R' U' F'",
-                desc: 'Line Case: Left, center & right yellow stickers form a horizontal line on top, while the front & back edges show their yellow stickers on top/bottom sides. Run F R U R\' U\' F\' once for Goal Cross!'
+                id: 'yc-line',
+                label: 'Line (1×)',
+                setupMoves: YCROSS_LINE_SETUP_YELLOW_TOP,
+                demoMoves: YCROSS_LINE_SOLVE,
+                desc: 'Line Case: Left & Right yellow edges form a horizontal bar on top, while Back & Front yellow stickers sit on the sides. Run F R U R\' U\' F\' once to complete the Goal Cross!'
             },
             {
-                id: 'yc-goal', label: 'Goal Cross', type: 'OLL', alg: "",
-                desc: 'Goal Yellow Cross achieved! All 4 yellow edge stickers face UP on the top cross with no side yellow edge stickers left.'
+                id: 'yc-goal',
+                label: 'Goal Cross',
+                setupMoves: ['x2'],
+                demoMoves: [],
+                desc: 'Goal Cross achieved! All 4 top yellow edges now face UP.'
             }
         ];
 
@@ -3272,16 +3273,8 @@
             if (!item) return;
             const lesson = BEGINNER_CURRICULUM[9];
             lesson.miniActiveId = item.id;
-            const baseSetup = {
-                'yc-dot':  ['x2', 'F', 'R', 'U', "R'", "U'", "F'", 'f', 'R', 'U', "R'", "U'", "f'"],
-                'yc-v':    ['x2', 'f', 'R', 'U', "R'", "U'", "f'"],
-                'yc-line': ['x2', 'F', 'R', 'U', "R'", "U'", "F'"],
-                'yc-goal': ['x2']
-            }[miniId] || ['x2'];
-            lesson.setupMoves = baseSetup;
-            lesson.demoMoves = item.id === 'yc-goal'
-                ? []
-                : ['F', 'R', 'U', "R'", "U'", "F'"];
+            lesson.setupMoves = item.setupMoves;
+            lesson.demoMoves = item.demoMoves;
             lesson.desc = item.desc;
             loadLessonStep(9, item.id !== 'yc-goal');
         }
@@ -4231,10 +4224,6 @@
                 cube.enqueueMoves([inv], Math.max(preset.radPerFrame, 0.09), false, () => {
                     if (AppState.appMode === 'GUIDE_SOLVE') buildPedagogicalPlan();
                 }, true);
-            });
-
-            document.querySelectorAll('[data-move]').forEach(btn => {
-                btn.addEventListener('click', () => executeUserMove(btn.dataset.move, false));
             });
 
             window.addEventListener('keydown', (e) => {
